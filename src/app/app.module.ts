@@ -11,11 +11,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
+import { OrganizationPageComponent } from './Pages/organization-page/organization-page.component';
+import { ServicesComponent } from './Components/services/services.component';
+import { HoursComponent } from './Components/hours/hours.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
+    OrganizationPageComponent,
+    ServicesComponent,
+    HoursComponent,
   ],
   imports: [
     BrowserModule,

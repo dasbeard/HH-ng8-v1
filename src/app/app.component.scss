@@ -1,0 +1,22 @@
+.mainContainer{
+    height: 100%;
+
+    mat-toolbar{
+        height: 50px;
+        
+        .spacer {
+            flex: 11 auto;
+        }
+
+        button {
+            margin: 0 10px;
+        }
+    }
+
+
+    router-outlet {
+        background-color: red !important;
+    }
+
+
+}
