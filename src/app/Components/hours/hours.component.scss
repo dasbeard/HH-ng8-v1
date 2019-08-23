@@ -1,0 +1,75 @@
+.container {
+  background-color: coral;
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 150px;
+
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  mat-button-toggle-group{
+    min-width: 100%;
+ 
+    mat-button-toggle{
+      min-width: 50%;
+    }
+ 
+  }
+
+
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+  .displayDay {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 280px;
+    margin-left: 100px;
+    // justify-content: center;
+    // outline: 1px solid red;
+
+    p {
+      margin: .8em .25em;
+      // text-align: center;
+    }
+    
+    .day {
+      min-width: 40px;
+      // margin: 5px 10px;
+    }
+
+    .openTime {
+      min-width: 65px;
+    }
+
+    .closedTime {
+      min-width: 65px;
+    }
+
+    .spacer {
+      margin: 0;
+      margin-right: .5em;
+
+    }
+
+    span {
+      font-size: .55em;
+      text-align: center;
+      color: green;
+      // display: none;
+    }
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+}

@@ -1,22 +1,16 @@
-.mainContainer{
-    height: 100%;
+.mainContainer {
+  height: 100%;
 
-    mat-toolbar{
-        height: 50px;
-        
-        .spacer {
-            flex: 11 auto;
-        }
+  mat-toolbar {
+    height: 50px;
 
-        button {
-            margin: 0 10px;
-        }
+    .spacer {
+      flex: 11 auto;
     }
 
-
-    router-outlet {
-        background-color: red !important;
+    button {
+      margin: 0 10px;
     }
-
+  }
 
 }
