@@ -11,6 +11,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 import { HomePageComponent } from "./Pages/home-page/home-page.component";
 import { OrganizationPageComponent } from "./Pages/organization-page/organization-page.component";
@@ -34,7 +36,8 @@ import { HoursComponent } from "./Components/hours/hours.component";
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

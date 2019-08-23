@@ -1,8 +1,6 @@
 .container {
-  background-color: coral;
-  max-width: 400px;
+  // max-width: 400px;
   margin: 0 auto;
-  min-height: 150px;
 
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -13,6 +11,12 @@
       min-width: 50%;
     }
  
+  }
+
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  .displayHOP, .displayServ {
+    border-radius: 4px;
   }
 
 

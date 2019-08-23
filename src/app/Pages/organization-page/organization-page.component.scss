@@ -41,7 +41,7 @@
   .orgContact {
     display: flex;
     justify-content: space-between;
-    // outline: 1px solid blue;
+    margin-bottom: 1em;
 
     p, a {
       margin: .5em;
@@ -84,10 +84,8 @@
 
     .orgAbout{
       grid-area: about;
-      background-color: lightblue;
       padding: .75em;
-      width: 100%;
-
+      
       h2 {
         text-align: center;
       }
@@ -95,12 +93,15 @@
     
     .orgHours{
       grid-area: hours;
-      width: 100%;
+      border-radius: 4px;
+      // background-color: lightgray;
     }
     
     .orgServices{
       grid-area: services;
-      background-color: lightgrey;
+      padding: .75em;
+      
+      // outline: 1px solid red;
 
     }
 

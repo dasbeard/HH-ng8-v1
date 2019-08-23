@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { OrganizationPageComponent } from './Pages/organization-page/organization-page.component';
 import { HoursComponent } from './Components/hours/hours.component';
+import { ServicesComponent } from './Components/services/services.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,12 @@ const routes: Routes = [
     path: "hours",
     pathMatch: "full",
     component: HoursComponent,
+    children: []
+  },
+  {
+    path: "services",
+    pathMatch: "full",
+    component: ServicesComponent,
     children: []
   },
   

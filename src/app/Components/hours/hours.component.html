@@ -20,13 +20,15 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div *ngIf="displayHours == 'HofOp'; else hoursServing">
+  <div
+    *ngIf="displayHours == 'HofOp'; else hoursServing"
+    class="displayHOP mat-elevation-z8"
+  >
     <div class="displayDay">
       <p class="day">Mon</p>
       <p class="openTime">2:00am</p>
       <p class="spacer">-</p>
       <p class="closedTime">12:30am</p>
-      
     </div>
 
     <div class="displayDay">
@@ -42,7 +44,7 @@
       <p class="openTime">2:20am</p>
       <p class="spacer">-</p>
       <p class="closedTime">1:15am</p>
-      
+      <span>Open Now</span>
     </div>
 
     <div class="displayDay">
@@ -50,7 +52,6 @@
       <p class="openTime">8:30am</p>
       <p class="spacer">-</p>
       <p class="closedTime">5:15am</p>
-      
     </div>
 
     <div class="displayDay">
@@ -58,7 +59,6 @@
       <p class="openTime">12:30am</p>
       <p class="spacer">-</p>
       <p class="closedTime">2:30am</p>
-      
     </div>
 
     <div class="displayDay">
@@ -74,68 +74,59 @@
       <p class="openTime">12:30am</p>
       <p class="spacer">-</p>
       <p class="closedTime">2:30am</p>
-      
     </div>
   </div>
 
+  <ng-template #hoursServing class="displayServ mat-elevation-z8">
+    <div class="displayDay">
+      <p class="day">Mon</p>
+      <p class="openTime">12:30am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">1:30am</p>
+    </div>
 
+    <div class="displayDay">
+      <p class="day">Tue</p>
+      <p class="openTime">9:40am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">5:35am</p>
+      <span>Open Now</span>
+    </div>
 
+    <div class="displayDay">
+      <p class="day">Wen</p>
+      <p class="openTime">7:50am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">12:15am</p>
+    </div>
 
-  <ng-template #hoursServing>
-      <div class="displayDay">
-          <p class="day">Mon</p>
-          <p class="openTime">12:30am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">1:30am</p>
-          
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Tue</p>
-          <p class="openTime">9:40am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">5:35am</p>
-          <span>Open Now</span>
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Wen</p>
-          <p class="openTime">7:50am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">12:15am</p>
-         
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Thu</p>
-          <p class="openTime">5:15am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">6:45am</p>
-          <span>Open Now</span>
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Fri</p>
-          <p class="openTime">3:30am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">12:30am</p>
-          
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Sat</p>
-          <p class="openTime">1:30am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">12:30am</p>
-          
-        </div>
-    
-        <div class="displayDay">
-          <p class="day">Sun</p>
-          <p class="openTime">2:15am</p>
-          <p class="spacer">-</p>
-          <p class="closedTime">12:30am</p>
-          
-        </div>
+    <div class="displayDay">
+      <p class="day">Thu</p>
+      <p class="openTime">5:15am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">6:45am</p>
+      <span>Open Now</span>
+    </div>
+
+    <div class="displayDay">
+      <p class="day">Fri</p>
+      <p class="openTime">3:30am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">12:30am</p>
+    </div>
+
+    <div class="displayDay">
+      <p class="day">Sat</p>
+      <p class="openTime">1:30am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">12:30am</p>
+    </div>
+
+    <div class="displayDay">
+      <p class="day">Sun</p>
+      <p class="openTime">2:15am</p>
+      <p class="spacer">-</p>
+      <p class="closedTime">12:30am</p>
+    </div>
   </ng-template>
 </div>
