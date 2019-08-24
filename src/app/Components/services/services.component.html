@@ -1,26 +1,42 @@
 <div class="container">
-  <div class="mainServices">  
-    <mat-checkbox>Beds Available</mat-checkbox>
-    <mat-checkbox>Childcare Help</mat-checkbox>
-    <mat-checkbox>Educational Help</mat-checkbox>
-    <mat-checkbox>Interview Prep</mat-checkbox>
-    <mat-checkbox>Job Placment Options</mat-checkbox>
-    <mat-checkbox>Takes Donations</mat-checkbox>
-    <mat-checkbox>Food Available</mat-checkbox>
+  <div class="mainServices">
+    <mat-checkbox [(ngModel)]="checked1" [disabled]="true">
+      Beds Available
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked2" [disabled]="true">
+      Childcare Help
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked3" [disabled]="true">
+      Educational Help
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked4" [disabled]="true">
+      Interview Prep
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked5" [disabled]="true">
+      Job Placment Options
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked6" [disabled]="true">
+      Takes Donations
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="checked7" [disabled]="true">
+      Food Available
+    </mat-checkbox>
   </div>
-    
+
   <div class="otherServices">
-
     <h3>Other Services We Offer</h3>
-    
+
     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eum. 
-      Quod nisi, laborum nobis eum, quis alias sit repellendus perferendis esse 
-      dolorem, fuga facere illum natus repellat nemo cum neque!
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eum.
+      Quod nisi, laborum nobis eum, quis alias sit repellendus perferendis esse
+      dolorem, fuga facere illum natus repellat nemo cum neque! Lorem ipsum
+      dolor sit amet consectetur adipisicing elit.
     </p>
-  
   </div>
-
-
 </div>

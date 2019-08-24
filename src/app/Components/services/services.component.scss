@@ -2,21 +2,24 @@
   width: 100%;
   height: 100%;
 
-
-  .mainServices{
+  .mainServices {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 1em;
+
+    ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+    .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+      background-color: rgb(255, 64, 129) !important;
+    }
+
+    ::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
+      color: #000;
+    }
   }
 
   .otherServices {
-    
     h3 {
       text-align: center;
     }
   }
-
-
-
-
 }

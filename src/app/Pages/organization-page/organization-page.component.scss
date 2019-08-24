@@ -8,27 +8,28 @@
   h1 {
     margin: 0.25em auto 0.5em auto;
     text-align: center;
+    font-size: 2.4em;
   }
 
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   .orgImgMap {
+    height: 390px;
     display: flex;
     justify-content: space-between;
-    // outline: 1px solid black;
-    
+
     .orgImage {
       width: 59%;
-      
+
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
-    
+
     .orgMap {
       width: 40%;
-      
+
       img {
         width: 100%;
         height: 100%;
@@ -36,15 +37,16 @@
     }
   }
 
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   .orgContact {
     display: flex;
     justify-content: space-between;
+    margin-top: 0.75em;
     margin-bottom: 1em;
 
-    p, a {
-      margin: .5em;
+    p,
+    a {
+      margin: 0.5em;
     }
 
     a {
@@ -53,7 +55,7 @@
     }
 
     a:hover {
-      color: rgba($color: #000000, $alpha: .5)
+      color: rgba($color: #000000, $alpha: 0.5);
     }
 
     .orgInfo {
@@ -67,51 +69,39 @@
       width: 40%;
       text-align: center;
     }
-
-
   }
 
-
-
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   .orgHoursServices {
-    display: grid;
-    grid-template-columns: auto 400px;
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas:  "about hours"
-                          "services hours";
+    margin-top: 2em;
 
-    .orgAbout{
+    display: grid;
+    grid-template-columns: 69% 30%;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      "about hours"
+      "services hours";
+
+    .orgAbout {
       grid-area: about;
-      padding: .75em;
-      
+      padding: 0.75em;
+      padding-top: 0;
+
       h2 {
         text-align: center;
+        margin-top: 0;
       }
     }
-    
-    .orgHours{
+
+    .orgHours {
       grid-area: hours;
       border-radius: 4px;
-      // background-color: lightgray;
+      // margin-top: 2em;
     }
-    
-    .orgServices{
+
+    .orgServices {
       grid-area: services;
-      padding: .75em;
-      
-      // outline: 1px solid red;
-
+      padding: 0.75em;
     }
-
-
-
   }
-
-
-
-
-
-
 }

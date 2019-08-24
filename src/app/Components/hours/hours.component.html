@@ -20,10 +20,7 @@
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div
-    *ngIf="displayHours == 'HofOp'; else hoursServing"
-    class="displayHOP mat-elevation-z8"
-  >
+  <div *ngIf="displayHours == 'HofOp'" class="displayHours mat-elevation-z8">
     <div class="displayDay">
       <p class="day">Mon</p>
       <p class="openTime">2:00am</p>
@@ -77,7 +74,7 @@
     </div>
   </div>
 
-  <ng-template #hoursServing class="displayServ mat-elevation-z8">
+  <div *ngIf="displayHours == 'hServing'"  class="displayHours mat-elevation-z8">
     <div class="displayDay">
       <p class="day">Mon</p>
       <p class="openTime">12:30am</p>
@@ -128,5 +125,5 @@
       <p class="spacer">-</p>
       <p class="closedTime">12:30am</p>
     </div>
-  </ng-template>
+  </div>
 </div>

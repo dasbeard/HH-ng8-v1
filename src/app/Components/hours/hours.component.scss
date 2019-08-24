@@ -15,8 +15,10 @@
 
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  .displayHOP, .displayServ {
+  .displayHours {
+    margin-top: 10px;
     border-radius: 4px;
+    
   }
 
 
@@ -27,19 +29,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-width: 280px;
-    margin-left: 100px;
-    // justify-content: center;
-    // outline: 1px solid red;
+    // min-width: 280px;
+    // ToDo: fix margins when real data is provided
+    margin-left: 20%;
 
     p {
       margin: .8em .25em;
-      // text-align: center;
     }
     
     .day {
       min-width: 40px;
-      // margin: 5px 10px;
     }
 
     .openTime {
@@ -60,7 +59,7 @@
       font-size: .55em;
       text-align: center;
       color: green;
-      // display: none;
+      min-width: 38px;
     }
   
   }
