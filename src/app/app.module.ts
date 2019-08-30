@@ -21,6 +21,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatTableModule} from '@angular/material/table';
 
 
 import { HomePageComponent } from "./Pages/home-page/home-page.component";
@@ -54,6 +55,7 @@ import { SimpleOrgComponent } from './Components/simple-org/simple-org.component
     MatListModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

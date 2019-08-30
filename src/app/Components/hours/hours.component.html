@@ -1,9 +1,10 @@
 <div class="container">
   <mat-button-toggle-group
     #group="matButtonToggleGroup"
-    value="{{ displayHours }}"
+    value="{{ hoursDisplayed }}"
   >
     <mat-button-toggle
+      class="HofOp"
       value="HofOp"
       aria-label="Hours of Operation"
       (click)="changeHours('HofOp')"
@@ -12,15 +13,74 @@
     </mat-button-toggle>
 
     <mat-button-toggle
-      value="hServing"
+      class="serving"
+      value="serving"
       aria-label="Hours Serving Food"
-      (click)="changeHours('hServing')"
+      (click)="changeHours('serving')"
     >
       Serving Food
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div *ngIf="displayHours == 'HofOp'" class="displayHours mat-elevation-z8">
+  <table
+    mat-table
+    [dataSource]="HofOp"
+    *ngIf="hoursDisplayed == 'HofOp'"
+  >
+    <!-- Day Column -->
+    <ng-container matColumnDef="day">
+      <td class="day" mat-cell *matCellDef="let element">{{ element.day }}</td>
+    </ng-container>
+
+    <!-- Open Column -->
+    <ng-container matColumnDef="open">
+      <td class="open" mat-cell *matCellDef="let element">{{ element.open }}</td>
+    </ng-container>
+
+    <!-- Spacer Column -->
+    <ng-container matColumnDef="spacer">
+      <td class="spacer" mat-cell *matCellDef="let element">{{ element.spacer }}</td>
+    </ng-container>
+
+    <!-- Close Column -->
+    <ng-container matColumnDef="close">
+      <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <table
+    mat-table
+    [dataSource]="serving"
+    *ngIf="hoursDisplayed == 'serving'"
+  >
+   <!-- Day Column -->
+   <ng-container matColumnDef="day">
+      <td class="day" mat-cell *matCellDef="let element">{{ element.day }}</td>
+    </ng-container>
+
+    <!-- Open Column -->
+    <ng-container matColumnDef="open">
+      <td class="open" mat-cell *matCellDef="let element">{{ element.open }}</td>
+    </ng-container>
+
+    <!-- Spacer Column -->
+    <ng-container matColumnDef="spacer">
+      <td class="spacer" mat-cell *matCellDef="let element">{{ element.spacer }}</td>
+    </ng-container>
+
+    <!-- Close Column -->
+    <ng-container matColumnDef="close">
+      <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<!-- <div *ngIf="displayHours == 'HofOp'" class="displayHours mat-elevation-z8"> -->
+<!-- <div *ngIf="displayHours == 'HofOp'" class="displayHours mat-elevation-z8">
     <div class="displayDay">
       <p class="day">Mon</p>
       <p class="openTime">2:00am</p>
@@ -120,5 +180,4 @@
       <p class="spacer">-</p>
       <p class="closedTime">12:30am</p>
     </div>
-  </div>
-</div>
+  </div> -->
