@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeolocationServiceService } from 'src/app/Services/geolocation-service.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor() { }
+  lat:number;
+  lng:number;
+  zoom:number;
+
+  constructor( private geoService: GeolocationServiceService ) { }
 
   ngOnInit() {
+    this.geoService.getUserLocation().subscribe( data => {
+      console.log(data);
+      this.lat = data.latitude;
+      this.lng = data.longitude;
+      this.zoom = 15;
+      
+      if(this.lat == null){
+        this.lat = 34.05;
+        this.lng = 118.25;
+        this.zoom = 9;
+      } 
+    })
+    
   }
 
 }

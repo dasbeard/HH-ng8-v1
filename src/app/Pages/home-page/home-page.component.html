@@ -1,16 +1,23 @@
 <div class="container">
-    <h1>Home Page</h1>
+  <h1>Welcom to Helping Hours</h1>
 
+  <agm-map 
+    [latitude]="lat" 
+    [longitude]="lng" 
+    [zoom]="zoom" 
+    [scrollwheel]="null"
+    [gestureHandling]="'cooperative'"
+  >
+    <agm-marker [latitude]="lat" [longitude]="lng">
+      <agm-info-window>{{ lat }},{{ lng }}</agm-info-window>
+    </agm-marker>
+  </agm-map>
 
-    <h2>Add map here</h2>
-    
-    
-    <h3>Add SimpleComponents Here</h3>
-    <h3>Add SimpleComponents Here</h3>
-    <h3>Add SimpleComponents Here</h3>
-    
+  <div class="simpleOrgs">
+    <app-simple-org class="org"></app-simple-org>
+    <app-simple-org class="org"></app-simple-org>
+    <app-simple-org class="org"></app-simple-org>
+  </div>
 
-    <h4>Add Search Bar Here</h4>
-    
-
+  <h4>Add Search Bar Here</h4>
 </div>

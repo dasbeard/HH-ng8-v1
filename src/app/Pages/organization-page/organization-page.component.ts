@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationPageComponent implements OnInit {
 
+  
   constructor() { }
 
   ngOnInit() {

@@ -1,42 +1,37 @@
 .container {
   // max-width: 400px;
   margin: 0 auto;
+  font-family: 'Roboto Mono', monospace;
 
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  mat-button-toggle-group {
+    width: 100%;
+    // margin: 0 auto;
 
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  mat-button-toggle-group{
-    min-width: 100%;
- 
-    mat-button-toggle{
-      min-width: 50%;
+    mat-button-toggle {
+      width: 50%;
     }
- 
   }
 
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   .displayHours {
     margin-top: 10px;
     border-radius: 4px;
-    
+    // max-width: 15em;
   }
 
-
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
   .displayDay {
     display: flex;
     flex-direction: row;
     align-items: center;
-    // min-width: 280px;
-    // ToDo: fix margins when real data is provided
-    margin-left: 20%;
+    padding: 0 25%;
 
     p {
-      margin: .8em .25em;
+      margin: 0.8em 0.25em;
     }
-    
+
     .day {
       min-width: 40px;
     }
@@ -51,28 +46,14 @@
 
     .spacer {
       margin: 0;
-      margin-right: .5em;
-
+      margin-right: 0.5em;
     }
 
     span {
-      font-size: .55em;
+      font-size: 0.55em;
       text-align: center;
       color: green;
       min-width: 38px;
     }
-  
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }

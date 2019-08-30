@@ -1,0 +1,61 @@
+.container {
+  background-color: lightblue;
+
+  .orgImage {
+    width: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .simpleOrgContent {
+    padding: 0.75em 0.5em 0.5em 0.5em;
+
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+    .orgHeader {
+      
+      .orgName{
+        text-align: center;
+        margin: 0;
+      }
+      
+      .orgAddress p {
+        text-align: center;
+        margin-top: 0.75em;
+        margin-bottom: 0.5em;
+        
+      }
+
+    }
+
+
+
+
+
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+    .orgInfo {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      margin-top: 0.5em;
+      margin-bottom: .25em;
+
+      p,
+      a {
+        margin: 0.5em;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      a:hover {
+        color: rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+  }
+}
