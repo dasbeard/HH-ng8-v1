@@ -1,19 +1,22 @@
 .container {
   margin: 0 auto;
   font-family: "Roboto Mono", monospace;
-  max-width: 300px;
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   mat-button-toggle-group {
     border: none;
     display: flex;
     justify-content: center;
-    
+
+    // Button
     .HofOp {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
+      
+      
     }
-    
+
+    // Button
     .serving {
       border-top-right-radius: 4px;
       border-bottom-right-radius: 4px;
@@ -32,11 +35,16 @@
     justify-content: center;
     border-radius: 4px;
 
+    // .tableRows {
+    //   height: 30px;
+    // }
+
     .day {
       width: 50px;
     }
 
-    .open, .close  {
+    .open,
+    .close {
       width: 60px;
     }
 
@@ -50,4 +58,3 @@
     }
   }
 }
-

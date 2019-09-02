@@ -14,12 +14,14 @@
   
   .simpleOrgs {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
     grid-gap: 1em;
     margin-top: 1em;
-
+    padding: 2em;
+    
     .org {
-      min-height: 50px;
+      border-radius: 4px;
+      // min-height: 50px;
     }
 
 

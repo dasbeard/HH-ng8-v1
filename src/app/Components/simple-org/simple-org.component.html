@@ -1,30 +1,30 @@
 <div class="container">
-  <div class="orgImage">
+  <div class="simpleOrgImage">
     <img
       src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
       alt=""
     />
   </div>
 
-  <div class="simpleOrgContent">
-    <div class="orgHeader">
-      <h1 class="orgName">Title Of Organaization Here</h1>
+  <div class="simpleOrgContact">
+    <h1 class="orgName">Title Of Organaization Here</h1>
 
-      <div class="orgAddress">
-        <p>12345 Somethign St. Some Town, CA</p>
-      </div>
+    <div class="orgAddress">
+      <p>12345 Somethign St. Some Town, CA</p>
     </div>
 
     <!-- TODO: Make all orgInfo into buttons on mobile -->
 
-    <div class="orgInfo">
+    <div class="simpleOrgInfo">
       <a href="#">WebSite</a>
       <p>(555)555-5555</p>
       <p>Email</p>
     </div>
 
-    <app-hours class="orgHours "></app-hours>
-
-    <app-services class="orgServices"></app-services>
+    <div class="simpleOrgContent">
+      <app-services class="orgServices"></app-services>
+      
+      <app-hours class="simpleOrgHours "></app-hours>
+    </div>
   </div>
 </div>

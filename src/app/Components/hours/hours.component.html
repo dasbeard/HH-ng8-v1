@@ -47,7 +47,7 @@
       <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
     </ng-container>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row class="tableRows" *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
   <table
@@ -75,7 +75,7 @@
       <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
     </ng-container>
 
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr mat-row class="tableRows" *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
 
