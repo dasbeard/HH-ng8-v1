@@ -77,10 +77,11 @@
 
     display: grid;
     grid-template-columns: 69% 30%;
-    grid-template-rows: repeat(2, auto);
+    grid-template-rows: repeat(3, auto);
     grid-template-areas:
       "about hours"
-      "services hours";
+      "services hours"
+      "otherServices hours";
 
     .orgAbout {
       grid-area: about;
@@ -102,6 +103,13 @@
     .orgServices {
       grid-area: services;
       padding: 0.75em;
+    }
+    
+    .orgOtherServices {
+      grid-area: otherServices;
+      h3 {
+        text-align: center;
+      }
     }
   }
 }
