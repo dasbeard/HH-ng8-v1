@@ -1,5 +1,8 @@
+// Import library functions for theme creation.
+@import '~@angular/material/theming';
+$primary: mat-palette($mat-indigo);
+
 .container {
-  // background-color: lightblue;
   
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   .simpleOrgImage {
@@ -29,10 +32,11 @@
       margin-bottom: 0.5em;
     }
 
+
     // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
     .simpleOrgInfo {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-direction: row;
       margin-top: 0.5em;
       margin-bottom: 0.25em;
@@ -53,16 +57,40 @@
     }
 
     // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-    .simpleOrgContent {
+    .simpleOrgLowerHalf {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
-      grid-gap: 1em;
-      margin-top: 1.25em;
+      grid-template-columns: [orgContent]1fr [orgHours]1fr;
+      width: 100%;
+      
+      button {
+        margin-top: .5em;
+        width: 95%;
+        text-align: center;
+        cursor: default
+      }
+
+      .simpleOrgContent {
+        grid-area: orgContent;
+      }
+      
+      .simpleOrgHours {
+        grid-area: orgHours;
+      }
+
     }
-
-
-
-
     
   }
+
+  .notAvailable{
+    opacity: .4;
+    background-color: rgb(220, 220, 220);
+  }
+  
+  .available{
+    background-color: mat-color($primary);
+    color: #fff;
+    
+  }
+
+
 }

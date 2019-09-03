@@ -1,18 +1,18 @@
 <div class="mainContainer">
   <mat-toolbar>
-    <span>Helping Hours</span>
+    <a class="title" [routerLink]="['']">Helping Hours</a>
 
     <span class="spacer"></span>
 
     <button
       mat-stroked-button
-      class="mat-elevation-z1"
+      class="btn mat-elevation-z1"
       [routerLink]="['OrganizationPage']"
     >
       OrgPage
     </button>
 
-    <button mat-stroked-button class="mat-elevation-z1" [routerLink]="[' ']">
+    <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">
       Home
     </button>
   </mat-toolbar>
