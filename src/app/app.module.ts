@@ -1,6 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -21,7 +21,10 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 import { HomePageComponent } from "./Pages/home-page/home-page.component";
@@ -29,6 +32,7 @@ import { OrganizationPageComponent } from "./Pages/organization-page/organizatio
 import { ServicesComponent } from "./Components/services/services.component";
 import { HoursComponent } from "./Components/hours/hours.component";
 import { SimpleOrgComponent } from './Components/simple-org/simple-org.component';
+import { LoginRegisterComponent } from './Pages/login-register/login-register.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +41,15 @@ import { SimpleOrgComponent } from './Components/simple-org/simple-org.component
     OrganizationPageComponent,
     ServicesComponent,
     HoursComponent,
-    SimpleOrgComponent
+    SimpleOrgComponent,
+    LoginRegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: Keys.googleMapsKey.apiKey
@@ -56,6 +62,8 @@ import { SimpleOrgComponent } from './Components/simple-org/simple-org.component
     MatButtonToggleModule,
     MatCheckboxModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
