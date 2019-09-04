@@ -16,7 +16,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.geoService.getUserLocation().subscribe( data => {
-      console.log(data);
+      // console.log(data);
+      console.log('IPAPI is running');
+      
       this.lat = data.latitude;
       this.lng = data.longitude;
       this.zoom = 15;

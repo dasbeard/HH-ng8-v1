@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './Pages/home-page/home-page.component';
 import { OrganizationPageComponent } from './Pages/organization-page/organization-page.component';
 import { LoginRegisterComponent } from './Pages/login-register/login-register.component';
+import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
@@ -24,13 +26,21 @@ const routes: Routes = [
     component: LoginRegisterComponent,
     children: []
   },
+  {
+    path: "OrgAdmin",
+    pathMatch: "full",
+    component: OrgAdminComponent,
+    canActivate: [AuthGuard]
+  },
 
   
   
   {
     path: "**",
-    component: HomePageComponent
+    // component: HomePageComponent,
+    redirectTo: ""
   }
+
 ];
 
 @NgModule({

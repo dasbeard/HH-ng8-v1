@@ -33,6 +33,7 @@ import { ServicesComponent } from "./Components/services/services.component";
 import { HoursComponent } from "./Components/hours/hours.component";
 import { SimpleOrgComponent } from './Components/simple-org/simple-org.component';
 import { LoginRegisterComponent } from './Pages/login-register/login-register.component';
+import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LoginRegisterComponent } from './Pages/login-register/login-register.co
     ServicesComponent,
     HoursComponent,
     SimpleOrgComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    OrgAdminComponent
   ],
   imports: [
     BrowserModule,
