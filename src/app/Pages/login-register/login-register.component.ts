@@ -27,11 +27,16 @@ export class LoginRegisterComponent implements OnInit {
 
   }
 
-  newClient($event) {
+  registerPage($event) {
     this.logIn = false;
-    this.register = $event;
+    this.register = true;
+  }
+
+  loginPage($event) {
+    this.logIn = true;
+    this.register = false;
   }
 
 
-  
+
 }

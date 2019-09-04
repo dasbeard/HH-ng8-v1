@@ -1,8 +1,12 @@
 <div class="container">
+
   <app-login *ngIf="logIn"
-  (registerNewClient)="newClient($event)"
+  (registerNewClient)="registerPage($event)"
   ></app-login>
+
   <app-register-account
   *ngIf="register"
+  (goToLogin)="loginPage($event)"
   ></app-register-account>
+
 </div>
