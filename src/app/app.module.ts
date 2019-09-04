@@ -34,6 +34,8 @@ import { HoursComponent } from "./Components/hours/hours.component";
 import { SimpleOrgComponent } from './Components/simple-org/simple-org.component';
 import { LoginRegisterComponent } from './Pages/login-register/login-register.component';
 import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
+import { RegisterAccountComponent } from './Components/register-account/register-account.component';
+import { LoginComponent } from './Components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
     HoursComponent,
     SimpleOrgComponent,
     LoginRegisterComponent,
-    OrgAdminComponent
+    OrgAdminComponent,
+    RegisterAccountComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
