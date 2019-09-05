@@ -1,6 +1,105 @@
 <div class="container">
-  <h1>Register Account Component</h1>
+  <h1>LETS GET STARTED!</h1>
 
-  <button mat-raised-button (click)="login()">Login</button>
+  <div class="registerContainer">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Organization's Name"
+          formControlName="organization"
+          required
+        />
+        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+        <mat-hint align="start"
+          ><strong>What's the name of your Organization?</strong>
+        </mat-hint>
+      </mat-form-field>
 
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter your Email"
+          formControlName="email"
+          required
+        />
+        <mat-hint align="start"
+          ><strong>This is how you will Login in the future</strong>
+        </mat-hint>
+        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter your Password"
+          formControlName="password"
+          required
+          [type]="hidePass ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePass = !hidePass"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          type="button"
+        >
+          <mat-icon>{{ hidePass ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <mat-hint align="start"
+          ><strong>Don't disclose personal info</strong>
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Confirm your Password"
+          formControlName="confirmPassword"
+          required
+          [type]="hidePassConf ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassConf = !hidePassConf"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          type="button"
+        >
+          <mat-icon>{{
+            hidePassConf ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+        <mat-hint align="start"
+          ><strong>Confirm your password</strong>
+        </mat-hint>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="registerBTN"
+      >
+        Continue
+      </button>
+    </form>
+
+    <div class="login">
+      <div class="containLogin">
+        <p>Already Registered?</p>
+        <button
+          mat-raised-button
+          color="accent"
+          class="loginBTN"
+          (click)="login()"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
 </div>
