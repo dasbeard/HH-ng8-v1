@@ -1,8 +1,14 @@
 <div class="container">
 
-  <h1>Testing Org Admin Page</h1>
+  <h1>{{ user$.organization }}</h1>
+
+  <pre>
+    {{user$ | json}}
+  </pre>
+
 
   <button mat-raised-button (click)="logout()"> Logout</button>
+  <button mat-raised-button (click)="deleteUser()"> Delete Account</button>
 
 
 

@@ -16,19 +16,23 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.geoService.getUserLocation().subscribe( data => {
-      // console.log(data);
+      console.log(data);
       console.log('IPAPI is running');
       
+      // Save data in service for future uses
+      this.geoService.userLocation = data;
+
       this.lat = data.latitude;
       this.lng = data.longitude;
       this.zoom = 15;
       
+      // if ipapi fails show map of Los Angeles
       if(this.lat == null){
         this.lat = 34.05;
         this.lng = 118.25;
         this.zoom = 9;
       } 
-    })
+    })    
     
   }
 

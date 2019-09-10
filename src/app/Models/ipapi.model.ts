@@ -18,6 +18,4 @@ export class Ipapi {
     "asn": string;
     "org": string;
 
-
-
 }

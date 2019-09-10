@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/Services/auth.service";
+import { User } from '../../Models/user'
 
 @Component({
   selector: "app-org-admin",
@@ -8,12 +9,25 @@ import { AuthService } from "src/app/Services/auth.service";
   styleUrls: ["./org-admin.component.scss"]
 })
 export class OrgAdminComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  user$:User = <User>{};
 
-  ngOnInit() {}
+  constructor(private authService: AuthService, private router: Router) {
+
+    this.authService.user$.subscribe( user => {
+      this.user$ = user;
+    })
+  }
+
+  ngOnInit() {
+  }
 
   logout() {
-    this.authService.logout();
-    this.router.navigateByUrl("");
+    this.authService.signOut();
   }
+
+  deleteUser(){
+    this.authService.deleteUser(this.user$);
+  }
+
+
 }

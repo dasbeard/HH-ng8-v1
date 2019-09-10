@@ -1,12 +1,13 @@
 <div class="container">
 
-  <app-login *ngIf="logIn"
-  (registerNewClient)="registerPage($event)"
-  ></app-login>
-
-  <app-register-account
-  *ngIf="register"
-  (goToLogin)="loginPage($event)"
-  ></app-register-account>
+    <app-login *ngIf="logIn"
+    (registerNewClient)="registerPage($event)"
+    ></app-login>
+    
+    <app-register-account
+    *ngIf="register"
+    (goToLogin)="loginPage($event)"
+    ></app-register-account> 
 
 </div>
+

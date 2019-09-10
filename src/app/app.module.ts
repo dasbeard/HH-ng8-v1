@@ -9,9 +9,18 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
-// API Keys for Google Maps
+// API Keys 
 import { Keys } from '../../keys';
+
+// Google Maps
 import { AgmCoreModule } from '@agm/core';
+
+
+// AngularFire
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
 
 import { LayoutModule } from "@angular/cdk/layout";
@@ -24,6 +33,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule,  } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 
@@ -60,6 +71,10 @@ import { LoginComponent } from './Components/login/login.component';
     AgmCoreModule.forRoot({
       apiKey: Keys.googleMapsKey.apiKey
     }),
+    AngularFireModule.initializeApp(Keys.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -70,8 +85,14 @@ import { LoginComponent } from './Components/login/login.component';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatStepperModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

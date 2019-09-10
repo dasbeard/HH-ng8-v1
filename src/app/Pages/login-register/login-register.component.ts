@@ -10,22 +10,23 @@ import { AuthService } from "../../Services/auth.service";
 export class LoginRegisterComponent implements OnInit {
   logIn:boolean = true;
   register:boolean = false;
-  message='temp';
-
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
-  ) {}
-
-  ngOnInit() {
-    // this.loggedIn = this.authService.isLoggedIn();
-
-    if (this.authService.isLoggedIn()) {
+  ) {
+    if (this.authService.user$) {
       this.router.navigateByUrl("/OrgAdmin");
     }
-
   }
+
+  ngOnInit() {
+  }
+
+
+
+
+
 
   registerPage($event) {
     this.logIn = false;

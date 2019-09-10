@@ -25,10 +25,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigateByUrl("/OrgAdmin");
-    }
-
     this.loginForm = this.formBuilder.group({
       email: ["", Validators.required],
       password: ["", Validators.required]
@@ -40,14 +36,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.isSubmitted = true;
     if (this.loginForm.invalid) {
       this.loginForm.reset();
       return;
     }
-    this.authService.login(this.loginForm.value);
-    this.router.navigateByUrl("/OrgAdmin");
+    this.authService.signIn(this.loginForm.value);
   }
 
   newClient() {
