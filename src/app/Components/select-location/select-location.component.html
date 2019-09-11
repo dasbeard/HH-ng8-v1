@@ -1,5 +1,10 @@
 <div class="container">
+  <h1>Lets learn a bit more about your organization</h1>
+
+  <h2>What is your address?</h2>
+
   <agm-map
+    class="autoCompleteMap"
     [latitude]="latitude"
     [longitude]="longitude"
     [scrollwheel]="null"
@@ -10,10 +15,15 @@
   </agm-map>
 
   <div class="autocomplete-container">
-    <mat-google-maps-autocomplete
-      (onAutocompleteSelected)="onAutocompleteSelected($event)"
-      (onLocationSelected)="onLocationSelected($event)"
-    >
-    </mat-google-maps-autocomplete>
+    <div class="autocomplete">
+      <mat-google-maps-autocomplete
+        (onAutocompleteSelected)="onAutocompleteSelected($event)"
+        (onLocationSelected)="onLocationSelected($event)"
+      >
+      </mat-google-maps-autocomplete>
+    </div>
+    <button mat-raised-button color="primary" (click)="moveForward()">
+      Continue
+    </button>
   </div>
 </div>

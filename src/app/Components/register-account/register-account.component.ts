@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "../../Services/auth.service";
-import { GeolocationServiceService } from 'src/app/Services/geolocation-service.service';
+import { GeolocationService } from 'src/app/Services/geolocation.service';
 
 @Component({
   selector: "app-register-account",
@@ -22,7 +22,7 @@ export class RegisterAccountComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private geoLoaction: GeolocationServiceService,
+    private geoLoaction: GeolocationService,
     private formBuilder: FormBuilder
 
   ) {}
@@ -34,12 +34,7 @@ export class RegisterAccountComponent implements OnInit {
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required]
     });
-    
-    this.location = this.geoLoaction.userLocation;
-    console.log(this.location);
-    
-    
-  
+
   }
 
   get formControls() {

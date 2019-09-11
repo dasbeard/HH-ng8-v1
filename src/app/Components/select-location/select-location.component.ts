@@ -6,14 +6,14 @@ import {
 } from "@angular-material-extensions/google-maps-autocomplete";
 // import {} from '@types/googlemaps';
 import PlaceResult = google.maps.places.PlaceResult;
-import { GeolocationServiceService } from 'src/app/Services/geolocation-service.service';
+import { GeolocationService } from 'src/app/Services/geolocation.service';
 
 
 @Component({
   selector: 'app-select-location',
   templateUrl: './select-location.component.html',
   styleUrls: ['./select-location.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class SelectLocationComponent implements OnInit {
   public appearance = Appearance;
@@ -23,7 +23,9 @@ export class SelectLocationComponent implements OnInit {
   public selectedAddress: PlaceResult;
   public country: string;
 
-  constructor(private titleService: Title, private geoLocate: GeolocationServiceService) {
+  public orgResult;
+
+  constructor(private titleService: Title, private geoLocate: GeolocationService) {
   }
 
   ngOnInit() {
@@ -53,13 +55,21 @@ export class SelectLocationComponent implements OnInit {
   }
 
   onAutocompleteSelected(result: PlaceResult) {
-    console.log('onAutocompleteSelected: ', result);
+    // console.log('onAutocompleteSelected: ', result);
+    this.orgResult = result;
   }
 
   onLocationSelected(location: Location) {
-    console.log('onLocationSelected: ', location);
+    // console.log('onLocationSelected: ', location);
     this.latitude = location.latitude;
     this.longitude = location.longitude;
     this.zoom = 18;
   }
+
+
+  moveForward(){
+    console.log(this.orgResult);
+    
+  }
+
 }

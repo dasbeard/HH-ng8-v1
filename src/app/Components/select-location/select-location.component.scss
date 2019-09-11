@@ -1,3 +1,33 @@
-agm-map{
-  height: 450px;
+.container {
+  width: 650px;
+  margin: 0 auto;
+  margin-top: 10%;
+  
+  h1, h2 {
+    text-align: center;
+  }
+
+  .autoCompleteMap{
+    height: 450px;
+  }
+
+
+  .autocomplete-container {
+    display: flex;
+    justify-content: space-between;
+    // align-content: center;
+    
+    .autocomplete {
+      width: 75%;
+      // vertical-align: bottom;
+    }
+    
+    button {
+      // line-height: 81px;
+      margin-top: 20px;
+      height: 2.6em;
+      // vertical-align: bottom;
+    }
+  }
+
 }

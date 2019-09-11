@@ -5,9 +5,9 @@ import { Ipapi } from '../Models/ipapi.model';
 @Injectable({
   providedIn: 'root'
 })
-export class GeolocationServiceService {
+export class GeolocationService {
 
-  userLocation = <Ipapi>{};
+  userLocation:Ipapi;
 
   constructor( private http: HttpClient ) { }
 
