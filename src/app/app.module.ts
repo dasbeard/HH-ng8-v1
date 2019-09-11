@@ -14,6 +14,8 @@ import { Keys } from '../../keys';
 
 // Google Maps
 import { AgmCoreModule } from '@agm/core';
+// Google Maps Auto Complete
+import { MatGoogleMapsAutocompleteModule } from '@angular-material-extensions/google-maps-autocomplete';
 
 
 // AngularFire
@@ -47,6 +49,7 @@ import { LoginRegisterComponent } from './Pages/login-register/login-register.co
 import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
 import { RegisterAccountComponent } from './Components/register-account/register-account.component';
 import { LoginComponent } from './Components/login/login.component';
+import { RegistrationComponent } from './Pages/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,8 @@ import { LoginComponent } from './Components/login/login.component';
     LoginRegisterComponent,
     OrgAdminComponent,
     RegisterAccountComponent,
-    LoginComponent
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,8 @@ import { LoginComponent } from './Components/login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-      apiKey: Keys.googleMapsKey.apiKey
+      apiKey: Keys.googleMapsKey.apiKey,
+      libraries: ['places']
     }),
     AngularFireModule.initializeApp(Keys.firebase),
     AngularFirestoreModule,
@@ -86,6 +91,8 @@ import { LoginComponent } from './Components/login/login.component';
     MatFormFieldModule,
     MatInputModule,
     MatStepperModule,
+    MatGoogleMapsAutocompleteModule,
+    
   ],
   providers: [
     {

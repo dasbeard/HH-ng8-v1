@@ -29,7 +29,7 @@ export class HomePageComponent implements OnInit {
       // if ipapi fails show map of Los Angeles
       if(this.lat == null){
         this.lat = 34.05;
-        this.lng = 118.25;
+        this.lng = -118.25;
         this.zoom = 9;
       } 
     })    
