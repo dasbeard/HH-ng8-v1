@@ -6,6 +6,7 @@ import { LoginRegisterComponent } from './Pages/login-register/login-register.co
 import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
 import { AuthGuard } from './auth.guard';
 import { RegistrationComponent } from './Pages/registration/registration.component';
+import { SelectLocationComponent } from './Components/select-location/select-location.component';
 
 
 const routes: Routes = [
@@ -29,9 +30,13 @@ const routes: Routes = [
   },
   {
     path: "Register",
-    pathMatch: "full",
+    // pathMatch: "full",
     component: RegistrationComponent,
-    children: []
+    children: [
+      { path: "", component: SelectLocationComponent},
+
+    ]
+      
   },
   {
     path: "OrgAdmin",

@@ -23,9 +23,7 @@ export class HomePageComponent implements OnInit {
       // console.log("No GeoLocation Stored");
 
       this.geoService.getUserLocation().subscribe(data => {
-        // console.log(data);
-        // console.log("IPAPI is running");
-
+        
         // Save data in service for future uses
         this.geoService.userLocation = data;
 

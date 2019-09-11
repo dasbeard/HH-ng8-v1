@@ -12,6 +12,7 @@ import { Observable, of } from "rxjs";
 import { switchMap, tap, take, map } from "rxjs/operators";
 
 import { CreateUser, User } from "./../Models/user";
+import { RegistationService } from './registation.service';
 
 @Injectable({
   providedIn: "root"
@@ -22,7 +23,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private regService: RegistationService
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -43,7 +45,13 @@ export class AuthService {
       this.afs.collection<CreateUser>(`users`).doc(uid).set({
         email: user.email, organization: user.organization, uid:uid
       });
-      this.router.navigateByUrl("/OrgAdmin");
+
+      // HERE
+      const sendToRegService = {email: user.email, organization: user.organization, uid: uid};
+      this.regService.startNewUser(sendToRegService);
+
+
+      this.router.navigateByUrl("/Register");
     })
 
   }
@@ -80,15 +88,22 @@ export class AuthService {
 
 
   async deleteUser(user:User){
-    // console.log(user);
-    this.afAuth.auth.currentUser.delete().then(() => {
-      // console.log('user auth has been deleted');
-      this.afs.doc<User>(`users/${user.uid}`).delete();
-      // console.log('user data has been deleted');
-      this.router.navigate(['']);
-    }).catch(error => {
+    this.afs.doc<User>(`users/${user.uid}`).delete();
+    this.afAuth.auth.currentUser.delete()
+    .catch(error => {
       console.log(error);
     })
+    this.router.navigate(['']);
+    
+    // // console.log(user);
+    // this.afAuth.auth.currentUser.delete().then(() => {
+    //   // console.log('user auth has been deleted');
+    //   this.afs.doc<User>(`users/${user.uid}`).delete();
+    //   // console.log('user data has been deleted');
+    //   this.router.navigate(['']);
+    // }).catch(error => {
+    //   console.log(error);
+    // })
   }
 
 

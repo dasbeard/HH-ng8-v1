@@ -1,27 +1,38 @@
 .container {
   width: 650px;
   margin: 0 auto;
-  margin-top: 10%;
-  
-  h1, h2 {
+  margin-top: 3%;
+
+  h1,
+  h2 {
     text-align: center;
+    margin: 0.5em auto;
   }
-
-  .autoCompleteMap{
-    height: 450px;
-  }
-
 
   .autocomplete-container {
     display: flex;
     justify-content: space-between;
-    // align-content: center;
-    
+    padding: 0 1em;
+    margin-bottom: 0.5em;
+    border-radius: 4px;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, .1) 0%,
+      rgba(255, 255, 255, .1) 85%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+
+    // background: linear-gradient(
+    //   rgba(215, 215, 215, 0.9) 0%,
+    //   rgba(255, 255, 255, 0.74) 100%,
+    //   );
+    //   // rgba(255, 255, 255, 0.1) 100%
+
     .autocomplete {
-      width: 75%;
+      width: 80%;
       // vertical-align: bottom;
     }
-    
+
     button {
       // line-height: 81px;
       margin-top: 20px;
@@ -30,4 +41,13 @@
     }
   }
 
+  .agmMap {
+    margin: 0 auto;
+    width: 80%;
+    outline: 1px solid #000;
+
+    .autoCompleteMap {
+      height: 450px;
+    }
+  }
 }
