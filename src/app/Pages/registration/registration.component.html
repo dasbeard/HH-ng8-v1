@@ -1,19 +1,5 @@
 <div class="container">
-  <agm-map
-    [latitude]="latitude"
-    [longitude]="longitude"
-    [scrollwheel]="null"
-    [zoom]="zoom"
-    [gestureHandling]="'cooperative'"
-  >
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
 
-  <div class="autocomplete-container">
-    <mat-google-maps-autocomplete
-      (onAutocompleteSelected)="onAutocompleteSelected($event)"
-      (onLocationSelected)="onLocationSelected($event)"
-    >
-    </mat-google-maps-autocomplete>
-  </div>
+  <app-select-location></app-select-location>
+
 </div>
