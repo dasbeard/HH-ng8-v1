@@ -77,12 +77,12 @@ export class SelectLocationComponent implements OnInit {
   }
 
   onAutocompleteSelected(result: PlaceResult) {
-    console.log("onAutocompleteSelected: ", result);
+    // console.log("onAutocompleteSelected: ", result);
     this.orgResult = result;
   }
 
   onLocationSelected(location: Location) {
-    console.log("onLocationSelected: ", location);
+    // console.log("onLocationSelected: ", location);
     this.latLng = location;
     this.latitude = location.latitude;
     this.longitude = location.longitude;

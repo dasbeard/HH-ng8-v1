@@ -5,6 +5,13 @@
     <span class="spacer"></span>
 
     <button
+      *ngIf="user$"
+      mat-stroked-button
+      class="btn mat-elevation-z1"
+      (click)="signOut()"
+    >SignOut</button>
+
+    <button
       mat-stroked-button
       class="btn mat-elevation-z1"
       [routerLink]="['LoginRegister']"
@@ -12,8 +19,12 @@
       Login/Register
     </button>
 
-    <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['Register']">
-      Registration
+    <button
+      mat-stroked-button
+      class="btn mat-elevation-z1"
+      [routerLink]="['Register/MoreInfo']"
+    >
+      Registration/MoreInfo
     </button>
 
     <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">

@@ -51,6 +51,7 @@ import { RegisterAccountComponent } from './Components/register-account/register
 import { LoginComponent } from './Components/login/login.component';
 import { RegistrationComponent } from './Pages/registration/registration.component';
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
+import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { SelectLocationComponent } from './Components/select-location/select-loc
     RegisterAccountComponent,
     LoginComponent,
     RegistrationComponent,
-    SelectLocationComponent
+    SelectLocationComponent,
+    AddOrgInformationComponent
   ],
   imports: [
     BrowserModule,

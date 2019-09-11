@@ -9,7 +9,7 @@ import { User } from '../Models/user';
 export class RegistationService {
   newUser:User;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   startNewUser(data:User){
     this.newUser = data;
@@ -23,7 +23,11 @@ export class RegistationService {
     this.newUser.latLng = latLng;
     
     console.log(this.newUser);
-    
+    // ! Maybe this should be session not localstorage
+    localStorage.setItem('user', JSON.stringify(this.newUser));
+
+
+    this.router.navigate(['/Register/MoreInfo']);
     
   }
 

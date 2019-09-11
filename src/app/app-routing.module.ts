@@ -7,6 +7,7 @@ import { OrgAdminComponent } from './Pages/org-admin/org-admin.component';
 import { AuthGuard } from './auth.guard';
 import { RegistrationComponent } from './Pages/registration/registration.component';
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
+import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
     component: RegistrationComponent,
     children: [
       { path: "", component: SelectLocationComponent},
+      { path: "MoreInfo", component: AddOrgInformationComponent},
 
     ]
       

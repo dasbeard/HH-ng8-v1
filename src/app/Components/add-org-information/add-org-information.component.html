@@ -1,0 +1,145 @@
+<div class="container">
+  <h1>
+    Welcome {{ user.organization }}
+    <br />
+    Now lets learn a bit more
+  </h1>
+
+  <form [formGroup]="formGroup">
+    <mat-vertical-stepper
+      #linearVerticalStepper="matVerticalStepper"
+      formArrayName="formArray"
+      [linear]="false"
+    >
+      <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+        <ng-template matStepLabel>Do you have a website?</ng-template>
+        <mat-form-field>
+          <mat-label>Website</mat-label>
+          <input
+            matInput
+            formControlName="website"
+            value="{{ user.website }}"
+          />
+          <!-- <mat-error>This field is required</mat-error> -->
+        </mat-form-field>
+
+        <!-- <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastNameFormCtrl" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field> -->
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+        <ng-template matStepLabel>
+          <div>What is a good phone number for people to contact?</div>
+        </ng-template>
+        <mat-form-field>
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            type="tel"
+            pattern="^[6-9]\d{9}$" maxlength="10"
+            formControlName="phone"
+            value="{{ user.phone }}"
+            required
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
+        <ng-template matStepLabel>
+          <div>
+            What email would you like people to be able to contact you at?
+          </div>
+        </ng-template>
+        <mat-form-field>
+          <mat-label>Email address</mat-label>
+          <input matInput formControlName="contactEmail" />
+          <mat-error>The input is invalid.</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
+        <ng-template matStepLabel>
+          <div>Tell us a little bit about your organization</div>
+        </ng-template>
+        <mat-form-field>
+          <mat-label>About</mat-label>
+          <textarea matInput formControlName="about" required></textarea>
+          <mat-error>The input is invalid.</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      <!-- 
+      <mat-step formGroupName="4" [stepControl]="formArray?.get([4])">
+        <ng-template matStepLabel>
+          <div>
+            Any other services that you provide that we may have missed?
+          </div>
+        </ng-template>
+        <mat-form-field>
+          <mat-label>Other Services</mat-label>
+          <textarea matInput formControlName="otherServices"></textarea>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+
+      
+      <mat-step formGroupName="5" [stepControl]="formArray?.get([5])">
+          <ng-template matStepLabel>Which of these services to you provide (check all that apply)</ng-template>
+          <mat-form-field>
+            <mat-label>Beds</mat-label>
+            <input matInput formControlName="beds">
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="childcare" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step> -->
+
+      <mat-step>
+        <ng-template matStepLabel>Confirm your information</ng-template>
+        Everything seems correct.
+        <div>
+          <!-- <button
+            type="button"
+            mat-raised-button
+            (click)="linearVerticalStepper.reset()"
+          >
+            Reset
+          </button> -->
+          <button type="button" mat-raised-button (click)="nextStep()">
+            nextStep
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+
+</div>

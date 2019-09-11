@@ -83,10 +83,13 @@ export class AuthService {
 
   async signOut(){
     await this.afAuth.auth.signOut();
+    // ! Maybe this should be session not localstorage
+    localStorage.removeItem('user');
     return this.router.navigate(['']);
   }
 
 
+  // !! Need to fix issue when deleting user - may need to logout and then re-login first
   async deleteUser(user:User){
     this.afs.doc<User>(`users/${user.uid}`).delete();
     this.afAuth.auth.currentUser.delete()
@@ -95,15 +98,6 @@ export class AuthService {
     })
     this.router.navigate(['']);
     
-    // // console.log(user);
-    // this.afAuth.auth.currentUser.delete().then(() => {
-    //   // console.log('user auth has been deleted');
-    //   this.afs.doc<User>(`users/${user.uid}`).delete();
-    //   // console.log('user data has been deleted');
-    //   this.router.navigate(['']);
-    // }).catch(error => {
-    //   console.log(error);
-    // })
   }
 
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
-import { Router } from "@angular/router";
 import { AuthService } from "../../Services/auth.service";
 import { GeolocationService } from 'src/app/Services/geolocation.service';
 
