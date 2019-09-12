@@ -14,12 +14,23 @@
 
   form {
     // outline: 1px solid red;
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
 
     mat-form-field{
       width: 95%;
     }
+
+    .matHint {
+      margin-bottom: 1.25em;
+      font-size: .75em;
+    }
+
+
+    .nextPageBtn {
+      margin-top: 1.25em;
+    }
+
   }
 
   // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~

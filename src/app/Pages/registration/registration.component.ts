@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { User } from 'src/app/Models/user';
 
 @Component({
   selector: "app-registration",
@@ -7,8 +8,12 @@ import { Component, OnInit } from "@angular/core";
 })
 export class RegistrationComponent implements OnInit {
 
+  user:User
 
   constructor() {
+    this.user = JSON.parse(localStorage.getItem("user"));  
+    // console.log(this.user);
+    
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistationService } from "src/app/Services/registation.service";
 import { User } from "src/app/Models/user";
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-add-org-services',
@@ -11,14 +12,38 @@ export class AddOrgServicesComponent implements OnInit {
 
   user: User;
 
+  servicesFormGroup: FormGroup;
+  otherServicesFormGroup: FormGroup;
 
   constructor(
     private regService: RegistationService,
+    private formBuilder: FormBuilder,
   ) { 
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
   ngOnInit() {
+    this.servicesFormGroup = this.formBuilder.group({
+      beds: [false],
+      childcare: [false],
+      education: [false],
+      interviewPrep: [false],
+      jobPlacement: [false],
+      donations: [false],
+      food: [false],
+    });
+    this.otherServicesFormGroup = this.formBuilder.group({
+      otherServices:['']
+    });
   }
+
+  addServices(){
+    console.log(this.servicesFormGroup.value);
+    console.log(this.otherServicesFormGroup.value);
+    
+
+  }
+
+
 
 }

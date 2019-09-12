@@ -39,6 +39,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule,  } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -100,7 +101,8 @@ import { AddOrgServicesComponent } from './Components/add-org-services/add-org-s
     MatInputModule,
     MatStepperModule,
     MatGoogleMapsAutocompleteModule,
-    TextMaskModule
+    TextMaskModule,
+    MatCardModule,
   ],
   providers: [
     {

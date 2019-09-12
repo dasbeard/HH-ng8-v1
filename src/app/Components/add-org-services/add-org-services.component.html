@@ -1,5 +1,106 @@
-<p>add-org-services works!</p>
+<div class="container">
+  <h2>
+    What services do you provide?
+  </h2>
 
-<pre>
-  {{ user | json }}
+  <mat-card>
+    <mat-vertical-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="servicesFormGroup">
+        <form [formGroup]="servicesFormGroup">
+          <ng-template matStepLabel>What services do you provide? </ng-template>
+          Select all that apply
+          <div class="servicesContainer">
+            <mat-checkbox
+              matInput
+              formControlName="beds"
+              value="{{ servicesFormGroup.beds }}"
+              >Beds Available</mat-checkbox
+            >
+
+            <mat-checkbox
+              matInput
+              formControlName="childcare"
+              value="{{ servicesFormGroup.childcare }}"
+              >Childcare Assistance</mat-checkbox
+            >
+            <mat-checkbox
+              matInput
+              formControlName="education"
+              value="{{ servicesFormGroup.education }}"
+              >Education Assistance</mat-checkbox
+            >
+            <mat-checkbox
+              matInput
+              formControlName="interviewPrep"
+              value="{{ servicesFormGroup.interviewPrep }}"
+              >Interview Preperation</mat-checkbox
+            >
+            <mat-checkbox
+              matInput
+              formControlName="jobPlacement"
+              value="{{ servicesFormGroup.jobPlacement }}"
+              >Job Placement Assistance</mat-checkbox
+            >
+            <mat-checkbox
+              matInput
+              formControlName="donations"
+              value="{{ servicesFormGroup.donations }}"
+              >Donation Center</mat-checkbox
+            >
+            <mat-checkbox
+              matInput
+              formControlName="food"
+              value="{{ servicesFormGroup.food }}"
+              >Do you serve food?</mat-checkbox
+            >
+          </div>
+
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="otherServicesFormGroup">
+        <form [formGroup]="otherServicesFormGroup">
+          <ng-template matStepLabel
+            >Any other services that you provide that we may have
+            missed?</ng-template
+          >
+          <mat-form-field>
+            <textarea
+              matInput
+              placeholder="Other Services"
+              formControlName="otherServices"
+            ></textarea>
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>One more step!</ng-template>
+        Almost there! Just need to get your hours of operation!
+        <div>
+          <!-- <button mat-button matStepperPrevious>Back</button> -->
+          <button
+            class="nextPageBtn"
+            mat-raised-button
+            color="primary"
+            (click)="addServices()"
+          >
+            Setup Hours
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card>
+
+  <pre>
+  <!-- {{ user | json }} -->
 </pre>
+</div>

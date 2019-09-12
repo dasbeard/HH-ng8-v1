@@ -6,7 +6,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl,
+  AbstractControl
 } from "@angular/forms";
 
 @Component({
@@ -30,11 +30,22 @@ export class AddOrgInformationComponent implements OnInit {
   nameFormGroup: FormGroup;
   emailFormGroup: FormGroup;
 
-  website;
-  phone;
-
-  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-
+  public mask = [
+    "(",
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ")",
+    " ",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/
+  ];
 
   get formArray(): AbstractControl | null {
     return this.formGroup.get("formArray");
@@ -43,57 +54,64 @@ export class AddOrgInformationComponent implements OnInit {
   constructor(
     private regService: RegistationService,
     private formBuilder: FormBuilder
-  ) {
-    // ! Maybe this should be session not localstorage
-    this.user = JSON.parse(localStorage.getItem("user"));
-  }
-
-  ngOnInit() {
-    // Sample
-    if (this.user.website) {
-      this.website = this.user.website;
-    } else {
-      this.website = "";
+    ) {
+      // ! Maybe this should be session not localstorage
+      this.user = JSON.parse(localStorage.getItem("user"));
     }
-    if (this.user.phone) {
-      this.phone = this.user.phone;
-    } else {
-      this.phone = "";
-    }
-
+    
+    ngOnInit() {
+      this.checkUserData();
     this.createFormGroup();
   }
 
+  checkUserData() {
+    if (!this.user.about) {
+      this.user.about = "";
+    }
 
+    if (!this.user.phone) {
+      this.user.phone = "";
+    }
+
+    if (!this.user.contactEmail) {
+      this.user.contactEmail = "";
+    }
+    
+    if (!this.user.website) {
+      this.user.website = "";
+    }
+    
+  }
+  
   createFormGroup() {
+
     this.formGroup = this.formBuilder.group({
       formArray: this.formBuilder.array([
         this.formBuilder.group({
-          website: [`${this.website}`]
+          about: [`${this.user.about}`]
         }),
         this.formBuilder.group({
-          phone: [`${this.phone}`, Validators.required]
+          website: [`${this.user.website}`]
         }),
         this.formBuilder.group({
-          contactEmail: ["", Validators.email]
+          phone: [`${this.user.phone}`, Validators.required]
         }),
         this.formBuilder.group({
-          about: [""]
-        }),
+          contactEmail: [`${this.user.contactEmail}`, Validators.email]
+        })
       ])
     });
   }
 
   basicInfo() {
     const basicOrgInfo = {
-      website: this.formGroup.value.formArray[0].website,
-      phone: this.formGroup.value.formArray[1].phone,
-      contactEmail: this.formGroup.value.formArray[2].contactEmail,
-      about: this.formGroup.value.formArray[3].about,
-    }
+      about: this.formGroup.value.formArray[0].about,
+      website: this.formGroup.value.formArray[1].website,
+      phone: this.formGroup.value.formArray[2].phone,
+      contactEmail: this.formGroup.value.formArray[3].contactEmail,
+    };
 
     // console.log(basicOrgInfo);
-    this.regService.addUserInfo(basicOrgInfo)
-
+    this.regService.addUserInfo(basicOrgInfo);
   }
 }

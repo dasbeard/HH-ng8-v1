@@ -1,100 +1,106 @@
 <div class="container">
   <h1>
-    Welcome {{ user.organization }}
-    <br />
     Now lets learn a bit more
   </h1>
 
   <form [formGroup]="formGroup" (ngSubmit)="basicInfo()">
-    <mat-vertical-stepper
-      #linearVerticalStepper="matVerticalStepper"
-      formArrayName="formArray"
-      [linear]="false"
-    >
-      <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
-        <ng-template matStepLabel>Do you have a website?</ng-template>
-        <mat-form-field>
-          <mat-label>Website</mat-label>
-          <input
-            matInput
-            formControlName="website"
-            value="{{ user.website }}"
-          />
-        </mat-form-field>
-
-        <div>
-          <button type="button" mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-
-      <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
-        <ng-template matStepLabel>
-          <div>What is a good phone number for people to contact?</div>
-        </ng-template>
-        <mat-form-field>
-          <mat-label>Phone Number</mat-label>
-          <input
-            matInput
-            type="tel"
-            [textMask]="{ mask: mask }"
-            formControlName="phone"
-            value="{{ user.phone }}"
-            required
-          />
-          <mat-error>This field is required</mat-error>
-        </mat-form-field>
-        <div>
-          <button type="button" mat-button matStepperPrevious>Back</button>
-          <button type="button" mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-
-      <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
-        <ng-template matStepLabel>
+    <mat-card>
+      <mat-vertical-stepper
+        #linearVerticalStepper="matVerticalStepper"
+        formArrayName="formArray"
+        [linear]="false"
+      >
+        <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+          <ng-template matStepLabel>
+            <div>Tell us a little bit about your organization</div>
+          </ng-template>
+          <mat-form-field>
+            <mat-label>About</mat-label>
+            <textarea matInput formControlName="about"></textarea>
+            <mat-error>The input is invalid.</mat-error>
+          </mat-form-field>
           <div>
-            What email would you like people to be able to contact you at?
+            <button type="button" mat-button matStepperNext>Next</button>
           </div>
-        </ng-template>
-        <mat-form-field>
-          <mat-label>Email address</mat-label>
-          <input matInput formControlName="contactEmail" />
-          <mat-error>The input is invalid.</mat-error>
-        </mat-form-field>
-        <div>
-          <button type="button" mat-button matStepperPrevious>Back</button>
-          <button type="button" mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
+        </mat-step>
 
-      <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
-        <ng-template matStepLabel>
-          <div>Tell us a little bit about your organization</div>
-        </ng-template>
-        <mat-form-field>
-          <mat-label>About</mat-label>
-          <textarea matInput formControlName="about" ></textarea>
-          <mat-error>The input is invalid.</mat-error>
-        </mat-form-field>
-        <div>
-          <button type="button" mat-button matStepperPrevious>Back</button>
-          <button type="button" mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
+        <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+          <ng-template matStepLabel>Do you have a website?</ng-template>
+          <div class="matHint">
+            (Leave blank if you don't)
+          </div>
+          <mat-form-field>
+            <mat-label>Website</mat-label>
+            <input
+              matInput
+              formControlName="website"
+              value="{{ user.website }}"
+            />
+          </mat-form-field>
 
-      <mat-step>
-        <ng-template matStepLabel>Let's keep going!</ng-template>
-        Next let's see what services you provide
-        <div>
-          <button
-            type="submit"
-            mat-raised-button
-            color="primary"
-            [disabled]="!formGroup.valid"
+          <div>
+            <button type="button" mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
+          <ng-template matStepLabel>
+            <div>What is a good phone number for people to contact?</div>
+          </ng-template>
+          <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input
+              matInput
+              type="tel"
+              [textMask]="{ mask: mask }"
+              formControlName="phone"
+              value="{{ user.phone }}"
+              required
+            />
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+          <div>
+            <button type="button" mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
+          <ng-template matStepLabel>
+              What email would you like people to be able to contact you at?
+          </ng-template>
+          <div class="matHint">
+              (This will be displayed on the site)
+            </div>
+          <mat-form-field>
+            <mat-label>Email address</mat-label>
+            <input matInput formControlName="contactEmail" />
+            <mat-error>The input is invalid.</mat-error>
+          </mat-form-field>
+          <div>
+            <button type="button" mat-button matStepperPrevious>Back</button>
+            <button type="button" mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Let's keep going!</ng-template>
+          Next let's see what services you provide
+          <div>
+            <!-- <button type="button" mat-button matStepperPrevious>Back</button> -->
+            <button
+              class="nextPageBtn"
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="!formGroup.valid"
             >
-            Services
-          </button>
-        </div>
-      </mat-step>
-    </mat-vertical-stepper>
+              Setup Services
+            </button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-card>
   </form>
 </div>

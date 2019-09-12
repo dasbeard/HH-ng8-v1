@@ -21,7 +21,7 @@ export class RegisterAccountComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private geoLoaction: GeolocationService,
+    // private geoLoaction: GeolocationService,
     private formBuilder: FormBuilder
 
   ) {}
