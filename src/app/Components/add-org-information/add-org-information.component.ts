@@ -6,7 +6,7 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl
+  AbstractControl,
 } from "@angular/forms";
 
 @Component({
@@ -25,21 +25,6 @@ export class AddOrgInformationComponent implements OnInit {
   servicesFormGroup: FormGroup;
   otherServicesFormGroup: FormGroup;
 
-  // Sample
-
-  fruits: Array<string> = [
-    "apple",
-    "pear",
-    "kiwi",
-    "banana",
-    "grape",
-    "strawberry",
-    "grapefruit",
-    "melon",
-    "mango",
-    "plum"
-  ];
-
   formGroup: FormGroup;
 
   nameFormGroup: FormGroup;
@@ -48,18 +33,12 @@ export class AddOrgInformationComponent implements OnInit {
   website;
   phone;
 
-  // steps = [
-  //   {label: 'Confirm your name', content: 'Last name, First name.'},
-  //   {label: 'Confirm your contact information', content: '123-456-7890'},
-  //   {label: 'Confirm your address', content: '1600 Amphitheater Pkwy MTV'},
-  //   {label: 'You are now done', content: 'Finished!'}
-  // ];
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+
 
   get formArray(): AbstractControl | null {
     return this.formGroup.get("formArray");
   }
-
-  // Sample
 
   constructor(
     private regService: RegistationService,
@@ -85,6 +64,7 @@ export class AddOrgInformationComponent implements OnInit {
     this.createFormGroup();
   }
 
+
   createFormGroup() {
     this.formGroup = this.formBuilder.group({
       formArray: this.formBuilder.array([
@@ -100,23 +80,11 @@ export class AddOrgInformationComponent implements OnInit {
         this.formBuilder.group({
           about: ["", Validators.required]
         }),
-        // this.formBuilder.group({
-        //   otherServices: [""]
-        // }),
-        // this.formBuilder.group({
-        //   beds: [""],
-        //   childcare: ["false"]
-          // education:['false'],
-          // interview:['false'],
-          // jobPlacement:['false'],
-          // donations:['false'],
-          // food:['false'],
-        // })
       ])
     });
   }
 
-  nextStep() {
+  basicInfo() {
 
     console.log(this.formGroup.value.formArray);
 

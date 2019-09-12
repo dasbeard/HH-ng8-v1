@@ -5,11 +5,11 @@
     Now lets learn a bit more
   </h1>
 
-  <form [formGroup]="formGroup">
+  <form [formGroup]="formGroup" (ngSubmit)="basicInfo()">
     <mat-vertical-stepper
       #linearVerticalStepper="matVerticalStepper"
       formArrayName="formArray"
-      [linear]="false"
+      [linear]="true"
     >
       <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
         <ng-template matStepLabel>Do you have a website?</ng-template>
@@ -20,16 +20,10 @@
             formControlName="website"
             value="{{ user.website }}"
           />
-          <!-- <mat-error>This field is required</mat-error> -->
         </mat-form-field>
 
-        <!-- <mat-form-field>
-            <mat-label>Last name</mat-label>
-            <input matInput formControlName="lastNameFormCtrl" required>
-            <mat-error>This field is required</mat-error>
-          </mat-form-field> -->
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button type="button" mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
 
@@ -42,7 +36,7 @@
           <input
             matInput
             type="tel"
-            pattern="^[6-9]\d{9}$" maxlength="10"
+            [textMask]="{ mask: mask }"
             formControlName="phone"
             value="{{ user.phone }}"
             required
@@ -50,8 +44,8 @@
           <mat-error>This field is required</mat-error>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button type="button" mat-button matStepperPrevious>Back</button>
+          <button type="button" mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
 
@@ -67,8 +61,8 @@
           <mat-error>The input is invalid.</mat-error>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button type="button" mat-button matStepperPrevious>Back</button>
+          <button type="button" mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
 
@@ -82,64 +76,26 @@
           <mat-error>The input is invalid.</mat-error>
         </mat-form-field>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button type="button" mat-button matStepperPrevious>Back</button>
+          <button type="button" mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
-
-      <!-- 
-      <mat-step formGroupName="4" [stepControl]="formArray?.get([4])">
-        <ng-template matStepLabel>
-          <div>
-            Any other services that you provide that we may have missed?
-          </div>
-        </ng-template>
-        <mat-form-field>
-          <mat-label>Other Services</mat-label>
-          <textarea matInput formControlName="otherServices"></textarea>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-
-      
-      <mat-step formGroupName="5" [stepControl]="formArray?.get([5])">
-          <ng-template matStepLabel>Which of these services to you provide (check all that apply)</ng-template>
-          <mat-form-field>
-            <mat-label>Beds</mat-label>
-            <input matInput formControlName="beds">
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-    
-          <mat-form-field>
-            <mat-label>Last name</mat-label>
-            <input matInput formControlName="childcare" required>
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-          <div>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </mat-step> -->
 
       <mat-step>
-        <ng-template matStepLabel>Confirm your information</ng-template>
-        Everything seems correct.
+        <ng-template matStepLabel>Let's keep going!</ng-template>
+        Next let's see what services you provide
         <div>
-          <!-- <button
-            type="button"
+          <button
+            type="submit"
             mat-raised-button
-            (click)="linearVerticalStepper.reset()"
-          >
-            Reset
-          </button> -->
-          <button type="button" mat-raised-button (click)="nextStep()">
-            nextStep
+            color="primary"
+            [disabled]="!formGroup.valid"
+            >
+            <!-- (click)="nextStep()" -->
+            Services
           </button>
         </div>
       </mat-step>
     </mat-vertical-stepper>
   </form>
-
 </div>

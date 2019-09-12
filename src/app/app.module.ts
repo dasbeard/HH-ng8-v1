@@ -24,6 +24,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -96,7 +98,7 @@ import { AddOrgInformationComponent } from './Components/add-org-information/add
     MatInputModule,
     MatStepperModule,
     MatGoogleMapsAutocompleteModule,
-    
+    TextMaskModule
   ],
   providers: [
     {
