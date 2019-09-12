@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { RegistationService } from "src/app/Services/registation.service";
 import { User } from "src/app/Models/user";
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
-  selector: 'app-add-org-services',
-  templateUrl: './add-org-services.component.html',
-  styleUrls: ['./add-org-services.component.scss']
+  selector: "app-add-org-services",
+  templateUrl: "./add-org-services.component.html",
+  styleUrls: ["./add-org-services.component.scss"]
 })
 export class AddOrgServicesComponent implements OnInit {
-
   user: User;
 
   servicesFormGroup: FormGroup;
@@ -17,8 +16,8 @@ export class AddOrgServicesComponent implements OnInit {
 
   constructor(
     private regService: RegistationService,
-    private formBuilder: FormBuilder,
-  ) { 
+    private formBuilder: FormBuilder
+  ) {
     this.user = JSON.parse(localStorage.getItem("user"));
   }
 
@@ -30,20 +29,19 @@ export class AddOrgServicesComponent implements OnInit {
       interviewPrep: [false],
       jobPlacement: [false],
       donations: [false],
-      food: [false],
+      servesFood: [false]
     });
     this.otherServicesFormGroup = this.formBuilder.group({
-      otherServices:['']
+      otherServices: [""]
     });
   }
 
-  addServices(){
-    console.log(this.servicesFormGroup.value);
-    console.log(this.otherServicesFormGroup.value);
-    
-
+  addServices() {
+    // console.log(this.servicesFormGroup.value);
+    // console.log(this.otherServicesFormGroup.value);
+    this.regService.addUserServices(
+      this.servicesFormGroup.value,
+      this.otherServicesFormGroup.value.otherServices
+    );
   }
-
-
-
 }

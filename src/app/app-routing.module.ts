@@ -24,6 +24,12 @@ const routes: Routes = [
     component: OrganizationPageComponent,
     children: []
   },
+  // {
+  //   path: "Organization:id",
+  //  // pathMatch: "full",
+  //   component: OrganizationPageComponent,
+  //   children: []
+  // },
   {
     path: "LoginRegister",
     pathMatch: "full",
@@ -38,7 +44,6 @@ const routes: Routes = [
       { path: "", component: SelectLocationComponent},
       { path: "MoreInfo", component: AddOrgInformationComponent},
       { path: "Services", component: AddOrgServicesComponent},
-
     ]
       
   },

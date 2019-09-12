@@ -46,18 +46,35 @@ export class RegistationService {
 
     localStorage.setItem("user", JSON.stringify(this.newUser));
 
-    this.newUserAfsDoc = this.afs.doc(`users/${this.newUser.uid}`);
-    this.newUserAfsDoc.update(this.newUser);
-
+    this.saveToDatabase(this.newUser)
+    
     this.router.navigate(["/Register/Services"]);
   }
 
 
-  addUserServices(data) {
+  addUserServices(services, otherServices) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
+    console.log(services, otherServices);
+    
+    this.newUser.services = services;
+    this.newUser.otherServices = otherServices;
 
-    // this.newUser.
-
+    console.log(this.newUser);
+    
+    localStorage.setItem("user", JSON.stringify(this.newUser));
+    this.saveToDatabase(this.newUser)
+    
   }
+
+  saveToDatabase(data){
+    this.newUserAfsDoc = this.afs.doc(`users/${data.uid}`);
+    this.newUserAfsDoc.update(data);
+
+    localStorage.setItem("user", JSON.stringify(this.newUser));
+    
+    console.log('Data saved to firebase');
+  }
+
+
 
 }

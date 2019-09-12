@@ -103,7 +103,7 @@ export class AddOrgInformationComponent implements OnInit {
     });
   }
 
-  basicInfo() {
+  saveBasicInfo() {
     const basicOrgInfo = {
       about: this.formGroup.value.formArray[0].about,
       website: this.formGroup.value.formArray[1].website,

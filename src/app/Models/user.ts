@@ -27,7 +27,7 @@ export interface Services {
   beds:boolean;
   childcare:boolean;
   education:boolean;
-  interview:boolean;
+  interviewPrep:boolean;
   jobPlacement:boolean;
   donations:boolean;
   servesFood:boolean;
