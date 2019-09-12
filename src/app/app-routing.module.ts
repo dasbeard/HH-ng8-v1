@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.guard';
 import { RegistrationComponent } from './Pages/registration/registration.component';
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
 import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
+import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
     children: [
       { path: "", component: SelectLocationComponent},
       { path: "MoreInfo", component: AddOrgInformationComponent},
+      { path: "Services", component: AddOrgServicesComponent},
 
     ]
       

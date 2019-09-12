@@ -54,6 +54,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegistrationComponent } from './Pages/registration/registration.component';
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
 import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
+import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AddOrgInformationComponent } from './Components/add-org-information/add
     LoginComponent,
     RegistrationComponent,
     SelectLocationComponent,
-    AddOrgInformationComponent
+    AddOrgInformationComponent,
+    AddOrgServicesComponent
   ],
   imports: [
     BrowserModule,

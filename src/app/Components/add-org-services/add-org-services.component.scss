@@ -1,0 +1,29 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 5%;
+  // margin-top: 5%;
+  
+  h1 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+
+
+  form {
+    // outline: 1px solid red;
+    width: 50%;
+    margin: 0 auto;
+
+    mat-form-field{
+      width: 95%;
+    }
+  }
+
+  // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~
+
+
+
+}

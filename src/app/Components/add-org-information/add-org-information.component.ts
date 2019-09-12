@@ -78,15 +78,22 @@ export class AddOrgInformationComponent implements OnInit {
           contactEmail: ["", Validators.email]
         }),
         this.formBuilder.group({
-          about: ["", Validators.required]
+          about: [""]
         }),
       ])
     });
   }
 
   basicInfo() {
+    const basicOrgInfo = {
+      website: this.formGroup.value.formArray[0].website,
+      phone: this.formGroup.value.formArray[1].phone,
+      contactEmail: this.formGroup.value.formArray[2].contactEmail,
+      about: this.formGroup.value.formArray[3].about,
+    }
 
-    console.log(this.formGroup.value.formArray);
+    // console.log(basicOrgInfo);
+    this.regService.addUserInfo(basicOrgInfo)
 
   }
 }

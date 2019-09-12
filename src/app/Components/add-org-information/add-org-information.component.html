@@ -9,7 +9,7 @@
     <mat-vertical-stepper
       #linearVerticalStepper="matVerticalStepper"
       formArrayName="formArray"
-      [linear]="true"
+      [linear]="false"
     >
       <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
         <ng-template matStepLabel>Do you have a website?</ng-template>
@@ -72,7 +72,7 @@
         </ng-template>
         <mat-form-field>
           <mat-label>About</mat-label>
-          <textarea matInput formControlName="about" required></textarea>
+          <textarea matInput formControlName="about" ></textarea>
           <mat-error>The input is invalid.</mat-error>
         </mat-form-field>
         <div>
@@ -91,7 +91,6 @@
             color="primary"
             [disabled]="!formGroup.valid"
             >
-            <!-- (click)="nextStep()" -->
             Services
           </button>
         </div>
