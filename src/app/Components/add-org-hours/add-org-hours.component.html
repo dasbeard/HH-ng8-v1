@@ -1,0 +1,469 @@
+<div class="container">
+  <h2>
+    Lets get your hours
+  </h2>
+
+  <!-- {{ user | json }} -->
+
+  <mat-card>
+    <mat-vertical-stepper [linear]="false" #stepper>
+      <mat-step [stepControl]="hoursOfOperationStep">
+        <form [formGroup]="hoursOfOperation">
+          <ng-template matStepLabel>When are you open? </ng-template>
+
+          <div class="mat-table">
+            <div class="mat-header-row">
+              <div class="mat-header-cell dayOfWeek">Day</div>
+              <div class="mat-header-cell openTime">Open</div>
+              <div class="mat-header-cell closeTime">Close</div>
+              <div class="mat-header-cell closedAllDay">Closed all day</div>
+            </div>
+
+            <div class="mat-row" formGroupName="monday">
+              <div class="mat-cell dayOfWeek">Monday</div>
+
+              <div class="mat-cell openTime">
+                <input
+                  [ngxTimepicker]="toggleTimepicker"
+                  [disableClick]="false"
+                  readonly
+                />
+                <ngx-material-timepicker-toggle
+                  [for]="toggleTimepicker"
+                ></ngx-material-timepicker-toggle>
+
+                <ngx-material-timepicker
+                  class="testing"
+                  #toggleTimepicker
+                  [minutesGap]="5"
+                ></ngx-material-timepicker>
+              </div>
+
+              <!-- <ngx-timepicker-field
+                class="mat-cell openTime"
+                buttonAlign="left"
+                formControlName="open"
+                [disabled]="mClosed.value"
+              ></ngx-timepicker-field> -->
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="mClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="tuesday">
+              <div class="mat-cell dayOfWeek">Tuesday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="tClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="tClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="wednesday">
+              <div class="mat-cell dayOfWeek">Wednesday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="wClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="wClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="thursday">
+              <div class="mat-cell dayOfWeek">Thursday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="thClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="thClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="friday">
+              <div class="mat-cell dayOfWeek">Friday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="fClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="fClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="saturday">
+              <div class="mat-cell dayOfWeek">Saturday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="saClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="saClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="sunday">
+              <div class="mat-cell dayOfWeek">Sunday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="suClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="suClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button mat-button type="button" matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step
+        [stepControl]="hoursServingFoodStep"
+        *ngIf="user.services.servesFood"
+      >
+        <form [formGroup]="hoursServingFood">
+          <ng-template matStepLabel
+            >What times do you serve food??
+          </ng-template>
+
+          <div class="mat-table">
+            <div class="mat-header-row">
+              <div class="mat-header-cell dayOfWeek">Day</div>
+              <div class="mat-header-cell openTime">Open</div>
+              <div class="mat-header-cell closeTime">Close</div>
+              <div class="mat-header-cell closedAllDay">Closed all day</div>
+            </div>
+
+            <div class="mat-row" formGroupName="monday">
+              <div class="mat-cell dayOfWeek">Monday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="mFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="mFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="tuesday">
+              <div class="mat-cell dayOfWeek">Tuesday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="tFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="tFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="wednesday">
+              <div class="mat-cell dayOfWeek">Wednesday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="wFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="wFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="thursday">
+              <div class="mat-cell dayOfWeek">Thursday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="thFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="thFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="friday">
+              <div class="mat-cell dayOfWeek">Friday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="fFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="fFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="saturday">
+              <div class="mat-cell dayOfWeek">Saturday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="saFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="saFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+
+            <div class="mat-row" formGroupName="sunday">
+              <div class="mat-cell dayOfWeek">Sunday</div>
+              <ngx-timepicker-field
+                class="mat-cell openTime"
+                formControlName="open"
+                [disabled]="suFClosed.value"
+              ></ngx-timepicker-field>
+
+              <ngx-timepicker-field
+                class="mat-cell closeTime"
+                formControlName="close"
+                [disabled]="suFClosed.value"
+              ></ngx-timepicker-field>
+
+              <div class="mat-cell closedAllDay">
+                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Thats it!</ng-template>
+        Lets take a look at your page!
+        <div>
+          <button
+            class="nextPageBtn"
+            mat-raised-button
+            color="primary"
+            (click)="addHours()"
+          >
+            Setup Hours
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-card>
+</div>
+
+<!-- 
+
+
+          <div formGroupName="monday" class="day">
+            <p>Monday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="mClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="mClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="tuesday" class="day">
+            <p>Tuesday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="tClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="tClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="wednesday" class="day">
+            <p>Wednesday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="wClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="wClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="thursday" class="day">
+            <p>Thursday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="thClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="thClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="friday" class="day">
+            <p>Friday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="fClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="fClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="saturday" class="day">
+            <p>Saturday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="saClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              formControlName="close"
+              [disabled]="saClosed.value"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+          <div formGroupName="sunday" class="day">
+            <p>Sunday</p>
+            <ngx-timepicker-field
+              formControlName="open"
+              [disabled]="suClosed.value"
+            ></ngx-timepicker-field>
+            <ngx-timepicker-field
+              [disabled]="suClosed.value"
+              formControlName="close"
+            ></ngx-timepicker-field>
+            <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+          </div>
+
+
+ -->
+
+<!-- <form (ngSubmit)="testing()">
+      <ngx-timepicker-field
+        [defaultTime]="'11:11 am'"
+        [disabled]="false"
+        [(ngModel)]="testingInput"
+        name='test'
+      ></ngx-timepicker-field>
+
+      <ngx-timepicker-field
+        [disabled]="false"
+        [(ngModel)]="testingInput2"
+        name='test2'
+        ></ngx-timepicker-field>
+
+      <button mat-raised-button>testBTN</button>
+    </form> -->

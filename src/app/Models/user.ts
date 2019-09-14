@@ -16,7 +16,9 @@ export interface User {
 
   otherServices?:string;
   services?: Services;
-  
+  hoursOfOperation?: Hours;
+  hoursServingFood?: Hours;
+
   latLng?: LatLngPosition;
   // !! May need to break into pieces
   fullAddress?: string;
@@ -36,4 +38,14 @@ export interface Services {
 export interface LatLngPosition {
   latitude:number;
   longitude:number;
+}
+
+export interface Hours {
+  monday: {open:string, close: string, isClosed:boolean};
+  tuesday: {open:string, close: string, isClosed:boolean};
+  wednesday: {open:string, close: string, isClosed:boolean};
+  thursday: {open:string, close: string, isClosed:boolean};
+  friday: {open:string, close: string, isClosed:boolean};
+  saturday: {open:string, close: string, isClosed:boolean};
+  sunday: {open:string, close: string, isClosed:boolean};
 }

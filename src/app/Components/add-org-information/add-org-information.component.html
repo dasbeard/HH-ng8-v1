@@ -1,7 +1,7 @@
 <div class="container">
-  <h1>
+  <h2>
     Now lets learn a bit more
-  </h1>
+  </h2>
 
   <form [formGroup]="formGroup" (ngSubmit)="saveBasicInfo()">
     <mat-card>
@@ -16,7 +16,7 @@
           </ng-template>
           <mat-form-field>
             <mat-label>About</mat-label>
-            <textarea matInput formControlName="about"></textarea>
+            <textarea matInput formControlName="about" required></textarea>
             <mat-error>The input is invalid.</mat-error>
           </mat-form-field>
           <div>
@@ -24,7 +24,7 @@
           </div>
         </mat-step>
 
-        <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+        <mat-step formGroupName="1" [stepControl]="formArray?.get([1])"  [optional]="true">
           <ng-template matStepLabel>Do you have a website?</ng-template>
           <div class="matHint">
             (Leave blank if you don't)
@@ -66,7 +66,7 @@
           </div>
         </mat-step>
 
-        <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
+        <mat-step formGroupName="3" [stepControl]="formArray?.get([3])"  [optional]="true">
           <ng-template matStepLabel>
               What email would you like people to be able to contact you at?
           </ng-template>

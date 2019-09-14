@@ -9,6 +9,7 @@ import { RegistrationComponent } from './Pages/registration/registration.compone
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
 import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
 import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
+import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
       { path: "", component: SelectLocationComponent},
       { path: "MoreInfo", component: AddOrgInformationComponent},
       { path: "Services", component: AddOrgServicesComponent},
+      { path: "Hours", component: AddOrgHoursComponent},
     ]
       
   },

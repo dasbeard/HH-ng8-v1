@@ -24,8 +24,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
+// Input Mask
 import { TextMaskModule } from 'angular2-text-mask';
 
+// Material Time Picker
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
@@ -56,6 +59,7 @@ import { RegistrationComponent } from './Pages/registration/registration.compone
 import { SelectLocationComponent } from './Components/select-location/select-location.component';
 import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
 import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
+import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +76,8 @@ import { AddOrgServicesComponent } from './Components/add-org-services/add-org-s
     RegistrationComponent,
     SelectLocationComponent,
     AddOrgInformationComponent,
-    AddOrgServicesComponent
+    AddOrgServicesComponent,
+    AddOrgHoursComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +108,7 @@ import { AddOrgServicesComponent } from './Components/add-org-services/add-org-s
     MatGoogleMapsAutocompleteModule,
     TextMaskModule,
     MatCardModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [
     {

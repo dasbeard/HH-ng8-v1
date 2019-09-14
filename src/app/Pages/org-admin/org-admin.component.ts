@@ -15,6 +15,7 @@ export class OrgAdminComponent implements OnInit {
 
     this.authService.user$.subscribe( user => {
       this.user$ = user;
+      localStorage.setItem("user", JSON.stringify(this.user$));
     })
   }
 

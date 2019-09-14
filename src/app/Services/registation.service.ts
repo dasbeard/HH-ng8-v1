@@ -54,17 +54,40 @@ export class RegistationService {
 
   addUserServices(services, otherServices) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
-    console.log(services, otherServices);
+    // console.log(services, otherServices);
     
     this.newUser.services = services;
     this.newUser.otherServices = otherServices;
 
-    console.log(this.newUser);
+    // console.log(this.newUser);
     
     localStorage.setItem("user", JSON.stringify(this.newUser));
     this.saveToDatabase(this.newUser)
+    this.router.navigate(["/Register/Hours"])
     
   }
+
+
+  addUserHours(identifier, data, user){
+      this.newUser = user;
+
+    if(identifier == 'hoursOfOp'){
+      console.log('Hours of Operation', data);
+      this.newUser.hoursOfOperation = data;
+      console.log(this.newUser);
+      
+    }
+    if(identifier == 'servingFood'){
+      console.log('Hours Serving Food', data);
+      this.newUser.hoursServingFood = data;
+      console.log(this.newUser);
+    }
+
+    this.saveToDatabase(this.newUser);
+    this.router.navigate(['/OrgAdmin']);
+    
+  }
+
 
   saveToDatabase(data){
     this.newUserAfsDoc = this.afs.doc(`users/${data.uid}`);

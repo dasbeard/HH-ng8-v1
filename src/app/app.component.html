@@ -9,7 +9,9 @@
       mat-stroked-button
       class="btn mat-elevation-z1"
       (click)="signOut()"
-    >SignOut</button>
+    >
+      SignOut
+    </button>
 
     <button
       mat-stroked-button
@@ -17,6 +19,14 @@
       [routerLink]="['LoginRegister']"
     >
       Login/Register
+    </button>
+
+    <button
+      mat-stroked-button
+      class="btn mat-elevation-z1"
+      [routerLink]="['Register/MoreInfo']"
+    >
+      Registration/MoreInfo
     </button>
 
     <button
@@ -30,9 +40,9 @@
     <button
       mat-stroked-button
       class="btn mat-elevation-z1"
-      [routerLink]="['Register/MoreInfo']"
+      [routerLink]="['Register/Hours']"
     >
-      Registration/MoreInfo
+      Registration/Hours
     </button>
 
     <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">

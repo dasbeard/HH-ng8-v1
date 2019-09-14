@@ -67,17 +67,10 @@ export class SelectLocationComponent implements OnInit {
       });
     }
 
-    // if (userLocation.latitude) {
-    //   this.latitude = userLocation.latitude;
-    //   this.longitude = userLocation.longitude;
-    //   this.zoom = 15;
-    //   // this.country = userLocation.country;
-    // }
-    // console.log(this.country);
   }
 
   onAutocompleteSelected(result: PlaceResult) {
-    // console.log("onAutocompleteSelected: ", result);
+    console.log("onAutocompleteSelected: ", result);
     this.orgResult = result;
   }
 

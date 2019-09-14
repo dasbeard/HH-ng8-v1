@@ -4,7 +4,7 @@
   </h2>
 
   <mat-card>
-    <mat-vertical-stepper [linear]="isLinear" #stepper>
+    <mat-vertical-stepper [linear]="false" #stepper>
       <mat-step [stepControl]="servicesFormGroup">
         <form [formGroup]="servicesFormGroup">
           <ng-template matStepLabel>What services do you provide? </ng-template>
@@ -61,7 +61,7 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="otherServicesFormGroup">
+      <mat-step [stepControl]="otherServicesFormGroup" [optional]="true">
         <form [formGroup]="otherServicesFormGroup">
           <ng-template matStepLabel
             >Any other services that you provide that we may have

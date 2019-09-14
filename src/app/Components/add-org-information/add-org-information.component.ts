@@ -18,12 +18,15 @@ export class AddOrgInformationComponent implements OnInit {
   user: User;
 
   isLinear = false;
+
+  // TODO: See if these are being used
   websiteFormGroup: FormGroup;
   phoneFormGroup: FormGroup;
   contactEmailFormGroup: FormGroup;
   aboutFormGroup: FormGroup;
   servicesFormGroup: FormGroup;
   otherServicesFormGroup: FormGroup;
+  // TODO: See if these are being used
 
   formGroup: FormGroup;
 
@@ -61,7 +64,7 @@ export class AddOrgInformationComponent implements OnInit {
     
     ngOnInit() {
       this.checkUserData();
-    this.createFormGroup();
+      this.createFormGroup();
   }
 
   checkUserData() {

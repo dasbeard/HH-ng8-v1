@@ -37,8 +37,6 @@ export class AddOrgServicesComponent implements OnInit {
   }
 
   addServices() {
-    // console.log(this.servicesFormGroup.value);
-    // console.log(this.otherServicesFormGroup.value);
     this.regService.addUserServices(
       this.servicesFormGroup.value,
       this.otherServicesFormGroup.value.otherServices
