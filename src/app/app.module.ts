@@ -30,6 +30,8 @@ import { TextMaskModule } from 'angular2-text-mask';
 // Material Time Picker
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
+
+// Material
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
@@ -45,7 +47,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {MatCardModule} from '@angular/material/card';
 
 
-
+// Components and Pages
 import { HomePageComponent } from "./Pages/home-page/home-page.component";
 import { OrganizationPageComponent } from "./Pages/organization-page/organization-page.component";
 import { ServicesComponent } from "./Components/services/services.component";

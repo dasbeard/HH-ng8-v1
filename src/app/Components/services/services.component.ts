@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-services',
@@ -6,18 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./services.component.scss']
 })
 export class ServicesComponent implements OnInit {
-  checked1;
-  checked2:boolean = true;
-  checked3:boolean = false;
-  checked4:boolean = false;
-  checked5:boolean = true;
-  checked6:boolean = false;
-  checked7:boolean = true;
   
-  
+  @Input() services: object;
+
   constructor() { }
 
   ngOnInit() {
+    // console.log( this.services );
   }
 
 }

@@ -25,12 +25,6 @@ const routes: Routes = [
     component: OrganizationPageComponent,
     children: []
   },
-  // {
-  //   path: "Organization:id",
-  //  // pathMatch: "full",
-  //   component: OrganizationPageComponent,
-  //   children: []
-  // },
   {
     path: "LoginRegister",
     pathMatch: "full",
@@ -50,10 +44,10 @@ const routes: Routes = [
       
   },
   {
-    path: "OrgAdmin",
-    pathMatch: "full",
+    path: "OrgAdmin/:id",
+    // pathMatch: "full",
     component: OrgAdminComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
 
   
@@ -71,3 +65,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+export const routingComponents = {
+    OrgAdminComponent
+}

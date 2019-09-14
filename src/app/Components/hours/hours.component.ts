@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 export interface Hours {
   day: string;
@@ -7,7 +7,7 @@ export interface Hours {
   close: string;
 }
 
-const hoursOfOperation: Hours[] = [
+const hoursOfOperation1: Hours[] = [
   {day: 'Mon', open: '12:30am', spacer: '-', close: '11:15pm'},
   {day: 'Tue', open: '1:30am', spacer: '-', close: '1:45pm'},
   {day: 'Wen', open: '10:30am', spacer: '-', close: '12:00pm'},
@@ -18,7 +18,7 @@ const hoursOfOperation: Hours[] = [
 ];
 
 
-const hoursServingFood: Hours[] = [
+const hoursServingFood1: Hours[] = [
   {day: 'Mon', open: '1:30am', spacer: '-', close: '1:15pm'},
   {day: 'Tue', open: '12:30am', spacer: '-', close: '4:45pm'},
   {day: 'Wen', open: '5:30am', spacer: '-', close: '11:00pm'},
@@ -28,25 +28,31 @@ const hoursServingFood: Hours[] = [
   {day: 'Sun', open: '2:15am', spacer: '-', close: '2:45pm'}
 ];
 
+
+
+
 @Component({
   selector: 'app-hours',
   templateUrl: './hours.component.html',
   styleUrls: ['./hours.component.scss']
 })
 export class HoursComponent implements OnInit {
+  @Input() hoursOfOp: object;
+  @Input() hoursServing: object;
 
   hoursDisplayed:string;
 
   displayedColumns: string[] = ['day', 'open', 'spacer', 'close'];
-  HofOp = hoursOfOperation;
-  serving = hoursServingFood;
+  HofOp = hoursOfOperation1;
+  serving = hoursServingFood1;
   
   constructor() { 
     this.hoursDisplayed = 'HofOp';
   }
 
   ngOnInit() {
-    console.log(this.hoursDisplayed);
+    // console.log(this.hoursDisplayed);
+    console.log(this.HofOp, this.hoursServing);
     
   }
 
