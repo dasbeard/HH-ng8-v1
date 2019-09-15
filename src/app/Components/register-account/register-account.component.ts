@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Validators, FormGroup, FormBuilder } from "@angular/forms";
 import { AuthService } from "../../Services/auth.service";
-import { GeolocationService } from 'src/app/Services/geolocation.service';
+import { GeolocationService } from "src/app/Services/geolocation.service";
 
 @Component({
   selector: "app-register-account",
@@ -17,13 +17,12 @@ export class RegisterAccountComponent implements OnInit {
   registerForm: FormGroup;
   isSubmitted = false;
 
-  location;
+  // location;
 
   constructor(
     private authService: AuthService,
     // private geoLoaction: GeolocationService,
     private formBuilder: FormBuilder
-
   ) {}
 
   ngOnInit() {
@@ -33,7 +32,6 @@ export class RegisterAccountComponent implements OnInit {
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required]
     });
-
   }
 
   get formControls() {

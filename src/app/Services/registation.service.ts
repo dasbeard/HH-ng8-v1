@@ -18,9 +18,12 @@ export class RegistationService {
   constructor(private router: Router, private afs: AngularFirestore) {}
 
   startNewUser(data: User) {
+
     this.newUser = data;
+    this.newUser.registering = true;
     localStorage.setItem("user", JSON.stringify(this.newUser));
-    // console.log('newUser', this.newUser);
+
+    this.router.navigateByUrl("/Register");
   }
 
   buildUserLocation(data, latLng) {
@@ -72,19 +75,23 @@ export class RegistationService {
       this.newUser = user;
 
     if(identifier == 'hoursOfOp'){
-      console.log('Hours of Operation', data);
+      // console.log('Hours of Operation', data);
       this.newUser.hoursOfOperation = data;
-      console.log(this.newUser);
+      // console.log(this.newUser);
       
     }
     if(identifier == 'servingFood'){
-      console.log('Hours Serving Food', data);
+      // console.log('Hours Serving Food', data);
       this.newUser.hoursServingFood = data;
       console.log(this.newUser);
     }
+    
+    this.newUser.registering = false;
+    
+    localStorage.setItem("user", JSON.stringify(this.newUser));
 
     this.saveToDatabase(this.newUser);
-    this.router.navigate(['/OrgAdmin']);
+    this.router.navigate([`/OrgAdmin/${this.newUser.uid}`]);
     
   }
 

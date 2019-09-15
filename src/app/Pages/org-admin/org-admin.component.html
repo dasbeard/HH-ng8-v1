@@ -1,5 +1,5 @@
 <div class="container" *ngIf="user$ as org">
-  <h1>Organization Title Goes Here</h1>
+  <h1>{{ org.organization }}</h1>
 
   <div class="orgImgMap">
     <div class="orgImage">
@@ -53,10 +53,9 @@
     </div>
   </div>
 
-  <pre>
+  <!-- <pre>
       {{ user$ | json }}
-    </pre
-  >
+    </pre> -->
 
   <button mat-raised-button (click)="logout()">Logout</button>
   <button mat-raised-button (click)="deleteUser()">Delete Account</button>

@@ -14,6 +14,8 @@ export interface User {
   phone?:string;
   contactEmail?:string;
 
+  registering?: boolean;
+
   otherServices?:string;
   services?: Services;
   hoursOfOperation?: Hours;

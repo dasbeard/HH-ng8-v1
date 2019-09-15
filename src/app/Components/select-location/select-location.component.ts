@@ -31,15 +31,18 @@ export class SelectLocationComponent implements OnInit {
   latLng:LatLngPosition;
 
   constructor(
-    private titleService: Title,
+    // private titleService: Title,
     private geoLocate: GeolocationService,
     private regService: RegistationService
-  ) {}
+  ) {
+    console.log('in Select place');
+    
+  }
 
   ngOnInit() {
-    this.titleService.setTitle(
-      "Home | @angular-material-extensions/google-maps-autocomplete"
-    );
+    // this.titleService.setTitle(
+    //   "Home | @angular-material-extensions/google-maps-autocomplete"
+    // );
 
     this.zoom = 10;
     this.latitude = 34.05;

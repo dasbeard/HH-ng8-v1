@@ -7,7 +7,7 @@
       class="HofOp"
       value="HofOp"
       aria-label="Hours of Operation"
-      (click)="changeHours('HofOp')"
+      (click)="changeHoursView('HofOp')"
     >
       Hours
     </mat-button-toggle>
@@ -16,7 +16,7 @@
       class="serving"
       value="serving"
       aria-label="Hours Serving Food"
-      (click)="changeHours('serving')"
+      (click)="changeHoursView('serving')"
     >
       Serving Food
     </mat-button-toggle>
@@ -29,7 +29,7 @@
   >
     <!-- Day Column -->
     <ng-container matColumnDef="day">
-      <td class="day" mat-cell *matCellDef="let element">{{ element.day }}</td>
+      <td class="day" mat-cell *matCellDef="let element">{{ element.day | titlecase}}</td>
     </ng-container>
 
     <!-- Open Column -->
@@ -57,7 +57,7 @@
   >
    <!-- Day Column -->
    <ng-container matColumnDef="day">
-      <td class="day" mat-cell *matCellDef="let element">{{ element.day }}</td>
+      <td class="day" mat-cell *matCellDef="let element">{{ element.day | titlecase }}</td>
     </ng-container>
 
     <!-- Open Column -->

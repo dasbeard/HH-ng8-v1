@@ -12,14 +12,9 @@ export class OrganizationsService {
   constructor( private afs: AngularFirestore, ) {
   }
   
-  // !! Need to use this to get users by UID
   getOrganizationByUID(uid){
     this.organizationDoc = this.afs.doc<User>(`users/${uid}`);
-
-    console.log(this.organizationDoc.valueChanges());
-    
     return this.organizationDoc.valueChanges();
-    // return this.organization;
   }
     
 }

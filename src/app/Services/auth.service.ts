@@ -12,13 +12,14 @@ import { Observable, of } from "rxjs";
 import { switchMap, tap, take, map } from "rxjs/operators";
 
 import { CreateUser, User } from "./../Models/user";
-import { RegistationService } from './registation.service';
+import { RegistationService } from "./registation.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   user$: Observable<User>;
+  newUserAfsDoc: AngularFirestoreDocument<User>;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -35,83 +36,92 @@ export class AuthService {
         }
       })
     );
-
   }
 
-  async createUser(user:CreateUser){
-    this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then( data => {
-      const uid = data.user.uid;
+  async createUser(user: CreateUser) {
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then(data => {
+        const uid = data.user.uid;
 
-      this.afs.collection<CreateUser>(`users`).doc(uid).set({
-        email: user.email, organization: user.organization, uid:uid
+        this.afs
+          .collection<CreateUser>(`users`)
+          .doc(uid)
+          .set({
+            email: user.email,
+            organization: user.organization,
+            uid: uid
+          });
+
+        const sendToRegService = {
+          email: user.email,
+          organization: user.organization,
+          uid: uid
+        };
+
+        this.regService.startNewUser(sendToRegService);
       });
-
-      // HERE
-      const sendToRegService = {email: user.email, organization: user.organization, uid: uid};
-      this.regService.startNewUser(sendToRegService);
-
-
-      this.router.navigateByUrl("/Register");
-    })
-
   }
-
 
   async signIn(user: CreateUser) {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(
       user.email,
       user.password
     );
-    return this.updateUserData(credential.user);
+
+    this.newUserAfsDoc = this.afs.doc(`users/${credential.user.uid}`);
+    this.newUserAfsDoc.valueChanges().subscribe(user => {
+      // console.log(user);
+      localStorage.setItem("user", JSON.stringify(user));
+    });
+
+    this.router.navigate([`/OrgAdmin/${credential.user.uid}`]);
+
+    // return credential.user;
+    // return this.updateUserData(credential.user);
   }
 
-  private updateUserData(user){
-    // console.log(user);
-    
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+  // private updateUserData(user) {
+  //   const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+  //     `users/${user.uid}`);
 
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      // organization: user.organization
-      // photoURL
-    };
-    this.router.navigate(['/OrgAdmin']);
-    return userRef.set(data, {merge:true});
-  }
+  //   const data = {
+  //     uid: user.uid,
+  //     email: user.email
+  //   };
 
+  //   this.router.navigate(["/OrgAdmin"]);
 
-  async signOut(){
+  //   return userRef.set(data, { merge: true });
+  // }
+
+  async signOut() {
     await this.afAuth.auth.signOut();
     // ! Maybe this should be session not localstorage
-    localStorage.removeItem('user');
-    return this.router.navigate(['']);
+    localStorage.removeItem("user");
+    return this.router.navigate([""]);
   }
-
-
+  
   // !! Need to fix issue when deleting user - may need to logout and then re-login first
-  async deleteUser(user:User){
+  async deleteUser(user: User) {
     this.afs.doc<User>(`users/${user.uid}`).delete();
-    this.afAuth.auth.currentUser.delete()
-    .catch(error => {
+    this.afAuth.auth.currentUser.delete().catch(error => {
       console.log(error);
-    })
-    this.router.navigate(['']);
-    
+    });
+    localStorage.removeItem("user");
+    this.router.navigate([""]);
   }
-
-
 }
 
-  // public login(userInfo: User) {
-  //   localStorage.setItem('ACCESS_TOKEN', "access_token");
-  // }
+// public login(userInfo: User) {
+//   localStorage.setItem('ACCESS_TOKEN', "access_token");
+// }
 
-  // public isLoggedIn() {
-  //   // return true;
-  //   return localStorage.getItem('ACCESS_TOKEN') !== null;
-  // }
+// public isLoggedIn() {
+//   // return true;
+//   return localStorage.getItem('ACCESS_TOKEN') !== null;
+// }
 
-  // public logout() {
-  //   localStorage.removeItem("ACCESS_TOKEN");
-  // }
+// public logout() {
+//   localStorage.removeItem("ACCESS_TOKEN");
+// }

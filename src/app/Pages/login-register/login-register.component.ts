@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../../Services/auth.service";
+import { RegistationService } from "src/app/Services/registation.service";
 
 @Component({
   selector: "app-login-register",
@@ -8,25 +9,25 @@ import { AuthService } from "../../Services/auth.service";
   styleUrls: ["./login-register.component.scss"]
 })
 export class LoginRegisterComponent implements OnInit {
-  logIn:boolean = true;
-  register:boolean = false;
+  logIn: boolean = true;
+  register: boolean = false;
+  uid: string;
 
   constructor(
     public authService: AuthService,
     private router: Router,
+    private regService: RegistationService
   ) {
-    if (this.authService.user$) {
-      this.router.navigateByUrl("/OrgAdmin");
+    if (localStorage.getItem("user") != null) {
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (!user.registering) {
+        this.router.navigate([`OrgAdmin/${user.uid}`]);
+        // console.log("user already in system");
+      }
     }
   }
 
-  ngOnInit() {
-  }
-
-
-
-
-
+  ngOnInit() {}
 
   registerPage($event) {
     this.logIn = false;
@@ -37,7 +38,4 @@ export class LoginRegisterComponent implements OnInit {
     this.logIn = true;
     this.register = false;
   }
-
-
-
 }

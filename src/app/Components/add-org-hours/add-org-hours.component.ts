@@ -169,6 +169,7 @@ export class AddOrgHoursComponent implements OnInit {
     }
   }
 
+// TODO: Refine this function
   findClosed(dataSet) {
     let modifiedDataSet = dataSet;
     Object.keys(dataSet).forEach(function(day) {
