@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
     zoom: 9,
   }
   
-
+  currentDate;
 
   allOrgs;
 
@@ -33,6 +33,7 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.runGeoLocation();
     this.getAllOrgs();
+    this.getCurrentTime();
   }
 
   runGeoLocation() {
@@ -60,4 +61,13 @@ export class HomePageComponent implements OnInit {
       this.allOrgs = data;
     });
   }
+
+  getCurrentTime() {
+    this.currentDate = new Date();
+
+    // console.log(this.currentDate.get);
+    console.log(this.currentDate.getDay());
+    
+  }
+
 }

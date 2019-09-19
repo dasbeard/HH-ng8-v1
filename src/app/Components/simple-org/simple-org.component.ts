@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/Models/user';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-simple-org',
@@ -9,11 +10,12 @@ import { User } from 'src/app/Models/user';
 export class SimpleOrgComponent implements OnInit {
   @Input() org: User;
 
+  timeNow;
+
   constructor() { }
 
   ngOnInit() {
     // console.log(this.org);
-    
   }
 
 }

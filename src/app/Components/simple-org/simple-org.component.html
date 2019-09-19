@@ -6,35 +6,48 @@
     />
   </div>
 
-
   <div class="simpleOrgContact">
-    <h1 class="orgName" [routerLink]="[ '/Organization', org.uid ]"> {{ org.organization }} </h1>
+    <h1 class="orgName" [routerLink]="['/Organization', org.uid]">
+      {{ org.organization }}
+    </h1>
 
     <div class="orgAddress">
-      <p> {{ org.fullAddress }} </p>
+      <p>{{ org.fullAddress }}</p>
     </div>
 
-
-    
     <!-- TODO: Make all orgInfo into buttons on mobile -->
     <div class="simpleOrgInfo">
       <a href="{{ org.website }}"> Website </a>
-      <p> {{org.phone}} </p>
-      <p> {{ org.contactEmail }} </p>
+      <p>{{ org.phone }}</p>
+      <p>{{ org.contactEmail }}</p>
     </div>
 
     <div class="simpleOrgLowerHalf">
-
       <div class="simpleOrgContent">
-        <button mat-raised-button [ngClass]="org.services.beds ? 'available' : 'notAvailable'">Beds Available</button>
-        <button mat-raised-button [ngClass]="org.services.donations ? 'available' : 'notAvailable'">Donations Center</button>
+        <button
+          mat-raised-button
+          [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
+          disabled
+        >
+          Beds Available
+        </button>
+        <button
+          mat-raised-button
+          [ngClass]="org.services.donations ? 'available' : 'notAvailable'"
+          disabled
+        >
+          Donations Center
+        </button>
       </div>
-      
+
       <div class="simpleOrgHours">
-        <button mat-raised-button >Open Now</button>
-        <button mat-raised-button >Serving Food</button>
+        <button mat-raised-button disabled>
+          Open Now
+        </button>
+        <button mat-raised-button disabled>
+          Serving Food
+        </button>
       </div>
-      
     </div>
   </div>
 </div>
