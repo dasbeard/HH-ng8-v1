@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="org">
   <div class="simpleOrgImage">
     <img
       src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
@@ -8,31 +8,31 @@
 
 
   <div class="simpleOrgContact">
-    <h1 class="orgName">Title Of Organaization Here</h1>
+    <h1 class="orgName" [routerLink]="[ '/Organization', org.uid ]"> {{ org.organization }} </h1>
 
     <div class="orgAddress">
-      <p>12345 Somethign St. Some Town, CA</p>
+      <p> {{ org.fullAddress }} </p>
     </div>
 
 
     
     <!-- TODO: Make all orgInfo into buttons on mobile -->
     <div class="simpleOrgInfo">
-      <a href="#">WebSite</a>
-      <p>(555)555-5555</p>
-      <p>Email</p>
+      <a href="{{ org.website }}"> Website </a>
+      <p> {{org.phone}} </p>
+      <p> {{ org.contactEmail }} </p>
     </div>
 
     <div class="simpleOrgLowerHalf">
 
       <div class="simpleOrgContent">
-        <button mat-raised-button class="notAvailable">Beds Available</button>
-        <button mat-raised-button class="available">Donations Center</button>
+        <button mat-raised-button [ngClass]="org.services.beds ? 'available' : 'notAvailable'">Beds Available</button>
+        <button mat-raised-button [ngClass]="org.services.donations ? 'available' : 'notAvailable'">Donations Center</button>
       </div>
       
       <div class="simpleOrgHours">
-        <button mat-raised-button class="available">Open Now</button>
-        <button mat-raised-button class="notAvailable">Serving Food</button>
+        <button mat-raised-button >Open Now</button>
+        <button mat-raised-button >Serving Food</button>
       </div>
       
     </div>

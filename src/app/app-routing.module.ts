@@ -20,7 +20,7 @@ const routes: Routes = [
     children: []
   }, 
   {
-    path: "OrganizationPage",
+    path: "Organization/:id",
     pathMatch: "full",
     component: OrganizationPageComponent,
     children: []

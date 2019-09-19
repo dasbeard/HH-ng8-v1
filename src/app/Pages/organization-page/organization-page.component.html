@@ -1,5 +1,5 @@
-<div class="container">
-  <h1>Organization Title Goes Here</h1>
+<div class="container" *ngIf="organization as org">
+  <h1> {{ org.organization }} </h1>
 
   <div class="orgImgMap">
     
@@ -21,12 +21,12 @@
 
   <div class="orgContact">
     <div class="orgInfo">
-      <a href="#">OrgWebSite.com</a>
-      <p>(555)555-5555</p>
-      <p>OrgContact@mail.com</p>
+      <a href="#"> {{ org.website }} </a>
+      <p> {{org.phone}} </p>
+      <p> {{org.contactEmail}} </p>
     </div>
     <div class="orgAddress">
-      <p>12345 Somethign St. Some Town, CA</p>
+      <p> {{org.fullAddress}} </p>
     </div>
   </div>
 
@@ -35,27 +35,22 @@
     <div class="orgAbout">
       <h2>About Us</h2>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, doloribus
-        esse. Quidem praesentium blanditiis, ipsam velit quos, ut ipsa a corrupti
-        voluptate qui ipsum aliquam, accusantium labore porro iste? Eaque!
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos delectus porro 
-        expedita culpa excepturi error velit. Asperiores ad, ipsum quia, consequatur 
-        id ipsam, consectetur corporis dignissimos dolor consequuntur nam aliquid.
+        {{org.about}}
       </p>
     </div>
     
-    <app-hours class="orgHours "></app-hours>
-    
-    <app-services class="orgServices"></app-services>
+    <app-hours
+    class="orgHours"
+    [hoursOfOp]="org.hoursOfOperation"
+    [hoursServing]="org.hoursServingFood"
+  ></app-hours>
 
+  <app-services class="orgServices" [services]="org.services"></app-services>
     <div class="orgOtherServices">
       <h3>Other Services We Offer</h3>
   
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, eum.
-        Quod nisi, laborum nobis eum, quis alias sit repellendus perferendis esse
-        dolorem, fuga facere illum natus repellat nemo cum neque! Lorem ipsum
-        dolor sit amet consectetur adipisicing elit.
+        {{org.otherServices}}
       </p>
     </div>
   

@@ -1,25 +1,37 @@
 <div class="container">
   <h1>Welcome to Helping Hours</h1>
 
-  <agm-map 
-    [latitude]="lat" 
-    [longitude]="lng" 
-    [zoom]="zoom" 
+  <agm-map
+    [latitude]="location.lat"
+    [longitude]="location.lng"
+    [zoom]="location.zoom"
     [scrollwheel]="null"
     [gestureHandling]="'cooperative'"
   >
-    <agm-marker [latitude]="lat" [longitude]="lng">
-      <agm-info-window>{{ lat }},{{ lng }}</agm-info-window>
+    <agm-marker [latitude]="location.lat" [longitude]="location.lng">
+      <agm-info-window>{{ location.lat }},{{ location.lng }}</agm-info-window>
     </agm-marker>
   </agm-map>
 
   <h2 class="nearby">Whats Nearby?</h2>
-  <div class="simpleOrgs">
+  <div class="simpleOrgs" *ngIf="allOrgs">
+    <app-simple-org
+      class="org mat-elevation-z5"
+      [org]="allOrgs[0]"
+    ></app-simple-org>
 
-    <app-simple-org class="org mat-elevation-z5"></app-simple-org>
-    <app-simple-org class="org mat-elevation-z5"></app-simple-org>
-    <app-simple-org class="org mat-elevation-z5"></app-simple-org>
+    <app-simple-org
+      class="org mat-elevation-z5"
+      [org]="allOrgs[1]"
+    ></app-simple-org>
+
+    <app-simple-org
+      class="org mat-elevation-z5"
+      [org]="allOrgs[0]"
+    ></app-simple-org>
   </div>
+
+  
 
   <h4>Add Search Bar Component Here</h4>
 </div>
