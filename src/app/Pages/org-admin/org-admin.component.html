@@ -1,6 +1,10 @@
 <div class="container" *ngIf="user$ as org">
   <h1>{{ org.organization }}</h1>
 
+  <!-- <pre>
+    {{ org | json }}
+  </pre> -->
+
   <div class="orgImgMap">
     <div class="orgImage">
       <img
@@ -10,10 +14,16 @@
     </div>
 
     <div class="orgMap">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FdummyMap.png?alt=media&token=f3a28b0b-98f6-42a6-83c9-2f1835736283"
-        alt=""
-      />
+        <agm-map
+        [latitude]="org.latLng.latitude"
+        [longitude]="org.latLng.longitude"
+        [zoom]="17"
+        [scrollwheel]="null"
+        [gestureHandling]="'cooperative'"
+      >
+        <agm-marker [latitude]="org.latLng.latitude" [longitude]="org.latLng.longitude">
+        </agm-marker>
+      </agm-map>
     </div>
   </div>
 

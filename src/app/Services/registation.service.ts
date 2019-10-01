@@ -27,6 +27,8 @@ export class RegistationService {
   }
 
   buildUserLocation(data, latLng) {
+    this.newUser = JSON.parse(localStorage.getItem("user"));
+
     this.newUser.fullAddress = data.formatted_address;
     this.newUser.phone = data.formatted_phone_number;
     this.newUser.website = data.website;
@@ -83,9 +85,12 @@ export class RegistationService {
     if(identifier == 'servingFood'){
       // console.log('Hours Serving Food', data);
       this.newUser.hoursServingFood = data;
-      console.log(this.newUser);
+      // console.log(this.newUser);
     }
+
+    // console.log(this.newUser);
     
+
     this.newUser.registering = false;
     
     localStorage.setItem("user", JSON.stringify(this.newUser));

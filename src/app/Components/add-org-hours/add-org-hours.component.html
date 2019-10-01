@@ -3,7 +3,9 @@
     Lets get your hours
   </h2>
 
-  <!-- {{ user | json }} -->
+  <!-- <pre>
+    {{ user | json }}
+  </pre> -->
 
   <mat-card>
     <mat-vertical-stepper [linear]="false" #stepper>
@@ -11,164 +13,345 @@
         <form [formGroup]="hoursOfOperation">
           <ng-template matStepLabel>When are you open? </ng-template>
 
-          <div class="mat-table">
-            <div class="mat-header-row">
-              <div class="mat-header-cell dayOfWeek">Day</div>
-              <div class="mat-header-cell openTime">Open</div>
-              <div class="mat-header-cell closeTime">Close</div>
-              <div class="mat-header-cell closedAllDay">Closed all day</div>
+          <div class="dayRow" formGroupName="monday">
+            <div class="dayOfWeek">Monday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPMonOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="HOPMonOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPMonOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="monday">
-              <div class="mat-cell dayOfWeek">Monday</div>
+            <p class="to">to</p>
 
-              <div class="mat-cell openTime">
-                <input
-                  [ngxTimepicker]="toggleTimepicker"
-                  [disableClick]="false"
-                  readonly
-                />
-                <ngx-material-timepicker-toggle
-                  [for]="toggleTimepicker"
-                ></ngx-material-timepicker-toggle>
-
-                <ngx-material-timepicker
-                  class="testing"
-                  #toggleTimepicker
-                  [minutesGap]="5"
-                ></ngx-material-timepicker>
-              </div>
-
-              <!-- <ngx-timepicker-field
-                class="mat-cell openTime"
-                buttonAlign="left"
-                formControlName="open"
-                [disabled]="mClosed.value"
-              ></ngx-timepicker-field> -->
-
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPMonClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="mClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="HOPMonClose"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #HOPMonClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="tuesday">
-              <div class="mat-cell dayOfWeek">Tuesday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.monday)"
+                >Closed</mat-checkbox
+              >
+              <!-- <mat-checkbox formControlName="isClosed" >Closed</mat-checkbox> -->
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="tuesday">
+            <div class="dayOfWeek">Tuesday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPTueOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="tClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="tClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="HOPTueOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #HOPTueOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="wednesday">
-              <div class="mat-cell dayOfWeek">Wednesday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="wClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPTueClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="wClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker-toggle
+                [for]="HOPTueClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPTueClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="thursday">
-              <div class="mat-cell dayOfWeek">Thursday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.tuesday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="wednesday">
+            <div class="dayOfWeek">Wednesday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPWenOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="thClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="thClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="HOPWenOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #HOPWenOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="friday">
-              <div class="mat-cell dayOfWeek">Friday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="fClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPWenClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="fClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker-toggle
+                [for]="HOPWenClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPWenClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="saturday">
-              <div class="mat-cell dayOfWeek">Saturday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.wednesday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="thursday">
+            <div class="dayOfWeek">Thursday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPThurOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="saClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="saClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="HOPThurOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #HOPThurOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="sunday">
-              <div class="mat-cell dayOfWeek">Sunday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="suClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPThurClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="suClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker-toggle
+                [for]="HOPThurClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPThurClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.thursday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="friday">
+            <div class="dayOfWeek">Friday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPFriOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPFriOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPFriOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPFriClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPFriClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPFriClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.friday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="saturday">
+            <div class="dayOfWeek">Saturday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPSatOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPSatOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPSatOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPSatClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPSatClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPSatClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.saturday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="sunday">
+            <div class="dayOfWeek">Sunday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="HOPSunOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPSunOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPSunOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="HOPSunClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="HOPSunClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #HOPSunClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursOfOperation.controls.sunday)"
+                >Closed</mat-checkbox
+              >
             </div>
           </div>
 
@@ -187,145 +370,344 @@
             >What times do you serve food??
           </ng-template>
 
-          <div class="mat-table">
-            <div class="mat-header-row">
-              <div class="mat-header-cell dayOfWeek">Day</div>
-              <div class="mat-header-cell openTime">Open</div>
-              <div class="mat-header-cell closeTime">Close</div>
-              <div class="mat-header-cell closedAllDay">Closed all day</div>
+          <div class="dayRow" formGroupName="monday">
+            <div class="dayOfWeek">Monday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingMonOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="ServingMonOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingMonOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="monday">
-              <div class="mat-cell dayOfWeek">Monday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="mFClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingMonClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="mFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
+              <ngx-material-timepicker-toggle
+                [for]="ServingMonClose"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #ServingMonClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="tuesday">
-              <div class="mat-cell dayOfWeek">Tuesday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursServingFood.controls.monday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="tuesday">
+            <div class="dayOfWeek">Tuesday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingTueOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="tFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="tFClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="ServingTueOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #ServingTueOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="wednesday">
-              <div class="mat-cell dayOfWeek">Wednesday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="wFClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingTueClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="wFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker-toggle
+                [for]="ServingTueClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingTueClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="thursday">
-              <div class="mat-cell dayOfWeek">Thursday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursServingFood.controls.tuesday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="wednesday">
+            <div class="dayOfWeek">Wednesday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingWenOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="thFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="thFClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="ServingWenOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #ServingWenOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="friday">
-              <div class="mat-cell dayOfWeek">Friday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="fFClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingWenClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="fFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker-toggle
+                [for]="ServingWenClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingWenClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="saturday">
-              <div class="mat-cell dayOfWeek">Saturday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursServingFood.controls.wednesday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="thursday">
+            <div class="dayOfWeek">Thursday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingThurOpen"
+                [disableClick]="false"
                 formControlName="open"
-                [disabled]="saFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
-                formControlName="close"
-                [disabled]="saFClosed.value"
-              ></ngx-timepicker-field>
+              <ngx-material-timepicker-toggle
+                [for]="ServingThurOpen"
+              ></ngx-material-timepicker-toggle>
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
-              </div>
+              <ngx-material-timepicker
+                #ServingThurOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
             </div>
 
-            <div class="mat-row" formGroupName="sunday">
-              <div class="mat-cell dayOfWeek">Sunday</div>
-              <ngx-timepicker-field
-                class="mat-cell openTime"
-                formControlName="open"
-                [disabled]="suFClosed.value"
-              ></ngx-timepicker-field>
+            <p class="to">to</p>
 
-              <ngx-timepicker-field
-                class="mat-cell closeTime"
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingThurClose"
+                [disableClick]="false"
                 formControlName="close"
-                [disabled]="suFClosed.value"
-              ></ngx-timepicker-field>
+                readonly
+              />
 
-              <div class="mat-cell closedAllDay">
-                <mat-checkbox formControlName="isClosed">Closed</mat-checkbox>
+              <ngx-material-timepicker-toggle
+                [for]="ServingThurClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingThurClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursServingFood.controls.thursday)"
+                >Closed</mat-checkbox
+              >
+            </div>
+          </div>
+
+          <div class="dayRow" formGroupName="friday">
+            <div class="dayOfWeek">Friday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingFriOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingFriOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingFriOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingFriClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingFriClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingFriClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+                <mat-checkbox
+                  (click)="disableDay(hoursServingFood.controls.friday)"
+                  >Closed</mat-checkbox
+                >
               </div>
+          </div>
+
+          <div class="dayRow" formGroupName="saturday">
+            <div class="dayOfWeek">Saturday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingSatOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingSatOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingSatOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingSatClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingSatClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingSatClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+                <mat-checkbox
+                  (click)="disableDay(hoursServingFood.controls.saturday)"
+                  >Closed</mat-checkbox
+                >
+              </div>
+          </div>
+
+          <div class="dayRow" formGroupName="sunday">
+            <div class="dayOfWeek">Sunday</div>
+
+            <div class="openTime">
+              <input
+                [ngxTimepicker]="ServingSunOpen"
+                [disableClick]="false"
+                formControlName="open"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingSunOpen"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingSunOpen
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <p class="to">to</p>
+
+            <div class="closeTime">
+              <input
+                [ngxTimepicker]="ServingSunClose"
+                [disableClick]="false"
+                formControlName="close"
+                readonly
+              />
+
+              <ngx-material-timepicker-toggle
+                [for]="ServingSunClose"
+              ></ngx-material-timepicker-toggle>
+
+              <ngx-material-timepicker
+                #ServingSunClose
+                [minutesGap]="5"
+              ></ngx-material-timepicker>
+            </div>
+
+            <div class="closedAllDay">
+              <mat-checkbox
+                (click)="disableDay(hoursServingFood.controls.sunday)"
+                >Closed</mat-checkbox
+              >
             </div>
           </div>
 

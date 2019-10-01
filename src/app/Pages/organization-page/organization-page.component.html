@@ -1,59 +1,63 @@
 <div class="container" *ngIf="organization as org">
-  <h1> {{ org.organization }} </h1>
+  <h1>{{ org.organization }}</h1>
 
   <div class="orgImgMap">
-    
     <div class="orgImage">
       <img
-      src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
-      alt=""
+        src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+        alt=""
       />
     </div>
-    
+
     <div class="orgMap">
-      <img
-      src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FdummyMap.png?alt=media&token=f3a28b0b-98f6-42a6-83c9-2f1835736283"
-      alt=""
-      />
+      <agm-map
+        [latitude]="org.latLng.latitude"
+        [longitude]="org.latLng.longitude"
+        [zoom]="17"
+        [scrollwheel]="null"
+        [gestureHandling]="'cooperative'"
+      >
+        <agm-marker
+          [latitude]="org.latLng.latitude"
+          [longitude]="org.latLng.longitude"
+        >
+        </agm-marker>
+      </agm-map>
     </div>
-    
   </div>
 
   <div class="orgContact">
     <div class="orgInfo">
       <a href="#"> {{ org.website }} </a>
-      <p> {{org.phone}} </p>
-      <p> {{org.contactEmail}} </p>
+      <p>{{ org.phone }}</p>
+      <p>{{ org.contactEmail }}</p>
     </div>
     <div class="orgAddress">
-      <p> {{org.fullAddress}} </p>
+      <p>{{ org.fullAddress }}</p>
     </div>
   </div>
 
   <div class="orgHoursServices">
-
     <div class="orgAbout">
       <h2>About Us</h2>
       <p>
-        {{org.about}}
+        {{ org.about }}
       </p>
     </div>
-    
-    <app-hours
-    class="orgHours"
-    [hoursOfOp]="org.hoursOfOperation"
-    [hoursServing]="org.hoursServingFood"
-  ></app-hours>
 
-  <app-services class="orgServices" [services]="org.services"></app-services>
+    <app-hours
+      class="orgHours"
+      [hoursOfOp]="org.hoursOfOperation"
+      [hoursServing]="org.hoursServingFood"
+    ></app-hours>
+
+    <app-services class="orgServices" [services]="org.services"></app-services>
     <div class="orgOtherServices">
       <h3>Other Services We Offer</h3>
-  
+
       <p>
-        {{org.otherServices}}
+        {{ org.otherServices }}
       </p>
     </div>
-  
   </div>
-
 </div>

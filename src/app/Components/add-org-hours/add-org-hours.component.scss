@@ -13,44 +13,54 @@
     width: 85%;
     margin: 0 auto;
 
-    .mat-table {
-      display: block;
-    }
+    .dayRow {
+      // outline: 1px solid red;
+       display: grid;
+      grid-template-columns: [day]100px [open]135px [to]45px [close]135px [closed]100px;
+      align-items: baseline;
+      position: relative;
+      margin-left: 2%;
 
-    .mat-row,
-    .mat-header-row {
-      display: flex;
-      align-items: center;
-      min-height: 24px;
-      padding: 0 12px;
 
       .dayOfWeek {
-        max-width: 85px;
+        grid-area: day;
+        text-align: end;
+        margin-right: 20px;
       }
       
-      .openTime,
-      .closeTime {
-        line-height: 24px;
+      .openTime {
+        grid-area: open;
         
         input {
-          width: 50%;
-          
+          width: 70%;
         }
-
+        
       }
       
+      .to {
+        grid-area: to;
+        padding-left: 10px;
+        margin: 13px 0;
+      }
+      
+      .closeTime {
+        grid-area: close;
+        
+        input {
+          width: 70%;
+        }
+      }
+      .closedAllDay {
+        grid-area: closed;
+        text-align: end;
+      }
+
+
+
     }
 
 
-    .mat-cell,
-    .mat-header-cell {
-      flex: 1;
-      overflow: hidden;
-      word-wrap: break-word;
-    }
-    .mat-header-cell {
-      text-align: center;
-    }
+
   }
 
 
@@ -58,5 +68,9 @@
 
   ::ng-deep .ngx-material-timepicker-toggle{
     display: inherit;
+    // line-height: 50px;
+    position: absolute;
+    top: 7px;
+
   }
 }
