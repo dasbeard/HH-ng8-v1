@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  font-family: "Roboto Mono", monospace;
+  // font-family: "Roboto Mono", monospace;
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   mat-button-toggle-group {
@@ -12,8 +12,6 @@
     .HofOp {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
-      
-      
     }
 
     // Button
@@ -29,33 +27,66 @@
   }
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  table {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    border-radius: 4px;
 
-    // .tableRows {
-    //   height: 30px;
-    // }
+  .HoursOfOperation {
+    // font-family: "Roboto Mono", monospace;
 
-    .day {
-      width: 50px;
-    }
-
-    .open,
-    .close {
-      width: 60px;
-    }
-
-    .close {
-      text-align: end;
-    }
-
-    .spacer {
-      width: 15px;
-      padding: 0 2px;
+    .dayRow {
+      // outline: 1px solid red;
+      display: grid;
+      grid-template-columns: [day]115px [open]95px [to]25px [close]95px;
+      justify-content: center;
       text-align: center;
+      width: 100%;
+
+      p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      .day {
+        // outline: 1px solid red;
+        grid-area: day;
+        text-align: right;
+        padding-right: 8px;
+      }
+
+      .open {
+        grid-area: open;
+      }
+
+      .to {
+        grid-area: to;
+      }
+
+      .close {
+        grid-area: close;
+      }
+    }
+
+    .dayRowClosed {
+      // outline: 1px solid blue;
+      display: grid;
+      grid-template-columns: [day]115px [closed]215px;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+
+      p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+
+      .day {
+        // outline: 1px solid red;
+        grid-area: day;
+        text-align: right;
+        padding-right: 8px;
+      }
+
+      .closed {
+        grid-area: closed;
+      }
     }
   }
 }

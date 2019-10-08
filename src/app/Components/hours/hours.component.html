@@ -5,76 +5,40 @@
   >
     <mat-button-toggle
       class="HofOp"
-      value="HofOp"
+      value="hoursOfOperation"
       aria-label="Hours of Operation"
-      (click)="changeHoursView('HofOp')"
+      (click)="changeHoursView('hoursOfOperation')"
     >
       Hours
     </mat-button-toggle>
 
     <mat-button-toggle
       class="serving"
-      value="serving"
+      value="hoursServing"
       aria-label="Hours Serving Food"
-      (click)="changeHoursView('serving')"
+      (click)="changeHoursView('hoursServing')"
     >
       Serving Food
     </mat-button-toggle>
   </mat-button-toggle-group>
 
-  <table
-    mat-table
-    [dataSource]="HofOp"
-    *ngIf="hoursDisplayed == 'HofOp'"
-  >
-    <!-- Day Column -->
-    <ng-container matColumnDef="day">
-      <td class="day" mat-cell *matCellDef="let element">{{ element.day | titlecase}}</td>
-    </ng-container>
+  <div class="HoursOfOperation" >
+    <div *ngFor="let day of hoursToDisplay; let i = index">
+      <div *ngIf="!day.isClosed; else closed" class="dayRow">
+        <p class="day">{{ days[i] }}</p>
+        <p class="open">{{ day.open }}</p>
+        <p class="to">to</p>
+        <p class="close">{{ day.close }}</p>
+      </div>
 
-    <!-- Open Column -->
-    <ng-container matColumnDef="open">
-      <td class="open" mat-cell *matCellDef="let element">{{ element.open }}</td>
-    </ng-container>
+      <ng-template #closed>
+        <div class="dayRowClosed">
+          <p class="day">{{ days[i] }}</p>
 
-    <!-- Spacer Column -->
-    <ng-container matColumnDef="spacer">
-      <td class="spacer" mat-cell *matCellDef="let element">{{ element.spacer }}</td>
-    </ng-container>
+          <p class="closed">Closed</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
 
-    <!-- Close Column -->
-    <ng-container matColumnDef="close">
-      <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
-    </ng-container>
-
-    <tr mat-row class="tableRows" *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-
-  <table
-    mat-table
-    [dataSource]="serving"
-    *ngIf="hoursDisplayed == 'serving'"
-  >
-   <!-- Day Column -->
-   <ng-container matColumnDef="day">
-      <td class="day" mat-cell *matCellDef="let element">{{ element.day | titlecase }}</td>
-    </ng-container>
-
-    <!-- Open Column -->
-    <ng-container matColumnDef="open">
-      <td class="open" mat-cell *matCellDef="let element">{{ element.open }}</td>
-    </ng-container>
-
-    <!-- Spacer Column -->
-    <ng-container matColumnDef="spacer">
-      <td class="spacer" mat-cell *matCellDef="let element">{{ element.spacer }}</td>
-    </ng-container>
-
-    <!-- Close Column -->
-    <ng-container matColumnDef="close">
-      <td class="close" mat-cell *matCellDef="let element">{{ element.close }}</td>
-    </ng-container>
-
-    <tr mat-row class="tableRows" *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
 </div>
