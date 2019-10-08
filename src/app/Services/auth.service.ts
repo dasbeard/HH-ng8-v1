@@ -109,7 +109,7 @@ export class AuthService {
       console.log(error);
     });
     localStorage.removeItem("user");
-    this.router.navigate([""]);
+    // this.router.navigate([""]);
   }
 }
 

@@ -41,5 +41,6 @@ export class OrgAdminComponent implements OnInit {
 
   deleteUser() {
     this.authService.deleteUser(this.user$);
+    this.router.navigate([""]);    
   }
 }

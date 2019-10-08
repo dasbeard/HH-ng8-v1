@@ -1,28 +1,33 @@
 <div class="container">
-  <mat-button-toggle-group
-    #group="matButtonToggleGroup"
-    value="{{ hoursDisplayed }}"
-  >
-    <mat-button-toggle
-      class="HofOp"
-      value="hoursOfOperation"
-      aria-label="Hours of Operation"
-      (click)="changeHoursView('hoursOfOperation')"
+  <div class="buttonContainer">
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
+      value="{{ hoursDisplayed }}"
     >
-      Hours
-    </mat-button-toggle>
+      <mat-button-toggle
+        class="HofOp"
+        
+        [ngClass]="{width50:buttonSize, width100:!buttonSize}"
+        value="hoursOfOperation"
+        aria-label="Hours of Operation"
+        (click)="changeHoursView('hoursOfOperation')"
+      >
+        Hours
+      </mat-button-toggle>
 
-    <mat-button-toggle
-      class="serving"
-      value="hoursServing"
-      aria-label="Hours Serving Food"
-      (click)="changeHoursView('hoursServing')"
-    >
-      Serving Food
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+      <mat-button-toggle
+        *ngIf="hoursServing"
+        class="serving width50"
+        value="hoursServing"
+        aria-label="Hours Serving Food"
+        (click)="changeHoursView('hoursServing')"
+      >
+        Serving Food
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
 
-  <div class="HoursOfOperation" >
+  <div class="HoursOfOperation">
     <div *ngFor="let day of hoursToDisplay; let i = index">
       <div *ngIf="!day.isClosed; else closed" class="dayRow">
         <p class="day">{{ days[i] }}</p>
@@ -40,5 +45,4 @@
       </ng-template>
     </div>
   </div>
-
 </div>

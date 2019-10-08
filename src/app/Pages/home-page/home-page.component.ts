@@ -66,7 +66,7 @@ export class HomePageComponent implements OnInit {
     this.currentDate = new Date();
 
     // console.log(this.currentDate.get);
-    console.log(this.currentDate.getDay());
+    console.log('day', this.currentDate.getDay());
     
   }
 

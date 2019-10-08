@@ -11,13 +11,14 @@ import { RegistationService } from "src/app/Services/registation.service";
 export class LoginRegisterComponent implements OnInit {
   logIn: boolean = true;
   register: boolean = false;
-  uid: string;
 
   constructor(
     public authService: AuthService,
     private router: Router,
-    private regService: RegistationService
+    // private regService: RegistationService
   ) {
+
+    // console.log( localStorage.getItem("user"));
     if (localStorage.getItem("user") != null) {
       let user = JSON.parse(localStorage.getItem("user"));
       if (!user.registering) {
