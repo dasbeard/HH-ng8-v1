@@ -48,8 +48,7 @@
     margin-top: 0.75em;
     margin-bottom: 1em;
 
-    p,
-    a {
+    p {
       margin: 0.5em;
     }
 
@@ -58,8 +57,9 @@
       color: #000;
     }
 
-    a:hover {
+    p:hover {
       color: rgba($color: #000000, $alpha: 0.5);
+      cursor: pointer;
     }
 
     .orgInfo {

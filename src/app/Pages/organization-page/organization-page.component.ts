@@ -27,4 +27,16 @@ export class OrganizationPageComponent implements OnInit {
     
   }
 
+  visitWebsite( URL ) {
+    window.open( URL, "_blank");
+  }
+
+  openAddressinGoogleMaps(URL) {
+    const baseURL = "https://www.google.com/maps/dir/?api=1&destination="
+    const urlEncoded = encodeURI(URL);
+    const fullURL = baseURL + urlEncoded;
+
+    window.open( fullURL, "_blank");
+  }
+
 }

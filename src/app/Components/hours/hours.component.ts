@@ -29,17 +29,17 @@ export class HoursComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.hoursOfOp);
-    console.log(this.hoursServing);
+    // console.log(this.hoursServing);
     this.hoursToDisplay = this.hoursOfOp;
     if(this.hoursServing){
-      console.log('not serving');
+      // console.log('not serving');
       this.buttonSize = true;
     } else {
-      console.log('serving food');
+      // console.log('serving food');
       this.buttonSize = false;
     }
 
-    console.log(this.buttonSize);
+    // console.log(this.buttonSize);
     
   }
 

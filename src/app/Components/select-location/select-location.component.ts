@@ -35,7 +35,7 @@ export class SelectLocationComponent implements OnInit {
     private geoLocate: GeolocationService,
     private regService: RegistationService
   ) {
-    console.log('in Select place');
+    // console.log('in Select place');
     
   }
 
@@ -73,7 +73,7 @@ export class SelectLocationComponent implements OnInit {
   }
 
   onAutocompleteSelected(result: PlaceResult) {
-    console.log("onAutocompleteSelected: ", result);
+    // console.log("onAutocompleteSelected: ", result);
     this.orgResult = result;
   }
 

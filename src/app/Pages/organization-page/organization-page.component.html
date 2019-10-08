@@ -28,12 +28,12 @@
 
   <div class="orgContact">
     <div class="orgInfo">
-      <a href="#"> {{ org.website }} </a>
+      <p (click)="visitWebsite(org.website)"> Visit Our Website </p>
       <p>{{ org.phone }}</p>
       <p>{{ org.contactEmail }}</p>
     </div>
     <div class="orgAddress">
-      <p>{{ org.fullAddress }}</p>
+      <p (click)="openAddressinGoogleMaps(org.fullAddress)">{{ org.fullAddress }}</p>
     </div>
   </div>
 
@@ -52,7 +52,8 @@
     ></app-hours>
 
     <app-services class="orgServices" [services]="org.services"></app-services>
-    <div class="orgOtherServices">
+
+    <div class="orgOtherServices" *ngIf="org.otherServices">
       <h3>Other Services We Offer</h3>
 
       <p>
