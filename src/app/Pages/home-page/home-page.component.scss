@@ -8,6 +8,7 @@
 
   agm-map {
     height: 500px;
+    // height: 50px;
   }
 
   .nearby {
@@ -31,9 +32,15 @@
       border-radius: 4px;
       background: linear-gradient(
         135deg,
-        rgba(255, 255, 255, 0.25) 45%,
-        rgba(33, 33, 33, 0.1) 100%
+        rgba(247, 255, 246, 0.75) 55%,
+        rgba(0, 0, 0, 0.1) 100%
       );
+
+      // background: linear-gradient(
+      //   135deg,
+      //   rgba(255, 255, 255, 0.25) 45%,
+      //   rgba(33, 33, 33, 0.1) 100%
+      // );
       // background: linear-gradient(
       //   135deg,
       //   rgba(255, 255, 255, 0.25) 45%,

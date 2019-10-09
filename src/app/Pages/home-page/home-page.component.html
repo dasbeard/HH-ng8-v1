@@ -2,14 +2,38 @@
   <h1>Welcome to Helping Hours</h1>
 
   <agm-map
+    (mapClick)="mapClick($event)"
     [latitude]="location.lat"
     [longitude]="location.lng"
     [zoom]="location.zoom"
     [scrollwheel]="null"
     [gestureHandling]="'cooperative'"
   >
-    <agm-marker [latitude]="location.lat" [longitude]="location.lng">
-      <agm-info-window>{{ location.lat }},{{ location.lng }}</agm-info-window>
+  <agm-circle [latitude]="location.lat" [longitude]="location.lng" 
+      [radius]="1000"
+      [fillColor]="'red'"
+      >
+      <!-- [circleDraggable]="true"
+      [editable]="true" -->
+  </agm-circle>
+
+    <!-- <agm-marker
+      [latitude]="location.lat"
+      [longitude]="location.lng"
+      (markerClick)="markerClick(iw)"
+    >
+      <agm-info-window #iw>{{ location.lat }},{{ location.lng }}</agm-info-window>
+    </agm-marker> -->
+
+    <agm-marker
+      (markerClick)="markerClick(iw)"
+      *ngFor="let org of allOrgs; async"
+      [latitude]="org.latLng.latitude"
+      [longitude]="org.latLng.longitude"
+    >
+      <agm-info-window #iw>
+        <strong> {{ org.organization }} </strong>
+      </agm-info-window>
     </agm-marker>
   </agm-map>
 
@@ -30,8 +54,6 @@
       [org]="allOrgs[0]"
     ></app-simple-org>
   </div>
-
-  
 
   <h4>Add Search Bar Component Here</h4>
 </div>
