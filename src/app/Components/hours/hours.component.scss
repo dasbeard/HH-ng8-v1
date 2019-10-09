@@ -1,15 +1,14 @@
 .width100 {
   width: 100%;
-  // background-color: red;
 }
 
 .width50 {
   width: 50%;
-  // background-color: green;
 }
 
 .container {
   margin: 0 auto;
+  // font-size: 15px;
   // font-family: "Roboto Mono", monospace;
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -19,28 +18,6 @@
     
     mat-button-toggle-group {
       width: 100%;
-      // margin: 0 auto;
-      // border: none;
-      // display: flex;
-      // justify-content: center;
-      
-    
-    // Button
-    // .HofOp {
-      //   border-top-left-radius: 4px;
-    //   border-bottom-left-radius: 4px;
-    // }
-    
-    // // Button
-    // .serving {
-      //   border-top-right-radius: 4px;
-      //   border-bottom-right-radius: 4px;
-      // }
-      
-      mat-button-toggle {
-        // border: 1px solid lightgray;
-        // width: 50%;
-      }
     }
   }
 
@@ -51,9 +28,8 @@
     // font-family: "Roboto Mono", monospace;
 
     .dayRow {
-      // outline: 1px solid red;
       display: grid;
-      grid-template-columns: [day]115px [open]95px [to]25px [close]95px;
+      grid-template-columns: [day]95px [open]85px [to]25px [close]85px;
       justify-content: center;
       text-align: center;
       width: 100%;
@@ -64,7 +40,6 @@
       }
 
       .day {
-        // outline: 1px solid red;
         grid-area: day;
         text-align: right;
         padding-right: 8px;
@@ -84,9 +59,8 @@
     }
 
     .dayRowClosed {
-      // outline: 1px solid blue;
       display: grid;
-      grid-template-columns: [day]115px [closed]215px;
+      grid-template-columns: [day]95px [closed]195px;
       justify-content: center;
       text-align: center;
       width: 100%;
@@ -97,7 +71,6 @@
       }
 
       .day {
-        // outline: 1px solid red;
         grid-area: day;
         text-align: right;
         padding-right: 8px;

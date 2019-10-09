@@ -1,8 +1,12 @@
 .mainContainer {
   height: 100%;
-
+  
   mat-toolbar {
     height: 50px;
+    background-color: #BBD5ED;
+    // background-color: #C9D7F8;
+
+
 
     .title {
       // cursor: pointer;
@@ -17,6 +21,8 @@
 
     .btn {
       margin: 0 10px;
+      // background-color: #B7FDFE;
+      background-color: #fff;
     }
   }
 

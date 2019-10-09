@@ -28,14 +28,29 @@
 
   <div class="orgContact">
     <div class="orgInfo">
-      <p class="pHover" (click)="visitWebsite(org.website)"> Visit Our Website </p>
-      <p>{{ org.phone }}</p>
-      <p class="pHover" *ngIf="org.contactEmail">{{ org.contactEmail }}</p>
+      <p class="pHover" (click)="visitWebsite(org.website)">
+        Visit Our Website
+      </p>
+      <a class="orgPhone pHover" href="tel:{{org.phone}}">{{ org.phone }}</a>
+
+      <!-- <p>{{ org.phone }}</p> -->
+      <p
+        class="pHover"
+        [ngClass]="{'addedToClipboard': clipboard}"
+        *ngIf="org.contactEmail"
+        (click)="copyEmailToClipboard()"
+      >
+        {{ emailPlaceHolder }}
+      </p>
     </div>
     <div class="orgAddress">
-      <p class="pHover" (click)="openAddressinGoogleMaps(org.fullAddress)">{{ org.fullAddress }}</p>
+      <p class="pHover" (click)="openAddressinGoogleMaps(org.fullAddress)">
+        {{ org.fullAddress }}
+      </p>
     </div>
   </div>
+
+
 
   <div class="orgHoursServices">
     <div class="orgAbout">
@@ -44,6 +59,7 @@
         {{ org.about }}
       </p>
     </div>
+
 
     <app-hours
       class="orgHours"

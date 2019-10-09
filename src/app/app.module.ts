@@ -30,6 +30,9 @@ import { TextMaskModule } from 'angular2-text-mask';
 // Material Time Picker
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
+// Clipboard
+import { ClipboardModule } from 'ngx-clipboard';
+
 
 // Material
 import { LayoutModule } from "@angular/cdk/layout";
@@ -111,6 +114,7 @@ import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.c
     TextMaskModule,
     MatCardModule,
     NgxMaterialTimepickerModule,
+    ClipboardModule,
   ],
   providers: [
     {
