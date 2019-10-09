@@ -17,5 +17,4 @@ export class Ipapi {
     "languages":string;
     "asn": string;
     "org": string;
-
 }

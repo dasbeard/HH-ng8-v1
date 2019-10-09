@@ -11,7 +11,7 @@ export class GeolocationService {
   constructor(private http: HttpClient) {}
 
   getUserLocation() {
-    console.log('Running IPapi');
+    // console.log('Running IPapi');
     
     return this.http.get<Ipapi>("https://ipapi.co/json/");
   }

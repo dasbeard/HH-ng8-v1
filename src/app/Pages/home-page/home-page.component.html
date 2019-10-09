@@ -3,14 +3,14 @@
 
   <agm-map
     (mapClick)="mapClick($event)"
-    [latitude]="location.lat"
-    [longitude]="location.lng"
-    [zoom]="location.zoom"
+    [latitude]="userLocation.lat"
+    [longitude]="userLocation.lng"
+    [zoom]="userLocation.zoom"
     [scrollwheel]="null"
     [gestureHandling]="'cooperative'"
   >
-  <agm-circle [latitude]="location.lat" [longitude]="location.lng" 
-      [radius]="1000"
+  <agm-circle [latitude]="userLocation.lat" [longitude]="userLocation.lng" 
+      [radius]="radiusSize"
       [fillColor]="'red'"
       >
       <!-- [circleDraggable]="true"
@@ -18,8 +18,8 @@
   </agm-circle>
 
     <!-- <agm-marker
-      [latitude]="location.lat"
-      [longitude]="location.lng"
+      [latitude]="userLocation.lat"
+      [longitude]="userLocation.lng"
       (markerClick)="markerClick(iw)"
     >
       <agm-info-window #iw>{{ location.lat }},{{ location.lng }}</agm-info-window>

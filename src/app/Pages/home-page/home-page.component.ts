@@ -15,17 +15,18 @@ interface geoLocation {
   styleUrls: ["./home-page.component.scss"]
 })
 export class HomePageComponent implements OnInit {
-  location: geoLocation = {
+  userLocation:geoLocation = {
     lat: 34.05,
     lng: -118.25,
-    zoom: 9
+    zoom: 9,
   };
 
+
+  radiusSize:number;
   currentDate;
   allOrgs;
 
   // !! NEED TO GET FIRST 3 ORGS
-
   currentIW: AgmInfoWindow;
   previousIW: AgmInfoWindow;
 
@@ -44,11 +45,35 @@ export class HomePageComponent implements OnInit {
   }
 
   runGeoLocation() {
+    if (navigator) {
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          this.getBrowserPosition(position);
+        },
+        error => {
+          this.runIPAPI(error);
+        }
+        );
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+        this.runIPAPI('Geolocation is not supported by this browser');
+    }
+  }
+
+  getBrowserPosition(pos) {
+    console.log("running browser position");
+    this.userLocation.lng = pos.coords.longitude;
+    this.userLocation.lat = pos.coords.latitude;
+    this.userLocation.zoom = 14;
+    this.radiusSize = 800;
+  }
+
+  runIPAPI(err) {
     if (this.geoService.userLocation) {
       // console.log("Geoloaction Already Stored");
-      this.location.lat = this.geoService.userLocation.latitude;
-      this.location.lng = this.geoService.userLocation.longitude;
-      this.location.zoom = 15;
+      this.userLocation.lat = this.geoService.userLocation.latitude;
+      this.userLocation.lng = this.geoService.userLocation.longitude;
+      this.userLocation.zoom = 13;
     } else {
       // console.log("No GeoLocation Stored");
 
@@ -56,9 +81,9 @@ export class HomePageComponent implements OnInit {
         // Save data in service for future uses
         this.geoService.userLocation = data;
 
-        this.location.lat = data.latitude;
-        this.location.lng = data.longitude;
-        this.location.zoom = 15;
+        this.userLocation.lat = data.latitude;
+        this.userLocation.lng = data.longitude;
+        this.userLocation.zoom = 13;
       });
     }
   }
@@ -67,7 +92,7 @@ export class HomePageComponent implements OnInit {
     this.orgService.getAllOrgs().subscribe(data => {
       this.allOrgs = data;
 
-      console.log(this.allOrgs);
+      // console.log(this.allOrgs);
     });
   }
 
@@ -89,6 +114,6 @@ export class HomePageComponent implements OnInit {
     this.currentDate = new Date();
 
     // console.log(this.currentDate.get);
-    console.log("day", this.currentDate.getDay());
+    // console.log("day", this.currentDate.getDay());
   }
 }
