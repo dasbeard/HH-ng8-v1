@@ -28,12 +28,12 @@
 
   <div class="orgContact">
     <div class="orgInfo">
-      <p (click)="visitWebsite(org.website)"> Visit Our Website </p>
+      <p class="pHover" (click)="visitWebsite(org.website)"> Visit Our Website </p>
       <p>{{ org.phone }}</p>
-      <p>{{ org.contactEmail }}</p>
+      <p class="pHover" *ngIf="org.contactEmail">{{ org.contactEmail }}</p>
     </div>
     <div class="orgAddress">
-      <p (click)="openAddressinGoogleMaps(org.fullAddress)">{{ org.fullAddress }}</p>
+      <p class="pHover" (click)="openAddressinGoogleMaps(org.fullAddress)">{{ org.fullAddress }}</p>
     </div>
   </div>
 

@@ -57,7 +57,7 @@
       color: #000;
     }
 
-    p:hover {
+    .pHover:hover {
       color: rgba($color: #000000, $alpha: 0.5);
       cursor: pointer;
     }
@@ -96,6 +96,10 @@
         text-align: center;
         margin-top: 0;
       }
+
+      p {
+        text-align: center;
+      }
     }
 
     .orgHours {
@@ -112,6 +116,10 @@
     .orgOtherServices {
       grid-area: otherServices;
       h3 {
+        text-align: center;
+      }
+
+      p {
         text-align: center;
       }
     }
