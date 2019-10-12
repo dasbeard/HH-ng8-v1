@@ -6,6 +6,8 @@
     text-align: center;
   }
 
+  // -*-*-*-*-*-* AGM-Map *-*-*-*-*-*-*-*-*
+
   agm-map {
     height: 500px;
     // height: 50px;
@@ -58,25 +60,46 @@
     }
 
   }
+  // -*-*-*-*-*-* END AGM-Map *-*-*-*-*-*-*-*-*
+
+
+
+  // -*-*-*-*-*-* Simple Orgs *-*-*-*-*-*-*-*-*
+
 
   .nearby {
-    text-align: center;
-    margin-bottom: 0;
-    font-size: 1.75em;
-  }
-
-  .simpleOrgs {
-    max-width: 960px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
-    grid-gap: 1.5em;
+    // outline: 1px solid red;
+    // width: 990px;
+    max-width: 990px;
     margin: 0 auto;
-    margin-top: 1em;
-    padding: 2em;
-    padding-top: 0;
-    justify-content: space-between;
+    
+    // grid-template-columns: repeat(310px);
+    // grid-gap: 1.5em;
+    // justify-content: space-between;
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 0;
+      font-size: 1.75em;
+    }
+
+    .simpleOrgs {
+      display: grid;
+      // width: 100%;
+      // margin: 0 auto;
+      grid-gap: 0.5em;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 310px));
+      justify-content: space-around;
+    }
+
+
 
     .org {
+      // outline: 1px solid green;
+      min-height: 50px;
+      min-width: 50px;
+
+
       border-radius: 4px;
       background: linear-gradient(
         135deg,

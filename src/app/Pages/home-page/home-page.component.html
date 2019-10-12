@@ -15,55 +15,74 @@
       [latitude]="org.latLng.latitude"
       [longitude]="org.latLng.longitude"
     >
-      <agm-info-window #iw >
+      <agm-info-window #iw>
         <div class="infoMarker">
-          <h3 class="pHover" [routerLink]="['/Organization', org.uid]" title="Visit {{ org.organization }}'s page">
+          <h3
+            class="pHover"
+            [routerLink]="['/Organization', org.uid]"
+            title="Visit {{ org.organization }}'s page"
+          >
             {{ org.organization }}
           </h3>
-          <p class="pHover" (click)="openAddressinGoogleMaps(org.fullAddress)" title="Get directions to {{ org.organization }} ">
+          <p
+            class="pHover"
+            (click)="openAddressinGoogleMaps(org.fullAddress)"
+            title="Get directions to {{ org.organization }} "
+          >
             {{ org.fullAddress }}
           </p>
 
-
           <div class="infoBody">
             <img
-            [routerLink]="['/Organization', org.uid]" title="Visit {{ org.organization }}'s page"
-            src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
-            alt=""
+              [routerLink]="['/Organization', org.uid]"
+              title="Visit {{ org.organization }}'s page"
+              src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+              alt=""
             />
             <div class="contact">
-              <a class="orgPhone pHover" href="tel:{{ org.phone }}" title="Call {{ org.organization }}">
+              <a
+                class="orgPhone pHover"
+                href="tel:{{ org.phone }}"
+                title="Call {{ org.organization }}"
+              >
                 {{ org.phone }}
               </a>
-              <p class="pHover" (click)="visitWebsite(org.website)" title="Visit {{ org.organization }}'s Website " >Website</p>
+              <p
+                class="pHover"
+                (click)="visitWebsite(org.website)"
+                title="Visit {{ org.organization }}'s Website "
+              >
+                Website
+              </p>
             </div>
-          
           </div>
-
         </div>
-
-
       </agm-info-window>
     </agm-marker>
   </agm-map>
 
+  <div class="nearby" *ngIf="allOrgs">
 
-  <h2 class="nearby">Whats Nearby?</h2>
-  <div class="simpleOrgs" *ngIf="allOrgs">
-    <app-simple-org
-      class="org mat-elevation-z5"
-      [org]="allOrgs[0]"
-    ></app-simple-org>
+    <h2>Whats Nearby?</h2>
 
-    <app-simple-org
-      class="org mat-elevation-z5"
-      [org]="allOrgs[1]"
-    ></app-simple-org>
+    <div class="simpleOrgs">
 
-    <app-simple-org
-      class="org mat-elevation-z5"
-      [org]="allOrgs[0]"
-    ></app-simple-org>
+      <app-simple-org
+        class="org mat-elevation-z5"
+        [org]="allOrgs[0]"
+      ></app-simple-org>
+
+      <app-simple-org
+        class="org mat-elevation-z5"
+        [org]="allOrgs[1]"
+      ></app-simple-org>
+
+      <app-simple-org
+        class="org mat-elevation-z5"
+        [org]="allOrgs[2]"
+      ></app-simple-org>
+    </div>
+
   </div>
 
   <h4>Add Search Bar Component Here</h4>
