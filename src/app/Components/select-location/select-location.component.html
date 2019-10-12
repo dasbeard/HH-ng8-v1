@@ -6,7 +6,9 @@
   <div class="autocomplete-container ">
     <div class="autocomplete">
       <mat-google-maps-autocomplete
-      [types]="[address,establishment]"
+        country="us"
+        [strictBounds]='true'
+        [types]="[address,establishment]"
         (onAutocompleteSelected)="onAutocompleteSelected($event)"
         (onLocationSelected)="onLocationSelected($event)"
       >

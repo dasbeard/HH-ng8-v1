@@ -15,14 +15,13 @@ interface geoLocation {
   styleUrls: ["./home-page.component.scss"]
 })
 export class HomePageComponent implements OnInit {
-  userLocation:geoLocation = {
+  userLocation: geoLocation = {
     lat: 34.05,
     lng: -118.25,
-    zoom: 9,
+    zoom: 9
   };
 
-
-  radiusSize:number = null;
+  radiusSize: number = null;
   currentDate;
   allOrgs;
 
@@ -40,16 +39,19 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.runGeoLocation();
+
     this.getAllOrgs();
     this.getCurrentTime();
   }
 
+  
   runGeoLocation() {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(
         position => {
-          this.getBrowserPosition(position);
-        },
+          this.userLocation.lng = position.coords.longitude;
+          this.userLocation.lat = position.coords.latitude;
+          this.userLocation.zoom = 14;        },
         error => {
           this.runIPAPI(error);
         }
@@ -60,29 +62,20 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  getBrowserPosition(pos) {
-    this.userLocation.lng = pos.coords.longitude;
-    this.userLocation.lat = pos.coords.latitude;
-    this.userLocation.zoom = 14;
-    // this.radiusSize = 800;
-    // console.log(this.userLocation);
-    
-  }
-
   runIPAPI(err) {
-    console.log('Running IPAPI');
-    
-    if (this.geoService.userLocation) {
+    // console.log('Running IPAPI');
+
+    if (this.geoService.userIpapiLocation) {
       // console.log("Geoloaction Already Stored");
-      this.userLocation.lat = this.geoService.userLocation.latitude;
-      this.userLocation.lng = this.geoService.userLocation.longitude;
+      this.userLocation.lat = this.geoService.userIpapiLocation.latitude;
+      this.userLocation.lng = this.geoService.userIpapiLocation.longitude;
       this.userLocation.zoom = 13;
     } else {
       // console.log("No GeoLocation Stored");
 
       this.geoService.getUserLocation().subscribe(data => {
         // Save data in service for future uses
-        this.geoService.userLocation = data;
+        this.geoService.userIpapiLocation = data;
 
         this.userLocation.lat = data.latitude;
         this.userLocation.lng = data.longitude;
@@ -113,7 +106,6 @@ export class HomePageComponent implements OnInit {
     this.previousIW = infoWindow;
   }
 
-
   visitWebsite(URL: string) {
     window.open(URL, "_blank");
   }
@@ -125,7 +117,6 @@ export class HomePageComponent implements OnInit {
 
     window.open(fullURL, "_blank");
   }
-  
 
   getCurrentTime() {
     this.currentDate = new Date();
