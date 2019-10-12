@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
   };
 
 
-  radiusSize:number;
+  radiusSize:number = null;
   currentDate;
   allOrgs;
 
@@ -61,14 +61,17 @@ export class HomePageComponent implements OnInit {
   }
 
   getBrowserPosition(pos) {
-    console.log("running browser position");
     this.userLocation.lng = pos.coords.longitude;
     this.userLocation.lat = pos.coords.latitude;
     this.userLocation.zoom = 14;
-    this.radiusSize = 800;
+    // this.radiusSize = 800;
+    // console.log(this.userLocation);
+    
   }
 
   runIPAPI(err) {
+    console.log('Running IPAPI');
+    
     if (this.geoService.userLocation) {
       // console.log("Geoloaction Already Stored");
       this.userLocation.lat = this.geoService.userLocation.latitude;
@@ -109,6 +112,20 @@ export class HomePageComponent implements OnInit {
     }
     this.previousIW = infoWindow;
   }
+
+
+  visitWebsite(URL: string) {
+    window.open(URL, "_blank");
+  }
+
+  openAddressinGoogleMaps(URL: string) {
+    const baseURL = "https://www.google.com/maps/dir/?api=1&destination=";
+    const urlEncoded = encodeURI(URL);
+    const fullURL = baseURL + urlEncoded;
+
+    window.open(fullURL, "_blank");
+  }
+  
 
   getCurrentTime() {
     this.currentDate = new Date();

@@ -2,6 +2,12 @@
 @import '~@angular/material/theming';
 $primary: mat-palette($mat-indigo);
 
+// .material-icons { 
+//   font-size: 48px;
+//   color: rgba(0, 0, 0, 0.26); 
+// }
+
+
 .container {
   
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -15,6 +21,7 @@ $primary: mat-palette($mat-indigo);
       height: 100%;
       object-fit: cover;
     }
+
   }
   
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

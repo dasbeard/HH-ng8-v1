@@ -9,33 +9,44 @@
     [scrollwheel]="null"
     [gestureHandling]="'cooperative'"
   >
-  <agm-circle [latitude]="userLocation.lat" [longitude]="userLocation.lng" 
-      [radius]="radiusSize"
-      [fillColor]="'red'"
-      >
-      <!-- [circleDraggable]="true"
-      [editable]="true" -->
-  </agm-circle>
-
-    <!-- <agm-marker
-      [latitude]="userLocation.lat"
-      [longitude]="userLocation.lng"
-      (markerClick)="markerClick(iw)"
-    >
-      <agm-info-window #iw>{{ location.lat }},{{ location.lng }}</agm-info-window>
-    </agm-marker> -->
-
     <agm-marker
       (markerClick)="markerClick(iw)"
       *ngFor="let org of allOrgs; async"
       [latitude]="org.latLng.latitude"
       [longitude]="org.latLng.longitude"
     >
-      <agm-info-window #iw>
-        <strong> {{ org.organization }} </strong>
+      <agm-info-window #iw >
+        <div class="infoMarker">
+          <h3 class="pHover" [routerLink]="['/Organization', org.uid]" title="Visit {{ org.organization }}'s page">
+            {{ org.organization }}
+          </h3>
+          <p class="pHover" (click)="openAddressinGoogleMaps(org.fullAddress)" title="Get directions to {{ org.organization }} ">
+            {{ org.fullAddress }}
+          </p>
+
+
+          <div class="infoBody">
+            <img
+            [routerLink]="['/Organization', org.uid]" title="Visit {{ org.organization }}'s page"
+            src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+            alt=""
+            />
+            <div class="contact">
+              <a class="orgPhone pHover" href="tel:{{ org.phone }}" title="Call {{ org.organization }}">
+                {{ org.phone }}
+              </a>
+              <p class="pHover" (click)="visitWebsite(org.website)" title="Visit {{ org.organization }}'s Website " >Website</p>
+            </div>
+          
+          </div>
+
+        </div>
+
+
       </agm-info-window>
     </agm-marker>
   </agm-map>
+
 
   <h2 class="nearby">Whats Nearby?</h2>
   <div class="simpleOrgs" *ngIf="allOrgs">

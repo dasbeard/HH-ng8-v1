@@ -9,6 +9,54 @@
   agm-map {
     height: 500px;
     // height: 50px;
+
+    .infoMarker {
+      // background-color: red;
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+  
+      p,
+      a, h3 {
+        padding: 0.5em;
+        margin: 0;
+      }
+  
+      .pHover:hover {
+        color: rgba($color: #000000, $alpha: 0.5);
+        cursor: pointer;
+      }
+
+
+      .infoBody {
+        display: grid;
+        grid-template-columns: [image]1fr [contact]1fr;
+        
+        img {
+          grid-area: image;
+          margin: .5em auto;
+          width: 75px;
+          height: 75px;
+        }
+        
+        img:hover {
+          cursor: pointer;
+        }
+        
+        .contact {
+          grid-area: contact;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+        }
+        
+      }
+
+    }
+
   }
 
   .nearby {
