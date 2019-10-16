@@ -1,57 +1,90 @@
 <div class="container" *ngIf="org">
+  <div
+    class="topHalf pHover"
+    [routerLink]="['/Organization', org.uid]"
+    title="See to {{ org.organization }}'s page "
+  >
     <div class="simpleOrgImage">
       <img
         src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
         alt=""
       />
     </div>
-  
-    <div class="simpleOrgContact">
-      <h1 class="orgName" [routerLink]="['/Organization', org.uid]">
-        {{ org.organization }}
-      </h1>
-  
-      <div class="orgAddress">
-        <p>{{ org.fullAddress }}</p>
+
+    <h2 class="orgName">
+      {{ org.organization }} Some other names and things and things
+    </h2>
+  </div>
+  <!-- -~-~-~-~-~-~- End Top Half -~-~-~-~-~-~- -->
+
+  <div class="bottomHalf">
+    <div class="orgAddress">
+      <p
+        class="pHover"
+        title="Get directions to {{ org.organization }}"
+        (click)="getDirections(org.fullAddress)"
+      >
+        {{ address }}
+      </p>
+    </div>
+
+    <!-- TODO: Make all orgInfo into buttons on mobile -->
+    <div class="simpleOrgInfo">
+      <p
+        class="pHover"
+        title="Visit {{ org.organization }}'s website"
+        (click)="visitWebsite(org.website)"
+      >
+        Website
+      </p>
+      <a
+        class="orgPhone pHover"
+        title="{{ org.organization }}'s phone number "
+        href="tel:{{ org.phone }}"
+        >{{ org.phone }}</a
+      >
+      <p
+        class="pHover"
+        [ngClass]="{ addedToClipboard: clipboard }"
+        *ngIf="org.contactEmail"
+        (click)="copyEmail(org.contactEmail)"
+        title="Copy email to clipboard"
+      >
+        {{ emailPlaceHolder }}
+      </p>
+    </div>
+
+    <!-- -~-~-~-~-~-~- Start Contex  -~-~-~-~-~-~- -->
+    <!-- [ngClass]="org.services.beds ? 'available' : 'notAvailable'" -->
+
+    <div class="orgContext">
+      <div
+        class="hoursOfOperation contextRow"
+        [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
+      >
+        <div class="name">Open Now</div>
+        <div class="context">until 9:00 pm</div>
       </div>
-  
-      <!-- TODO: Make all orgInfo into buttons on mobile -->
-      <div class="simpleOrgInfo">
-        <a href="{{ org.website }}"> Website </a>
-        <p>{{ org.phone }}</p>
-        <p>{{ org.contactEmail }}</p>
+
+      <div
+        class="hoursServingFood contextRow"
+        [ngClass]="org.services.servesFood ? 'available' : 'notAvailable'"
+      >
+        <div class="name">Serving Food</div>
+        <div class="context">at 5:00 pm</div>
       </div>
-  
-      <div class="simpleOrgLowerHalf">
-        <div class="simpleOrgContent">
-          <button
-            mat-raised-button
-            [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
-            disabled
-          >
-            Beds Available
-            <!--   <i class="material-icons">
-      hotel
-    </i> -->
-          </button>
-          <button
-            mat-raised-button
-            [ngClass]="org.services.donations ? 'available' : 'notAvailable'"
-            disabled
-          >
-            Donations Center
-          </button>
-        </div>
-  
-        <div class="simpleOrgHours">
-          <button mat-raised-button disabled>
-            Open Now
-          </button>
-          <button mat-raised-button disabled>
-            Serving Food
-          </button>
-        </div>
+
+      <div
+        class="bedsAvailable contextRow"
+        [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
+      >
+        <div class="name">Beds Available</div>
+        <div class="context">unknown</div>
       </div>
     </div>
+
+    <p class="lastUpdated">Last updated on July 23 2019 2:35pm</p>
+
+    <!-- -~-~-~-~-~-~- End Contex  -~-~-~-~-~-~- -->
   </div>
-  
+</div>

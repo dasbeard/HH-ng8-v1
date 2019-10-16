@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/Models/user';
-import { DateTime } from 'luxon';
+import { ClickFunctionsService } from 'src/app/Services/click-functions.service';
 
 @Component({
   selector: 'app-simple-org',
@@ -9,13 +9,45 @@ import { DateTime } from 'luxon';
 })
 export class SimpleOrgComponent implements OnInit {
   @Input() org: User;
+  address: string;
 
-  timeNow;
+  emailPlaceHolder: string = 'Email Us';
+  clipboard: boolean = false;
+  // timeNow;
 
-  constructor() { }
+  constructor( private clickFunction: ClickFunctionsService ) { 
+
+  }
 
   ngOnInit() {
-    // console.log(this.org);
+    this.createAddress();
   }
+  
+  createAddress(){
+    this.address = this.org.fullAddress.substr(0, this.org.fullAddress.lastIndexOf(","));
+
+  }
+
+  visitWebsite(URL: string) {
+    this.clickFunction.visitWebsite(URL)
+  };
+
+  getDirections(address: string) {
+    this.clickFunction.openAddressInGoogleMaps(address);
+  };
+
+  copyEmail(email:string) {
+    this.clickFunction.copyToClipboard(email);
+
+    this.emailPlaceHolder = 'Copied to your Clipboard'
+    this.clipboard = true;
+    
+    setTimeout(() => {
+      this.emailPlaceHolder = 'Email Us'
+      this.clipboard = false;
+    }, 3000);
+
+  }
+
 
 }
