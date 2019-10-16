@@ -24,7 +24,7 @@
           required
         />
         <mat-hint align="start"
-          ><strong>This is how you will Login in the future</strong>
+          ><strong>This is will be your User ID</strong>
         </mat-hint>
         <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
       </mat-form-field>
@@ -38,6 +38,7 @@
           [type]="hidePass ? 'password' : 'text'"
         />
         <button
+          tabindex="-1"
           mat-icon-button
           matSuffix
           (click)="hidePass = !hidePass"
@@ -61,6 +62,7 @@
           [type]="hidePassConf ? 'password' : 'text'"
         />
         <button
+          tabindex="-1"
           mat-icon-button
           matSuffix
           (click)="hidePassConf = !hidePassConf"

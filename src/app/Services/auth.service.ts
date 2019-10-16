@@ -81,19 +81,6 @@ export class AuthService {
     // return this.updateUserData(credential.user);
   }
 
-  // private updateUserData(user) {
-  //   const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-  //     `users/${user.uid}`);
-
-  //   const data = {
-  //     uid: user.uid,
-  //     email: user.email
-  //   };
-
-  //   this.router.navigate(["/OrgAdmin"]);
-
-  //   return userRef.set(data, { merge: true });
-  // }
 
   async signOut() {
     await this.afAuth.auth.signOut();
@@ -113,15 +100,3 @@ export class AuthService {
   }
 }
 
-// public login(userInfo: User) {
-//   localStorage.setItem('ACCESS_TOKEN', "access_token");
-// }
-
-// public isLoggedIn() {
-//   // return true;
-//   return localStorage.getItem('ACCESS_TOKEN') !== null;
-// }
-
-// public logout() {
-//   localStorage.removeItem("ACCESS_TOKEN");
-// }

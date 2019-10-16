@@ -48,7 +48,6 @@ export class SelectLocationComponent implements OnInit {
     this.longitude = -118.25;
     this.country = "us";
 
-    // this.setCurrentPosition();
     this.runGeoLocation();
   }
 
@@ -78,7 +77,7 @@ export class SelectLocationComponent implements OnInit {
       this.userLocation = this.geoLocate.userIpapiLocation;
       this.latitude = this.userLocation.latitude;
       this.longitude = this.userLocation.longitude;
-      this.zoom = 15;
+      this.zoom = 14;
     } else {
       this.geoLocate.getUserLocation().subscribe(data => {
         //       // Save data in service for future uses
@@ -86,36 +85,15 @@ export class SelectLocationComponent implements OnInit {
 
         this.latitude = data.latitude;
         this.longitude = data.longitude;
-        this.zoom = 15;
+        this.zoom = 14;
       });
     }
 
   }
 
-  // }
-
-  // private setCurrentPosition() {
-  //   // console.log( this.geoLocate.userLocation );
-  //   if (this.geoLocate.userLocation) {
-  //     this.userLocation = this.geoLocate.userLocation;
-  //     this.latitude = this.userLocation.latitude;
-  //     this.longitude = this.userLocation.longitude;
-  //     this.zoom = 15;
-  //   } else {
-  //     this.geoLocate.getUserLocation().subscribe(data => {
-  //       // Save data in service for future uses
-  //       this.geoLocate.userLocation = data;
-
-  //       this.latitude = data.latitude;
-  //       this.longitude = data.longitude;
-  //       this.zoom = 15;
-  //     });
-  //   }
-
-  // }
 
   onAutocompleteSelected(result: PlaceResult) {
-    console.log("onAutocompleteSelected: ", result);
+    // console.log("onAutocompleteSelected: ", result);
     this.orgResult = result;
   }
 

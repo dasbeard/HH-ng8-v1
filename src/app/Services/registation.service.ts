@@ -107,7 +107,7 @@ export class RegistationService {
 
     localStorage.setItem("user", JSON.stringify(this.newUser));
     
-    console.log('Data saved to firebase');
+    // console.log('Data saved to firebase');
   }
 
 

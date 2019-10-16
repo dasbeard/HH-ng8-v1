@@ -14,18 +14,17 @@ export class LoginRegisterComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private router: Router,
-    // private regService: RegistationService
-  ) {
+    private router: Router
+  ) // private regService: RegistationService
+  {
+    const userJSON = JSON.parse(localStorage.getItem("user"));
 
-    // console.log( localStorage.getItem("user"));
-    if (localStorage.getItem("user") != null) {
-      let user = JSON.parse(localStorage.getItem("user"));
-      if (!user.registering) {
-        this.router.navigate([`OrgAdmin/${user.uid}`]);
-        // console.log("user already in system");
+    if (userJSON != null) {
+      if (!userJSON.registering) {
+        this.router.navigate([`OrgAdmin/${userJSON.uid}`]);
       }
     }
+
   }
 
   ngOnInit() {}
