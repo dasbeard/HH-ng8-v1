@@ -22,20 +22,40 @@ export class SimpleOrgComponent implements OnInit {
   hoursServingFoodString: string;
   hoursServingFoodContext: string;
 
+
+  days: Array<string> = [
+    "Sun",
+    "Mon",
+    "Tues",
+    "Wen",
+    "Thur",
+    "Fri",
+    "Sat"
+  ];
+
+
   constructor(private clickFunction: ClickFunctionsService) {}
 
   ngOnInit() {
     this.createAddress();
 
     // this.getTimeOfService(this.org.hoursOfOperation[1].close);
-    this.checkIfOpenToday();
+    this.checkIfOpenToday('HOP');
+    if (this.org.services.servesFood){
+      this.checkIfOpenToday('food');
+    }
   }
 
-  checkIfOpenToday() {
-    // console.log(this.org.hoursOfOperation[this.dayTime.dayOfWeek]);
+  checkIfOpenToday(service) {
 
+    console.log(service);
+
+    // !! NEED TO MAKE THIS WORK FOR SERVING FOOD !!
+
+    
+    
     if (this.org.hoursOfOperation[this.dayTime.dayOfWeek].isClosed) {
-      this.setHOPasClosed();
+      this.setasClosed('hoursOfOperation');
     } else {
       let openTime = this.extractTimeOfService(
         this.org.hoursOfOperation[this.dayTime.dayOfWeek].open
@@ -43,14 +63,11 @@ export class SimpleOrgComponent implements OnInit {
       let closeTime = this.extractTimeOfService(
         this.org.hoursOfOperation[this.dayTime.dayOfWeek].open
       );
-      this.checkIfOpenNow(openTime, closeTime);
+      this.checkIfNow(openTime, closeTime);
     }
   }
 
-  checkIfOpenNow(openTime, closeTime) {
-    // console.log("toCheck Open Time", openTime);
-    // console.log('today', this.dayTime.meridiem);
-
+  checkIfNow(openTime, closeTime) {
     // console.log("Check meridiem");
     if (this.dayTime.meridiem >= openTime.meridiem) {
       // console.log("Checking Hour");
@@ -70,54 +87,59 @@ export class SimpleOrgComponent implements OnInit {
           this.hoursOfOpOpen = true;
         } else {
           // console.log("Closed based on minute");
-          this.setHOPasClosed();
+          this.setasClosed('hoursOfOperation');
         }
       } else {
         // console.log("Closed because of hour");
-        this.setHOPasClosed();
+        this.setasClosed('hoursOfOperation');
       }
     } else {
       // console.log("Meridiem Check Closed");
-      this.setHOPasClosed();
+      this.setasClosed('hoursOfOperation');
     }
   }
 
-  setHOPasClosed() {
+  setasClosed(service) {
     // !! Build Function to check for next Day/Time open
-    this.nextOpen();
-
-    let nextTimeOpen = "";
+    let nextOpenDay = this.nextOpen(service);
 
     this.hoursOfOpString = "Closed";
-    this.hoursOfOpContext = "opens at " + nextTimeOpen;
+    this.hoursOfOpContext = "open "+ this.days[nextOpenDay[1]] + ' at ' + nextOpenDay[0];
     this.hoursOfOpOpen = false;
   }
 
-
-  nextOpen(){
-    let day = this.dayTime.dayOfWeek;
-    const dayHolder = day;
-
-    for (let index = 0; index < 8; index++) {
-      
-      
+  nextOpen(type) {
+    let service;
+    if(type === 'hoursOfOperation'){
+      service = this.org.hoursOfOperation; 
+    } else if ( type == 'servingFood') {
+      service = this.org.hoursServingFood;
     }
 
+    // const tempService = type;
+    // const service = 'this.org.'+ tempService;
+    const day = this.dayTime.dayOfWeek;
 
-    if( this.org.hoursOfOperation[day+1].isClosed){
-      console.log('Closed Tomorrow');
-      
-    } else {
-      console.log('Open Tomorrow at ', this.org.hoursOfOperation[day+1].open);
-      
+    for (let index = 1; index < 9; index++) {
+      if (day + index >= 7) {
+        let temp = 0;
+        if (service[temp].isClosed) {
+          // console.log("Closed Tomorrow");
+        } else {
+          // console.log( "Open on " + temp + " at ", service[temp].open );
+          return [service[temp].open, temp];
+        }
+        temp++;
+      } else {
+        if (service[day + index].isClosed) {
+          // console.log("Closed Tomorrow");
+        } else {
+          // console.log( "Open on " + (day+index) + " at ", service[day + index].open );
+          return [service[day + index].open, day + index];
+        }
+      }
     }
-
-
   }
-
-
-
-
 
   extractTimeOfService(time: string) {
     // console.log(time);

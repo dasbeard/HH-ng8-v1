@@ -75,19 +75,23 @@ $primary: mat-palette($mat-indigo);
         display: flex;
         justify-content: space-around;
         line-height: 2em;
-        // margin-top: .5em;
         margin-bottom: .5em;
 
         .name {
-          font-size: 1.15em;
-          width: 100%;
-          padding-left: 15px;
+          font-size: 1em;
+          width: 72%;
+          padding-left: 10px;
         }
         
         .context {
           width: 100%;
           text-align: center;
           padding-right: 15px;
+        }
+
+        .hop {
+          padding-left: 0;
+          text-align: center;
         }
 
       }
