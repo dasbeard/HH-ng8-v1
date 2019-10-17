@@ -32,8 +32,8 @@ export class AddOrgHoursComponent implements OnInit {
 
   hoursOfOperation = new FormGroup({
     monday: new FormGroup({
-      open: new FormControl({value:"", disabled: false}),
-      close: new FormControl({value:"", disabled: false}),
+      open: new FormControl(""),
+      close: new FormControl(""),
       isClosed: new FormControl(<boolean>false)
     }),
     tuesday: new FormGroup({
@@ -114,13 +114,13 @@ export class AddOrgHoursComponent implements OnInit {
     
     // !! Check for Errors HERE First
     let HoursOfOpArray = [];
+    HoursOfOpArray.push(HP.sunday.value);
     HoursOfOpArray.push(HP.monday.value);
     HoursOfOpArray.push(HP.tuesday.value);
     HoursOfOpArray.push(HP.wednesday.value);
     HoursOfOpArray.push(HP.thursday.value);
     HoursOfOpArray.push(HP.friday.value);
     HoursOfOpArray.push(HP.saturday.value);
-    HoursOfOpArray.push(HP.sunday.value);
         
     this.regService.addUserHours("hoursOfOp", HoursOfOpArray, this.user);
 
@@ -129,13 +129,13 @@ export class AddOrgHoursComponent implements OnInit {
 
       // !! Check for Errors HERE First
       let HoursServingArray = [];
+      HoursServingArray.push(SF.sunday.value);
       HoursServingArray.push(SF.monday.value);
       HoursServingArray.push(SF.tuesday.value);
       HoursServingArray.push(SF.wednesday.value);
       HoursServingArray.push(SF.thursday.value);
       HoursServingArray.push(SF.friday.value);
       HoursServingArray.push(SF.saturday.value);
-      HoursServingArray.push(SF.sunday.value);
   
       this.regService.addUserHours("servingFood", HoursServingArray, this.user);
     }

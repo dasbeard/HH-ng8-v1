@@ -12,7 +12,7 @@
     </div>
 
     <h2 class="orgName">
-      {{ org.organization }} Some other names and things and things
+      {{ org.organization }} 
     </h2>
   </div>
   <!-- -~-~-~-~-~-~- End Top Half -~-~-~-~-~-~- -->
@@ -49,7 +49,7 @@
         *ngIf="org.contactEmail"
         (click)="copyEmail(org.contactEmail)"
         title="Copy email to clipboard"
-      >
+        >
         {{ emailPlaceHolder }}
       </p>
     </div>
@@ -60,10 +60,10 @@
     <div class="orgContext">
       <div
         class="hoursOfOperation contextRow"
-        [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
+        [ngClass]="hoursOfOpOpen ? 'available' : 'notAvailable'"
       >
-        <div class="name">Open Now</div>
-        <div class="context">until 9:00 pm</div>
+        <div class="name"> {{hoursOfOpString}} </div>
+        <div class="context"> {{hoursOfOpContext}} </div>
       </div>
 
       <div

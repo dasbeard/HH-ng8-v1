@@ -14,13 +14,13 @@ export class HoursComponent implements OnInit {
   buttonSize: boolean = false;
 
   days: Array<string> = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday",
-    "Sunday"
+    "Saturday"
   ];
 
   constructor() {

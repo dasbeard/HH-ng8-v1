@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { GeolocationService } from "src/app/Services/geolocation.service";
 import { OrganizationsService } from "src/app/Services/organizations.service";
 import { AgmInfoWindow } from "@agm/core";
+import { ClickFunctionsService } from 'src/app/Services/click-functions.service';
 
 interface geoLocation {
   lat: number;
@@ -22,8 +23,9 @@ export class HomePageComponent implements OnInit {
   };
 
   radiusSize: number = null;
-  currentDate;
+  currentDateTime;
   allOrgs;
+  dayObj;
 
   // !! NEED TO GET FIRST 3 ORGS
   currentIW: AgmInfoWindow;
@@ -31,7 +33,8 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private geoService: GeolocationService,
-    private orgService: OrganizationsService
+    private orgService: OrganizationsService,
+    private clickFunction: ClickFunctionsService
   ) {
     this.currentIW = null;
     this.previousIW = null;
@@ -107,21 +110,45 @@ export class HomePageComponent implements OnInit {
   }
 
   visitWebsite(URL: string) {
-    window.open(URL, "_blank");
+    this.clickFunction.visitWebsite(URL);
   }
 
-  openAddressinGoogleMaps(URL: string) {
-    const baseURL = "https://www.google.com/maps/dir/?api=1&destination=";
-    const urlEncoded = encodeURI(URL);
-    const fullURL = baseURL + urlEncoded;
-
-    window.open(fullURL, "_blank");
+  openAddressinGoogleMaps(address: string) {
+    this.clickFunction.openAddressInGoogleMaps(address)
   }
+
 
   getCurrentTime() {
-    this.currentDate = new Date();
+    this.currentDateTime = new Date();
+    let hour = this.currentDateTime.getHours();
+    let min = this.currentDateTime.getMinutes();
+    let meridiem = 0;
+    let day = this.currentDateTime.getDay();
+    
+    if (hour > 12) {
+      hour -= 12;
+      meridiem = 1;
+      // console.log(hour);
+    }
 
-    // console.log(this.currentDate.get);
-    // console.log("day", this.currentDate.getDay());
+    this.dayObj = {
+                  dayOfWeek: day,
+                  hour: hour,
+                  minute: min,
+                  meridiem: meridiem
+                };
+
+    // console.log(this.dayObj);
+    
+
+
+
+
+    // !! Get hour and min into string to be able to compare agains hours of Op and Serving Times
+    // .toString()
+    // let temp = parseInt(text, 10) // Example
+
+    // console.log(this.currentDateTime);
+    // console.log("day", this.currentDateTime.getDay());
   }
 }
