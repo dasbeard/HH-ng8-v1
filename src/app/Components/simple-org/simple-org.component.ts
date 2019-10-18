@@ -81,45 +81,73 @@ export class SimpleOrgComponent implements OnInit {
   }
 
   checkIfNow(openTime, closeTime, service) {
-    let string;
-    let context;
-    let open;
     let serviceString;
+    let tempOpenHour;
+    let tempCloseHour;
+    let tempDayHour;
+
 
     if( service === this.org.hoursOfOperation ){
-      string = this.hoursOfOpString;
-      context = this.hoursOfOpContext;
-      open = this.hoursOfOpOpen;
       serviceString = 'HOP';
     } else if ( service === this.org.hoursServingFood ){
-      string = this.hoursServingFoodString;
-      context = this.hoursServingFoodContext;
-      open = this.hoursServingFoodNow;
       serviceString = 'food';
     };
+ 
+    if(openTime.meridiem === 1){
+      if (openTime.hour === 12){
+        tempOpenHour = openTime.hour;
+      } else {
+        tempOpenHour = openTime.hour + 12;
+      }
+    } else {
+      tempOpenHour = openTime.hour;
+    };
+
+    if(closeTime.meridiem === 1){
+      if(closeTime.hour === 12){
+        tempCloseHour = closeTime.hour;
+      } else {
+        tempCloseHour = closeTime.hour + 12;
+      }
+    } else {
+      tempCloseHour = closeTime.hour;
+    };
     
-    if (this.dayTime.meridiem >= openTime.meridiem) {
-      if (
-        this.dayTime.hour >= openTime.hour &&
-        this.dayTime.hour <= closeTime.hour
-      ) {
-        if (
-          this.dayTime.minute >= openTime.minute &&
-          this.dayTime.minute <= closeTime.minute
-        ) {
-          string = "Open Now";
-          context =
-            "until " + service[this.dayTime.dayOfWeek].close;
-          open = true;
-        } else {
-          this.setasClosed(serviceString);
-        }
+    if(this.dayTime.meridiem === 1){
+      if(this.dayTime.hour == 12){
+        tempDayHour = this.dayTime.hour;
+      } else {
+        tempDayHour = this.dayTime.hour + 12;
+      }
+    } else {
+      tempDayHour = this.dayTime.hour;
+    };
+
+    if(tempDayHour >= tempOpenHour && tempDayHour <= tempCloseHour){
+      if ( this.dayTime.minute <= openTime.minute || this.dayTime.minute >= closeTime.minute ) {
+        this.setAsOpen(service)
+        return
       } else {
         this.setasClosed(serviceString);
       }
     } else {
       this.setasClosed(serviceString);
     }
+
+  }
+
+  setAsOpen(service) {
+
+    if( service === this.org.hoursOfOperation ){
+      this.hoursOfOpString = "Open Now";
+      this.hoursOfOpContext = "until " + service[this.dayTime.dayOfWeek].close;
+      this.hoursOfOpOpen = true;
+    } else if ( service === this.org.hoursServingFood ){
+      this.hoursServingFoodString = "Serving Food"
+      this.hoursServingFoodContext = "until " + service[this.dayTime.dayOfWeek].close;
+      this.hoursServingFoodNow = true;
+    };
+
   }
   
   setasClosed(service) {

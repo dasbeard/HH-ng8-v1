@@ -24,6 +24,7 @@ export interface User {
   latLng?: LatLngPosition;
   // !! May need to break into pieces
   fullAddress?: string;
+  lastUpdated?: number;
   
 }
 

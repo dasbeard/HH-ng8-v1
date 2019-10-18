@@ -90,7 +90,7 @@ export class RegistationService {
 
     // console.log(this.newUser);
     
-
+    this.newUser.lastUpdated = Date.now();
     this.newUser.registering = false;
     
     localStorage.setItem("user", JSON.stringify(this.newUser));

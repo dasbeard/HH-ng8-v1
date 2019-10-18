@@ -60,7 +60,7 @@
 
     <div class="orgContext">
       <div
-        class="hoursOfOperation contextRow"
+        class="hoursOfOperation contextRow z-depth-1"
         [ngClass]="hoursOfOpOpen ? 'available' : 'notAvailable'"
         >
         <div class="name hop"> {{ hoursOfOpString }} </div>
@@ -68,7 +68,7 @@
       </div>
 
       <div
-        class="hoursServingFood contextRow"
+        class="hoursServingFood contextRow z-depth-1"
         [ngClass]="hoursServingFoodNow ? 'available' : 'notAvailable'"
         >
         <div class="name"> {{ hoursServingFoodString }} </div>
@@ -76,7 +76,7 @@
       </div>
 
       <div
-        class="bedsAvailable contextRow"
+        class="bedsAvailable contextRow z-depth-1"
         [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
       >
       <!-- <div class="name">unknown</div> -->
@@ -86,6 +86,7 @@
 
     
     <!-- -~-~-~-~-~-~- End Contex  -~-~-~-~-~-~- -->
-    <p class="lastUpdated">Last updated on July 23 2019 2:35pm</p>
+    <p class="lastUpdated">Last updated on {{ org.lastUpdated | date:'medium' }} </p>
+    <!-- <p class="lastUpdated">Last updated on July 23, 2019 2:35pm</p> -->
   </div>
 </div>
