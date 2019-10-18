@@ -31,6 +31,7 @@
     <!-- TODO: Make all orgInfo into buttons on mobile -->
     <div class="simpleOrgInfo">
       <p
+        *ngIf="org.website"
         class="pHover"
         title="Visit {{ org.organization }}'s website"
         (click)="visitWebsite(org.website)"
@@ -61,30 +62,30 @@
       <div
         class="hoursOfOperation contextRow"
         [ngClass]="hoursOfOpOpen ? 'available' : 'notAvailable'"
-      >
-        <div class="name hop"> {{hoursOfOpString}} </div>
+        >
+        <div class="name hop"> {{ hoursOfOpString }} </div>
         <div class="context"> {{hoursOfOpContext}} </div>
       </div>
 
       <div
         class="hoursServingFood contextRow"
-        [ngClass]="org.services.servesFood ? 'available' : 'notAvailable'"
-      >
-        <div class="name">Serving Food</div>
-        <div class="context">at 5:00 pm</div>
+        [ngClass]="hoursServingFoodNow ? 'available' : 'notAvailable'"
+        >
+        <div class="name"> {{ hoursServingFoodString }} </div>
+        <div class="context"> {{ hoursServingFoodContext }} </div>
       </div>
 
       <div
         class="bedsAvailable contextRow"
         [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
       >
-        <div class="name">Beds Available</div>
-        <div class="context">unknown</div>
+      <!-- <div class="name">unknown</div> -->
+        <div class="bedString"> {{ bedString }} </div>
       </div>
     </div>
 
-    <p class="lastUpdated">Last updated on July 23 2019 2:35pm</p>
-
+    
     <!-- -~-~-~-~-~-~- End Contex  -~-~-~-~-~-~- -->
+    <p class="lastUpdated">Last updated on July 23 2019 2:35pm</p>
   </div>
 </div>

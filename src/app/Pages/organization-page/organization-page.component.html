@@ -28,7 +28,7 @@
 
   <div class="orgContact">
     <div class="orgInfo">
-      <p class="pHover" (click)="visitWebsite(org.website)">
+      <p *ngIf="org.website" class="pHover" (click)="visitWebsite(org.website)">
         Visit Our Website
       </p>
       <a class="orgPhone pHover" href="tel:{{org.phone}}">{{ org.phone }}</a>
