@@ -1,9 +1,126 @@
 <div class="container" *ngIf="user$ as org">
-  <h1>{{ org.organization }}</h1>
+  <div class="mainContent">
+    <div class="leftSide">
+      <form [formGroup]="mainForm" class="mainForm">
+        <div class="updateForm">
+          <mat-form-field>
+            <mat-label>Organization Name</mat-label>
+            <input matInput required formControlName="organization" />
+          </mat-form-field>
 
-  <!-- <pre>
-    {{ org | json }}
-  </pre> -->
+          <div class="address">
+            <span>Address</span>
+            <p>{{ org.fullAddress }}</p>
+
+            <button mat-raised-button type="button" (click)="changeAddress()">
+              Change
+            </button>
+          </div>
+
+          <mat-form-field>
+            <mat-label>{{
+              org.website === "" ? "Add your website" : "org.website"
+            }}</mat-label>
+            <input matInput formControlName="website" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="tel" required formControlName="phone" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{
+              org.contactEmail === ""
+                ? "Add a contact email"
+                : "org.contactEmail"
+            }}</mat-label>
+            <input matInput type="email" formControlName="contactEmail" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>About</mat-label>
+            <textarea 
+              matInput 
+              required
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              formControlName="about" 
+              ></textarea>
+          </mat-form-field>
+
+          <div class="servicesContainer">
+            <mat-checkbox matInput formControlName="beds">
+              Beds Available
+            </mat-checkbox>
+
+            <mat-checkbox matInput formControlName="childcare">
+              Child Care
+            </mat-checkbox>
+
+            <mat-checkbox matInput formControlName="education"
+              >Education Assistance</mat-checkbox
+            >
+            <mat-checkbox matInput formControlName="interviewPrep"
+              >Interview Preperation</mat-checkbox
+            >
+            <mat-checkbox matInput formControlName="jobPlacement"
+              >Job Placement Assistance</mat-checkbox
+            >
+
+            <mat-checkbox matInput formControlName="donations"
+              >Donation Center</mat-checkbox
+            >
+
+            <mat-checkbox matInput formControlName="servesFood"
+              >Do you serve food?</mat-checkbox
+            >
+          </div>
+
+          <mat-form-field>
+            <mat-label
+              >{{
+                org.otherServices === ""
+                  ? "What other services do you provide? "
+                  : "org.otherServices"
+              }}
+            </mat-label>
+            <textarea 
+            matInput 
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            formControlName="otherServices"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+    <div class="rightSide">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+        alt=""
+      />
+
+      <app-hours
+        class="orgHoursHOP"
+        [hoursOfOp]="org.hoursOfOperation"
+      ></app-hours>
+
+      <app-hours
+        class="orgHoursFood"
+        [hoursServing]="org.hoursServingFood"
+      ></app-hours>
+    </div>
+  </div>
+  <button mat-raised-button (click)="deleteUser()">Delete Account</button>
+</div>
+<!--  SAFETY -->
+
+<!-- <div class="container" *ngIf="user$ as org">
+  <h1>{{ org.organization }}</h1>
 
   <div class="orgImgMap">
     <div class="orgImage">
@@ -63,10 +180,7 @@
     </div>
   </div>
 
-  <!-- <pre>
-      {{ user$ | json }}
-    </pre> -->
 
   <button mat-raised-button (click)="logout()">Logout</button>
   <button mat-raised-button (click)="deleteUser()">Delete Account</button>
-</div>
+</div> -->
