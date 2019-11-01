@@ -1,4 +1,12 @@
-.container {
-  width: 600px;
-  background-color: lightblue;
+.contianer {
+  position: relative;
+
+  .closeBtn {
+    position: absolute;
+    right: -22px;
+    top: -42px;
+  }
+
+
+
 }

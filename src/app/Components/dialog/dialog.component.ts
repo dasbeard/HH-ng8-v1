@@ -30,6 +30,7 @@ export class DialogComponent implements OnInit {
 
 
   closeDialog(){ 
+    this.dialogRef.close({event:'close'}); 
     // this.dialogRef.close({event:'close',data:this.fromDialog}); 
   }
 
