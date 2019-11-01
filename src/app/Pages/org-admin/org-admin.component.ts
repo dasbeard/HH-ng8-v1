@@ -73,8 +73,7 @@ export class OrgAdminComponent implements OnInit {
       maxHeight: '85vh',
       data: {
               identifier: 'Address', 
-              address: this.user$.fullAddress,
-              location: this.user$.latLng
+              user: this.user$
             }
     });
 

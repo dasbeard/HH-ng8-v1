@@ -1,7 +1,7 @@
 <div class="container">
-  <h1>Lets learn a bit more about your organization</h1>
+  <h1 *ngIf="!oldAddress">Lets learn a bit more about your organization</h1>
 
-  <h2>What is your address?</h2>
+  <h2>{{headerString}}</h2>
 
   <div class="autocomplete-container ">
     <div class="autocomplete" *ngIf="!oldAddress; else changeAddress">
@@ -23,7 +23,7 @@
         [types]="[address, establishment]"
         (onAutocompleteSelected)="onAutocompleteSelected($event)"
         (onLocationSelected)="onLocationSelected($event)"
-        [address]="oldAddress.address"
+        [address]="oldAddress.user.fullAddress"
       >
       </mat-google-maps-autocomplete>
     </ng-template>

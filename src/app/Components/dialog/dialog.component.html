@@ -6,8 +6,9 @@
 
   <!-- {{ dataFromParent }} -->
 
-    <app-select-location *ngIf="identifier === 'Address'"
+  <app-select-location *ngIf="identifier === 'Address'"
     [oldAddress]="dataFromParent"
+    (savedNewAddress)="receiveMessage($event)"
 
     ></app-select-location>
 

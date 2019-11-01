@@ -16,18 +16,22 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {
-    // this.dataFromParent = data;
+
     if (data.identifier === 'Address'){
-      console.log('Address');
       this.identifier = 'Address';
       this.dataFromParent = data;
     }
-   }
+
+  }
 
   ngOnInit() {
 
   }
-
+  
+  receiveMessage($event) {
+    // console.log($event);
+    this.closeDialog()
+  }
 
   closeDialog(){ 
     this.dialogRef.close({event:'close'}); 

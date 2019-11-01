@@ -14,6 +14,8 @@ import {
 export class RegistationService {
   newUser: User;
   newUserAfsDoc: AngularFirestoreDocument<User>;
+  userAfsDoc: AngularFirestoreDocument<User>;
+  updateUser: User;
 
   constructor(private router: Router, private afs: AngularFirestore) {}
 
@@ -24,6 +26,23 @@ export class RegistationService {
     localStorage.setItem("user", JSON.stringify(this.newUser));
 
     this.router.navigateByUrl("/Register");
+  }
+
+  updateAddress(locationResults, latLng, oldData: User) {
+    let userToUpdate:User = oldData;
+
+    // update data
+    userToUpdate.fullAddress = locationResults.formatted_address;
+    userToUpdate.latLng = latLng;
+    
+    // update user in Firebase
+    this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
+    this.userAfsDoc.update(userToUpdate);
+
+
+    // update user in localStorage
+    localStorage.setItem("user", JSON.stringify(userToUpdate));
+    
   }
 
   buildUserLocation(data, latLng) {
