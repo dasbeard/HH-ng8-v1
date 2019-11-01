@@ -4,16 +4,30 @@
   <h2>What is your address?</h2>
 
   <div class="autocomplete-container ">
-    <div class="autocomplete">
+    <div class="autocomplete" *ngIf="!oldAddress; else changeAddress">
       <mat-google-maps-autocomplete
         country="us"
-        [strictBounds]='true'
-        [types]="[address,establishment]"
+        [strictBounds]="true"
+        [types]="[address, establishment]"
         (onAutocompleteSelected)="onAutocompleteSelected($event)"
         (onLocationSelected)="onLocationSelected($event)"
       >
       </mat-google-maps-autocomplete>
     </div>
+
+    <ng-template #changeAddress class="autocomplete">
+      <mat-google-maps-autocomplete
+        class="change"
+        country="us"
+        [strictBounds]="true"
+        [types]="[address, establishment]"
+        (onAutocompleteSelected)="onAutocompleteSelected($event)"
+        (onLocationSelected)="onLocationSelected($event)"
+        [address]="oldAddress.address"
+      >
+      </mat-google-maps-autocomplete>
+    </ng-template>
+
     <button mat-raised-button color="primary" (click)="moveForward()">
       Continue
     </button>

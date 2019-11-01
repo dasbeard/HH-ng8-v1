@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import {
   Location,
@@ -11,6 +11,15 @@ import { Ipapi } from "src/app/Models/ipapi.model";
 import { AuthService } from "src/app/Services/auth.service";
 import { RegistationService } from "src/app/Services/registation.service";
 import { LatLngPosition } from "src/app/Models/user";
+
+export interface changeAddress {
+  identifier: string, 
+  address: string,
+  location: {
+    latitude: number,
+    longitude: number
+  }
+}
 
 @Component({
   selector: "app-select-location",
@@ -30,25 +39,38 @@ export class SelectLocationComponent implements OnInit {
   public userLocation: Ipapi;
   latLng: LatLngPosition;
 
+ 
+
+
+  @Input() oldAddress: changeAddress;
+
   constructor(
     // private titleService: Title,
     private geoLocate: GeolocationService,
     private regService: RegistationService
   ) {
-    // console.log('in Select place');
+    console.log('in Select place');
+    
   }
-
+  
   ngOnInit() {
     // this.titleService.setTitle(
-    //   "Home | @angular-material-extensions/google-maps-autocomplete"
-    // );
+      //   "Home | @angular-material-extensions/google-maps-autocomplete"
+      // );
 
-    this.zoom = 10;
-    this.latitude = 34.05;
-    this.longitude = -118.25;
-    this.country = "us";
-
-    this.runGeoLocation();
+    if(this.oldAddress) {
+          this.zoom = 17;
+          this.latitude = this.oldAddress.location.latitude;
+          this.longitude = this.oldAddress.location.longitude;
+          this.country = "us";
+    } else {
+      this.zoom = 10;
+      this.latitude = 34.05;
+      this.longitude = -118.25;
+      this.country = "us";
+      
+      this.runGeoLocation();
+    }
   }
 
 

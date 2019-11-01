@@ -6,6 +6,8 @@ import { User } from "../../Models/user";
 import { OrganizationsService } from "src/app/Services/organizations.service";
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/Components/dialog/dialog.component';
 
 @Component({
   selector: "app-org-admin",
@@ -19,20 +21,22 @@ export class OrgAdminComponent implements OnInit {
   servicesForm: FormGroup;
   user$;
   orgId: string;
+  dialogData
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private orgService: OrganizationsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     let id = this.route.snapshot.paramMap.get('id');
     // console.log(id);
 
     this.orgService.getOrganizationByUID( id ).subscribe( data => {
       
-      // console.log(data.services);
+      // console.log(data);
       
       this.user$ = data;
       this.createForm();
@@ -41,7 +45,6 @@ export class OrgAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    
   }
 
   createForm() {
@@ -60,6 +63,26 @@ export class OrgAdminComponent implements OnInit {
       jobPlacement: new FormControl(this.user$.services.jobPlacement),
       servesFood: new FormControl(this.user$.services.servesFood)
     });
+
+  }
+
+  changeAddress(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '75vw',
+      minHeight: '45vh',
+      maxHeight: '85vh',
+      data: {
+              identifier: 'Address', 
+              address: this.user$.fullAddress,
+              location: this.user$.latLng
+            }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+
 
   }
 

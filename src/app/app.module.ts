@@ -47,7 +47,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule,  } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 // Components and Pages
@@ -65,6 +66,7 @@ import { SelectLocationComponent } from './Components/select-location/select-loc
 import { AddOrgInformationComponent } from './Components/add-org-information/add-org-information.component';
 import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
 import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.component';
+import { DialogComponent } from './Components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,8 @@ import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.c
     SelectLocationComponent,
     AddOrgInformationComponent,
     AddOrgServicesComponent,
-    AddOrgHoursComponent
+    AddOrgHoursComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -115,6 +118,10 @@ import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.c
     MatCardModule,
     NgxMaterialTimepickerModule,
     ClipboardModule,
+    MatDialogModule,
+  ],
+  entryComponents: [
+    DialogComponent
   ],
   providers: [
     {
