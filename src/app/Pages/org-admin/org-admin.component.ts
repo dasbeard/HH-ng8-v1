@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/Components/dialog/dialog.component';
+import { RegistationService } from 'src/app/Services/registation.service';
 
 @Component({
   selector: "app-org-admin",
@@ -29,7 +30,8 @@ export class OrgAdminComponent implements OnInit {
     private route: ActivatedRoute,
     private orgService: OrganizationsService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private registrationService: RegistationService
   ) {
     let id = this.route.snapshot.paramMap.get('id');
     // console.log(id);
@@ -67,6 +69,7 @@ export class OrgAdminComponent implements OnInit {
   }
 
   changeAddress(): void {
+    // Open dialog with slect address component
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75vw',
       minHeight: '45vh',
@@ -77,20 +80,43 @@ export class OrgAdminComponent implements OnInit {
             }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    // dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
       // this.animal = result;
-    });
+    // });
 
+  }
+
+  updateProfile() {
+    // console.log(this.user$);
+    // console.log(this.mainForm.value);
+    
+    this.registrationService.updateProfile(this.user$, this.mainForm.value);
 
   }
 
 
 
-
-
   logout() {
     this.authService.signOut();
+  }
+
+
+  deleteUserDialog() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '75vw',
+      minHeight: '45vh',
+      maxHeight: '85vh',
+      data: {
+              identifier: 'deleteUser', 
+              user: this.user$
+            }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // this.animal = result;
+    });
   }
 
   deleteUser() {

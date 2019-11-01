@@ -1,4 +1,6 @@
 <div class="container" *ngIf="user$ as org">
+  <h1>Edit Profile</h1>
+
   <div class="mainContent">
     <div class="leftSide">
       <form [formGroup]="mainForm" class="mainForm">
@@ -12,7 +14,12 @@
             <span>Address *</span>
             <p>{{ org.fullAddress }}</p>
 
-            <button mat-raised-button type="button" color='primary' (click)="changeAddress()">
+            <button
+              mat-raised-button
+              type="button"
+              color="primary"
+              (click)="changeAddress()"
+            >
               Change
             </button>
           </div>
@@ -31,23 +38,21 @@
 
           <mat-form-field>
             <mat-label>{{
-              org.contactEmail === ""
-                ? "Add a contact email"
-                : "Contact Email"
+              org.contactEmail === "" ? "Add a contact email" : "Contact Email"
             }}</mat-label>
             <input matInput type="email" formControlName="contactEmail" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>About</mat-label>
-            <textarea 
-              matInput 
+            <textarea
+              matInput
               required
               cdkTextareaAutosize
               cdkAutosizeMinRows="1"
               cdkAutosizeMaxRows="5"
-              formControlName="about" 
-              ></textarea>
+              formControlName="about"
+            ></textarea>
           </mat-form-field>
 
           <div class="servicesContainer">
@@ -86,12 +91,12 @@
                   : "Other services you provide "
               }}
             </mat-label>
-            <textarea 
-            matInput 
-            cdkTextareaAutosize
-            cdkAutosizeMinRows="1"
-            cdkAutosizeMaxRows="5"
-            formControlName="otherServices"
+            <textarea
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5"
+              formControlName="otherServices"
             ></textarea>
           </mat-form-field>
         </div>
@@ -115,5 +120,18 @@
       ></app-hours>
     </div>
   </div>
-  <button mat-raised-button color='warn' (click)="deleteUser()">Delete Account</button>
+
+  <div class="bottomBtns">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!mainForm.valid"
+      (click)="updateProfile()"
+    >
+      Update Profile
+    </button>
+    <button mat-raised-button color="warn" (click)="deleteUserDialog()">
+      Delete Account
+    </button>
+  </div>
 </div>

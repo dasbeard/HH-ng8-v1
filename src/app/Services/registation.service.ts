@@ -28,22 +28,6 @@ export class RegistationService {
     this.router.navigateByUrl("/Register");
   }
 
-  updateAddress(locationResults, latLng, oldData: User) {
-    let userToUpdate:User = oldData;
-
-    // update data
-    userToUpdate.fullAddress = locationResults.formatted_address;
-    userToUpdate.latLng = latLng;
-    
-    // update user in Firebase
-    this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
-    this.userAfsDoc.update(userToUpdate);
-
-
-    // update user in localStorage
-    localStorage.setItem("user", JSON.stringify(userToUpdate));
-    
-  }
 
   buildUserLocation(data, latLng) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
@@ -120,8 +104,53 @@ export class RegistationService {
   }
 
 
+  updateAddress(locationResults, latLng, oldData: User) {
+    let userToUpdate:User = oldData;
+
+    // update data
+    userToUpdate.fullAddress = locationResults.formatted_address;
+    userToUpdate.latLng = latLng;
+    
+    // update user in Firebase
+    this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
+    this.userAfsDoc.update(userToUpdate);
+
+    // update user in localStorage
+    localStorage.setItem("user", JSON.stringify(userToUpdate));
+  }
+
+
+  updateProfile(oldData, newData){
+    let newProfile: User = oldData;
+
+    // update data
+    newProfile.organization = newData.organization;
+    newProfile.website = newData.website;
+    newProfile.phone = newData.phone;
+    newProfile.contactEmail = newData.contactEmail;
+    newProfile.about = newData.about;
+    newProfile.otherServices = newData.otherServices;
+    
+    newProfile.services.beds = newData.beds;
+    newProfile.services.childcare = newData.childcare;
+    newProfile.services.education = newData.education;
+    newProfile.services.interviewPrep = newData.interviewPrep;
+    newProfile.services.jobPlacement = newData.jobPlacement;
+    newProfile.services.donations = newData.donations;
+    newProfile.services.servesFood = newData.servesFood;
+    
+    // console.log('Updated', newProfile);
+    // update user in Firebase
+    this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
+    this.userAfsDoc.update(newProfile);
+
+
+    // update user in localStorage
+    localStorage.setItem("user", JSON.stringify(newProfile));
+  }
+
   saveToDatabase(data){
-    this.newUserAfsDoc = this.afs.doc(`users/${data.uid}`);
+    this.newUserAfsDoc = this.afs.doc<User>(`users/${data.uid}`);
     this.newUserAfsDoc.update(data);
 
     localStorage.setItem("user", JSON.stringify(this.newUser));

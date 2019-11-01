@@ -1,17 +1,28 @@
 <div class="contianer">
-  <button mat-mini-fab class="closeBtn" (click)=closeDialog()><i class="material-icons">
+  <button mat-mini-fab class="closeBtn" (click)="closeDialog()">
+    <mat-icon class="material-icons">
       close
-      </i></button>
-
+    </mat-icon>
+  </button>
 
   <!-- {{ dataFromParent }} -->
 
-  <app-select-location *ngIf="identifier === 'Address'"
+  <app-select-location
+    *ngIf="identifier === 'Address'"
     [oldAddress]="dataFromParent"
     (savedNewAddress)="receiveMessage($event)"
+  ></app-select-location>
 
-    ></app-select-location>
+  <div *ngIf="identifier === 'deleteUser'" class="deleteUser">
+    <h1>Are you sure you want to delete your account?</h1>
+    
+    <p>
+      All data and your User ID will be permanently deleted and unrecoverable
+    </p>
 
-
-
+    <div class="bottomBtns">
+      <button mat-raised-button color='primary' (click)="closeDialog()">Cancel</button>
+      <button mat-raised-button color="warn">Delete My Account</button>
+    </div>
+  </div>
 </div>

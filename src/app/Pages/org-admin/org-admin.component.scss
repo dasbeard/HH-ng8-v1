@@ -1,9 +1,14 @@
 .container {
   max-width: 990px;
-  padding: 0.75em 0.5em 3.5em 0.5em;
+  padding: 0.75em 0.5em 1.5em 0.5em;
   margin: 0 auto;
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+  h1 {
+    text-align: center;
+  }
+
   .mainContent {
     display: grid;
     grid-template-columns: [leftSide]1.5fr [rightSide]0.5fr;
@@ -14,13 +19,13 @@
 
       .mainForm {
         mat-form-field {
-          width: 95%;          
+          width: 95%;
         }
 
         .address {
           width: 95%;
           position: relative;
-          line-height: 45.5px;
+          line-height: 39.5px;
           border-bottom: 1px solid rgb(144, 148, 148);
           // padding-top: 20px;
           margin-bottom: 22px;
@@ -75,5 +80,16 @@
         width: 100%;
       }
     }
+
   }
+
+  .bottomBtns {
+    width: 75%;
+    margin: 15px auto 25px auto;
+    // margin-top: 15px;
+    // margin-bottom: 25px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+    
 }
