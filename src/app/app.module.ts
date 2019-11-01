@@ -49,6 +49,8 @@ import { MatStepperModule,  } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+
 
 
 // Components and Pages
@@ -119,6 +121,7 @@ import { DialogComponent } from './Components/dialog/dialog.component';
     NgxMaterialTimepickerModule,
     ClipboardModule,
     MatDialogModule,
+    MatMenuModule,
   ],
   entryComponents: [
     DialogComponent

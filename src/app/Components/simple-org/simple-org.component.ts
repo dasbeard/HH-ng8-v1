@@ -71,6 +71,10 @@ export class SimpleOrgComponent implements OnInit {
       }
     } else if ( inputService === 'food'){
       service = this.org.hoursServingFood;
+        if(service[day].isClosed) {
+          this.setasClosed('food');
+          return
+        }
     }
 
     const openTime = await this.extractTimeOfService(service[day].open);

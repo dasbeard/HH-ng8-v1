@@ -4,29 +4,57 @@
 
     <span class="spacer"></span>
 
+    <!--     
     <button
       *ngIf="user$"
       mat-stroked-button
       class="btn mat-elevation-z1"
-      (click)="signOut()"
-    >
+      >
       SignOut
-    </button>
+    </button> -->
 
+    <div *ngIf="user$; else notLoggedIn" class="loggedIn">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span> My Account </span>
+        <!-- <mat-icon>menu</mat-icon> -->
+      </button>
 
-    <button
-      mat-stroked-button
-      class="btn mat-elevation-z1"
-      [routerLink]="['LoginRegister']"
-    >
-      Login/Register
-    </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['Organization', user$.uid]">
+          <mat-icon class="material-icons">
+            web
+          </mat-icon>
+          <span>My Page</span>
+        </button>
+
+        <button mat-menu-item [routerLink]="['OrgAdmin', user$.uid]">
+          <mat-icon class="material-icons">
+            edit
+          </mat-icon>
+          <span>Edit Profile</span>
+        </button>
+        
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon class="material-icons">
+            exit_to_app
+          </mat-icon>
+          <span>Sign Out</span>
+        </button>
+      </mat-menu>
+    </div>
+
+    <ng-template #notLoggedIn>
+      <!-- class="btn mat-elevation-z1" -->
+      <button mat-button [routerLink]="['LoginRegister']">
+        Login/Register
+      </button>
+    </ng-template>
 
     <!-- !! NEED TO ADD PAGE !! -->
     <!-- <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">
       About Us
     </button> -->
-<!-- 
+    <!-- 
     <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">
       Home
     </button> -->
