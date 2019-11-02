@@ -10,8 +10,8 @@
   <mat-card>
     <mat-vertical-stepper [linear]="false" #stepper>
       <mat-step [stepControl]="hoursOfOperationStep">
-        <form [formGroup]="hoursOfOperation">
-          <ng-template matStepLabel>When are you open? </ng-template>
+        <ng-template matStepLabel>When are you open? </ng-template>
+          <!-- <form [formGroup]="hoursOfOperation">
 
           <div class="dayRow" formGroupName="sunday">
             <div class="dayOfWeek">Sunday</div>
@@ -108,7 +108,6 @@
                 (click)="disableDay(hoursOfOperation.controls.monday)"
                 >Closed</mat-checkbox
               >
-              <!-- <mat-checkbox formControlName="isClosed" >Closed</mat-checkbox> -->
             </div>
           </div>
 
@@ -365,7 +364,15 @@
           <div>
             <button mat-button type="button" matStepperNext>Next</button>
           </div>
-        </form>
+        </form> -->
+     
+        <app-edit-hours
+        
+        >
+
+        </app-edit-hours>
+     
+     
       </mat-step>
 
       <mat-step

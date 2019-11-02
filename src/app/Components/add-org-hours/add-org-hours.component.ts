@@ -9,7 +9,6 @@ import {
   Validators
 } from "@angular/forms";
 
-import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-add-org-hours",

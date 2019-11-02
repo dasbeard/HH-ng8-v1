@@ -4,14 +4,18 @@
 
     <span class="spacer"></span>
 
-    <!--     
+    
+    <!-- Temp -->
     <button
-      *ngIf="user$"
       mat-stroked-button
       class="btn mat-elevation-z1"
-      >
-      SignOut
-    </button> -->
+      [routerLink]="['Register', 'Hours']"
+    >
+      Hours
+    </button>
+    <!-- Temp -->
+
+
 
     <div *ngIf="user$; else notLoggedIn" class="loggedIn">
       <button mat-button [matMenuTriggerFor]="menu">
@@ -33,7 +37,7 @@
           </mat-icon>
           <span>Edit Profile</span>
         </button>
-        
+
         <button mat-menu-item (click)="signOut()">
           <mat-icon class="material-icons">
             exit_to_app

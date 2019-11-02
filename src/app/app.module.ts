@@ -69,6 +69,7 @@ import { AddOrgInformationComponent } from './Components/add-org-information/add
 import { AddOrgServicesComponent } from './Components/add-org-services/add-org-services.component';
 import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.component';
 import { DialogComponent } from './Components/dialog/dialog.component';
+import { EditHoursComponent } from './Components/edit-hours/edit-hours.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { DialogComponent } from './Components/dialog/dialog.component';
     AddOrgInformationComponent,
     AddOrgServicesComponent,
     AddOrgHoursComponent,
-    DialogComponent
+    DialogComponent,
+    EditHoursComponent
   ],
   imports: [
     BrowserModule,

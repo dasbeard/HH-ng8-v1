@@ -54,7 +54,7 @@ export class RegistationService {
 
     localStorage.setItem("user", JSON.stringify(this.newUser));
 
-    this.saveToDatabase(this.newUser)
+    // this.saveToDatabase(this.newUser)
     
     this.router.navigate(["/Register/Services"]);
   }
