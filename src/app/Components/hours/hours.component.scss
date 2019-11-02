@@ -24,8 +24,18 @@
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-  .HoursOfOperation {
+  .HoursDisplayed {
     // font-family: "Roboto Mono", monospace;
+      .editBtn {
+        width: 40%;
+        margin: 10px calc(50% - 20% );
+
+
+        .material-icons {
+          font-size: 18px;
+        }
+      }
+
 
     .dayRow {
       display: grid;

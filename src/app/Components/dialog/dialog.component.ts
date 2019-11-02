@@ -21,9 +21,14 @@ export class DialogComponent implements OnInit {
       this.identifier = 'Address';
       this.dataFromParent = data;
     } else if (data.identifier === 'deleteUser'){
-      console.log('deleteUser');
+      // console.log('deleteUser');
       
       this.identifier = 'deleteUser';
+      this.dataFromParent = data;
+    } else if (data.identifier === 'hoursOfOperation' || data.identifier === 'hoursServing'){
+      // console.log('editHours');
+      
+      this.identifier = 'editHours';
       this.dataFromParent = data;
     }
 

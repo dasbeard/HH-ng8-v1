@@ -12,7 +12,7 @@
         aria-label="Hours of Operation"
         (click)="changeHoursView('hoursOfOperation')"
       >
-        Hours
+        Business Hours
       </mat-button-toggle>
 
       <mat-button-toggle
@@ -27,7 +27,20 @@
     </mat-button-toggle-group>
   </div>
 
-  <div class="HoursOfOperation">
+  <div class="HoursDisplayed">
+    <button 
+      mat-raised-button 
+      *ngIf="identifier" 
+      color="primary" 
+      class="editBtn"
+      (click)="editHours(hoursToDisplay, hoursDisplayed)"
+      >
+      <mat-icon class="material-icons">
+          edit
+        </mat-icon>
+      Edit
+    </button>
+
     <div *ngFor="let day of hoursToDisplay; let i = index">
       <div *ngIf="!day.isClosed; else closed" class="dayRow">
         <p class="day">{{ days[i] }}</p>

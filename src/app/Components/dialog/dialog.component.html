@@ -25,4 +25,17 @@
       <button mat-raised-button color="warn">Delete My Account</button>
     </div>
   </div>
+
+
+  <div *ngIf="identifier === 'editHours'" class="editHours">
+
+    <p>Edit Hours</p>
+
+    <pre>
+      {{ dataFromParent | json }}
+    </pre>
+
+  </div>
+
+
 </div>

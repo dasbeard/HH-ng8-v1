@@ -112,12 +112,15 @@
       <app-hours
         class="orgHoursHOP"
         [hoursOfOp]="org.hoursOfOperation"
-      ></app-hours>
-
-      <app-hours
-        class="orgHoursFood"
         [hoursServing]="org.hoursServingFood"
-      ></app-hours>
+        [identifier]="'orgAdmin'"
+        ></app-hours>
+        
+        <!-- <app-hours
+        *ngIf="org.services.servesFood"
+        class="orgHoursFood"
+        [identifier]="orgAdmin"
+        ></app-hours> -->
     </div>
   </div>
 

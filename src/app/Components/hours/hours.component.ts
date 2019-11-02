@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogComponent } from "src/app/Components/dialog/dialog.component";
 
 @Component({
   selector: "app-hours",
@@ -8,6 +10,7 @@ import { Component, OnInit, Input } from "@angular/core";
 export class HoursComponent implements OnInit {
   @Input() hoursOfOp: Array<object>;
   @Input() hoursServing: Array<object>;
+  @Input() identifier: string;
 
   hoursDisplayed: string;
   hoursToDisplay: object;
@@ -23,15 +26,13 @@ export class HoursComponent implements OnInit {
     "Saturday"
   ];
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.hoursDisplayed = "hoursOfOperation";
   }
 
   ngOnInit() {
-    // console.log(this.hoursOfOp);
-    // console.log(this.hoursServing);
     this.hoursToDisplay = this.hoursOfOp;
-    if(this.hoursServing){
+    if (this.hoursServing) {
       // console.log('not serving');
       this.buttonSize = true;
     } else {
@@ -40,7 +41,6 @@ export class HoursComponent implements OnInit {
     }
 
     // console.log(this.buttonSize);
-    
   }
 
   changeHoursView(input) {
@@ -52,5 +52,22 @@ export class HoursComponent implements OnInit {
       this.hoursDisplayed = "hoursServing";
       this.hoursToDisplay = this.hoursServing;
     }
+  }
+
+  editHours(hoursToEdit, identifier) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: "75vw",
+      minHeight: "45vh",
+      maxHeight: "85vh",
+      data: {
+        identifier: identifier,
+        data: hoursToEdit
+      }
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+      // this.animal = result;
+    // });
   }
 }
