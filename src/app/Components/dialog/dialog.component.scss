@@ -37,4 +37,22 @@
   }
 
 
+  .editHours {
+    width: 525px;
+    margin: 0 auto;
+  }
+
+
+
+
+  ::ng-deep .ngx-material-timepicker-toggle{
+    display: inherit;
+    // line-height: 50px;
+    position: absolute;
+    top: 7px;
+  
+  }
+
 }
+
+

@@ -1,5 +1,5 @@
 <div class="contianer">
-  <button mat-mini-fab class="closeBtn" (click)="closeDialog()">
+  <button mat-mini-fab class="closeBtn" (click)="closeDialog('close')">
     <mat-icon class="material-icons">
       close
     </mat-icon>
@@ -21,8 +21,8 @@
     </p>
 
     <div class="bottomBtns">
-      <button mat-raised-button color='primary' (click)="closeDialog()">Cancel</button>
-      <button mat-raised-button color="warn">Delete My Account</button>
+      <button mat-raised-button color='primary' (click)="closeDialog('close')">Cancel</button>
+      <button mat-raised-button color="warn" (click)="closeDialog('delete')">Delete My Account</button>
     </div>
   </div>
 
@@ -31,9 +31,29 @@
 
     <p>Edit Hours</p>
 
-    <pre>
+    <app-edit-hours
+      class="editHours"
+      *ngFor="let day of hoursArray; let i = index"
+      [dayInput]="day"
+      [isAdmin]='true'
+      (dayOutput)="receiveTime($event, identifier)"
+    >
+    </app-edit-hours>
+
+<!-- 
+    <app-edit-hours
+    *ngFor="let day of hoursOfOpArray; let i = index"
+    [dayInput]="day"
+    (dayOutput)="receiveTime('HOP', $event)"
+  >
+  </app-edit-hours> -->
+
+
+    <!-- <pre>
       {{ dataFromParent | json }}
-    </pre>
+    </pre> -->
+
+
 
   </div>
 

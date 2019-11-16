@@ -1,15 +1,14 @@
 <div class="container">
-
   <div class="dayRow" [formGroup]="dayForm">
-    <div class="dayOfWeek">DDDAAAYYY</div>
+    <div class="dayOfWeek">{{ days[dayInput.day] }}</div>
 
     <div class="openTime">
       <input
         [ngxTimepicker]="openIcon"
         [disableClick]="false"
         formControlName="open"
-        readonly/>
-
+        readonly
+      />
       <ngx-material-timepicker-toggle
         [for]="openIcon"
       ></ngx-material-timepicker-toggle>
@@ -17,6 +16,7 @@
       <ngx-material-timepicker
         #openIcon
         [minutesGap]="5"
+        (timeSet)="openTimeSet($event)"
       ></ngx-material-timepicker>
     </div>
 
@@ -27,8 +27,8 @@
         [ngxTimepicker]="closeIcon"
         [disableClick]="false"
         formControlName="close"
-        readonly/>
-
+        readonly
+      />
       <ngx-material-timepicker-toggle
         [for]="closeIcon"
       ></ngx-material-timepicker-toggle>
@@ -37,14 +37,21 @@
         [defaultTime]="'12:00 pm'"
         #closeIcon
         [minutesGap]="5"
+        (timeSet)="closeTimeSet($event)"
       ></ngx-material-timepicker>
     </div>
 
     <div class="closedAllDay">
-      <mat-checkbox (click)="disableDay(dayForm.controls.isClosed)"
-        >Closed</mat-checkbox
+      <mat-checkbox formControlName="isClosed" hidden></mat-checkbox>
+      <mat-checkbox
+        #c
+        (click)="disableDay(!c.checked)"
+        [checked]="isClosedValue"
       >
+        Closed
+      </mat-checkbox>
     </div>
-    <button type="button" (click)='showData()'>Click Me</button>
   </div>
+
+  <div class="errorMessage" *ngIf="error">{{ errorMessage }}</div>
 </div>

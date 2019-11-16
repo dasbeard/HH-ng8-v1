@@ -39,9 +39,12 @@ export class OrgAdminComponent implements OnInit {
     this.orgService.getOrganizationByUID( id ).subscribe( data => {
       
       // console.log(data);
-      
-      this.user$ = data;
-      this.createForm();
+      if(data){
+
+        this.user$ = data;
+        this.createForm();
+      }
+        
     })
 
   }
@@ -72,6 +75,7 @@ export class OrgAdminComponent implements OnInit {
     // Open dialog with slect address component
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75vw',
+      maxWidth: '800px',
       minHeight: '45vh',
       maxHeight: '85vh',
       data: {
@@ -101,10 +105,10 @@ export class OrgAdminComponent implements OnInit {
     this.authService.signOut();
   }
 
-
   deleteUserDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75vw',
+      maxWidth: '800px',
       minHeight: '45vh',
       maxHeight: '85vh',
       data: {
@@ -114,13 +118,22 @@ export class OrgAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      // console.log(result);
+      if(result.event === 'delete'){
+        console.log('Delete User');
+        this.deleteUser();
+      }
       // console.log('The dialog was closed');
       // this.animal = result;
     });
   }
 
   deleteUser() {
-    this.authService.deleteUser(this.user$);
     this.router.navigate([""]);    
+    setTimeout(() => {
+      
+      this.authService.deleteUser(this.user$);
+    }, 250);
+
   }
 }

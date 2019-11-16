@@ -124,7 +124,7 @@ export class SelectLocationComponent implements OnInit {
     // console.log(this.regService.newUser);
     // this.latLng.longitude = this.longitude;
     if (this.oldAddress){
-      console.log('Updating Address');
+      // console.log('Updating Address');
       
       // console.log(this.orgResult, this.latLng, this.oldAddress.uid);
       

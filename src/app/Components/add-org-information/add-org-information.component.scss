@@ -1,8 +1,7 @@
 .container {
   max-width: 960px;
   margin: 0 auto;
-  margin-top: 5%;
-  // margin-top: 5%;
+  margin-top: 1em;
   
   h2 {
     text-align: center;
@@ -11,24 +10,54 @@
   }
 
 
-
-  form {
-    // outline: 1px solid red;
-    width: 60%;
+  mat-card{
+    width: 75%;
     margin: 0 auto;
+    
 
-    mat-form-field{
-      width: 95%;
-    }
+    form {
+      // outline: 1px solid red;
+      // width: 60%;
+      // margin: 0 auto;
+      // width: 75%;
+      // margin: 0 auto;
 
-    .matHint {
-      margin-bottom: 1.25em;
-      font-size: .75em;
-    }
+      mat-form-field{
+        width: 95%;
+      }
 
+      .matHint {
+        margin-bottom: 1.25em;
+        font-size: .75em;
+      }
 
-    .nextPageBtn {
-      margin-top: 1.25em;
+      .stepperBtn, .stepperBtns {
+        margin-top: 12px;
+      }
+
+      .stepperBtn{
+        display: flex;
+        justify-content: flex-end;
+        width: 75%;
+      }
+      
+      .stepperBtns{
+        display: flex;
+        justify-content: space-between;
+        width: 75%;
+      }
+
+      .stepperBtnFinish {
+        display: flex;
+        justify-content: center;
+        width: 75%;
+        margin-top: 25px;
+      }
+
+      // .nextPageBtn {
+      //   margin-top: 1.25em;
+      // }
+
     }
 
   }

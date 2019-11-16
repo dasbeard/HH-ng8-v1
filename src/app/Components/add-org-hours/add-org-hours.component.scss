@@ -13,51 +13,77 @@
     width: 85%;
     margin: 0 auto;
 
-    .dayRow {
-      // outline: 1px solid red;
-       display: grid;
-      grid-template-columns: [day]100px [open]135px [to]45px [close]135px [closed]100px;
-      align-items: baseline;
-      position: relative;
-      margin-left: 2%;
 
-
-      .dayOfWeek {
-        grid-area: day;
-        text-align: end;
-        margin-right: 20px;
-      }
-      
-      .openTime {
-        grid-area: open;
-        
-        input {
-          width: 70%;
-        }
-        
-      }
-      
-      .to {
-        grid-area: to;
-        padding-left: 10px;
-        margin: 13px 0;
-      }
-      
-      .closeTime {
-        grid-area: close;
-        
-        input {
-          width: 70%;
-        }
-      }
-      .closedAllDay {
-        grid-area: closed;
-        text-align: end;
-      }
-
-
-
+    .stepperBtn, .stepperBtns {
+      margin-top: 12px;
     }
+
+    .stepperBtn{
+      display: flex;
+      justify-content: flex-end;
+      width: 75%;
+    }
+    
+    .stepperBtns{
+      display: flex;
+      justify-content: space-between;
+      width: 75%;
+    }
+
+    .stepperBtnFinish {
+      display: flex;
+      justify-content: center;
+      width: 75%;
+      margin-top: 25px;
+    }
+
+
+
+    // .dayRow {
+    //   // outline: 1px solid red;
+    //    display: grid;
+    //   grid-template-columns: [day]100px [open]135px [to]45px [close]135px [closed]100px;
+    //   align-items: baseline;
+    //   position: relative;
+    //   margin-left: 2%;
+
+
+    //   .dayOfWeek {
+    //     grid-area: day;
+    //     text-align: end;
+    //     margin-right: 20px;
+    //   }
+      
+    //   .openTime {
+    //     grid-area: open;
+        
+    //     input {
+    //       width: 70%;
+    //     }
+        
+    //   }
+      
+    //   .to {
+    //     grid-area: to;
+    //     padding-left: 10px;
+    //     margin: 13px 0;
+    //   }
+      
+    //   .closeTime {
+    //     grid-area: close;
+        
+    //     input {
+    //       width: 70%;
+    //     }
+    //   }
+    //   .closedAllDay {
+    //     grid-area: closed;
+    //     text-align: end;
+    //   }
+
+
+
+    // }
 
 
 

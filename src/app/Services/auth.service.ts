@@ -91,11 +91,13 @@ export class AuthService {
   
   // !! Need to fix issue when deleting user - may need to logout and then re-login first
   async deleteUser(user: User) {
-    this.afs.doc<User>(`users/${user.uid}`).delete();
     this.afAuth.auth.currentUser.delete().catch(error => {
+      console.log('Error');
       console.log(error);
     });
-    localStorage.removeItem("user");
+      this.afs.doc<User>(`users/${user.uid}`).delete();
+    
+      localStorage.removeItem("user");
     // this.router.navigate([""]);
   }
 }

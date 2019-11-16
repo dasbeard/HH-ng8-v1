@@ -4,7 +4,7 @@
   </h2>
 
   <mat-card>
-    <mat-vertical-stepper [linear]="false" #stepper>
+    <mat-vertical-stepper [linear]="true" #stepper>
       <mat-step [stepControl]="servicesFormGroup">
         <form [formGroup]="servicesFormGroup">
           <ng-template matStepLabel>What services do you provide? </ng-template>
@@ -55,8 +55,14 @@
             >
           </div>
 
-          <div>
-            <button mat-button matStepperNext>Next</button>
+          <div class='stepperBtn'>
+            <button 
+              mat-raised-button 
+              color='primary'
+              matStepperNext
+              >
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
@@ -75,9 +81,23 @@
             ></textarea>
           </mat-form-field>
 
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+          <div class="stepperBtns">
+            <button 
+              mat-raised-button
+              type="button"
+              color='accent'
+              matStepperPrevious
+              >
+              Back
+            </button>
+            <button 
+              mat-raised-button
+              type="button"
+              color='primary'
+              matStepperNext
+              >
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
@@ -85,10 +105,9 @@
       <mat-step>
         <ng-template matStepLabel>One more step!</ng-template>
         Almost there! Just need to get your hours of operation!
-        <div>
+        <div class="stepperBtnFinish">
           <!-- <button mat-button matStepperPrevious>Back</button> -->
           <button
-            class="nextPageBtn"
             mat-raised-button
             color="primary"
             (click)="addServices()"

@@ -41,6 +41,8 @@ export class HoursComponent implements OnInit {
     }
 
     // console.log(this.buttonSize);
+    // console.log(this.hoursToDisplay);
+    
   }
 
   changeHoursView(input) {
@@ -57,6 +59,7 @@ export class HoursComponent implements OnInit {
   editHours(hoursToEdit, identifier) {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: "75vw",
+      maxWidth: '800px',
       minHeight: "45vh",
       maxHeight: "85vh",
       data: {

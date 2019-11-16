@@ -17,7 +17,15 @@
 
 
 
-    <div *ngIf="user$; else notLoggedIn" class="loggedIn">
+
+    <div *ngIf="!user$; else notLoggedIn">
+        <!-- class="btn mat-elevation-z1" -->
+        <button mat-button [routerLink]="['LoginRegister']">
+          Login/Register
+        </button>
+      </div>
+
+    <ng-template #notLoggedIn class="loggedIn">
       <button mat-button [matMenuTriggerFor]="menu">
         <span> My Account </span>
         <!-- <mat-icon>menu</mat-icon> -->
@@ -45,14 +53,8 @@
           <span>Sign Out</span>
         </button>
       </mat-menu>
-    </div>
-
-    <ng-template #notLoggedIn>
-      <!-- class="btn mat-elevation-z1" -->
-      <button mat-button [routerLink]="['LoginRegister']">
-        Login/Register
-      </button>
     </ng-template>
+
 
     <!-- !! NEED TO ADD PAGE !! -->
     <!-- <button mat-stroked-button class="btn mat-elevation-z1" [routerLink]="['']">

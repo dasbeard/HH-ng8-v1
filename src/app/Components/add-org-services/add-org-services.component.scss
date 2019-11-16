@@ -35,10 +35,28 @@
       font-size: .75em;
     }
 
-    .nextPageBtn {
-      margin-top: 1.25em;
+    .stepperBtn, .stepperBtns {
+      margin-top: 12px;
     }
 
+    .stepperBtn{
+      display: flex;
+      justify-content: flex-end;
+      width: 75%;
+    }
+    
+    .stepperBtns{
+      display: flex;
+      justify-content: space-between;
+      width: 75%;
+    }
+
+    .stepperBtnFinish {
+      display: flex;
+      justify-content: center;
+      width: 75%;
+      margin-top: 25px;
+    }
 
 
   }

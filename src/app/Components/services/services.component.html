@@ -25,7 +25,7 @@
       Donation Center
     </mat-checkbox>
 
-    <mat-checkbox [(ngModel)]="services.servesFood" [disabled]="true">
+    <mat-checkbox *ngIf="services.servesFood" [(ngModel)]="services.servesFood" [disabled]="true">
       Food Available
     </mat-checkbox>
   </div>
