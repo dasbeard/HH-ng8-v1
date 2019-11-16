@@ -114,13 +114,9 @@
         [hoursOfOp]="org.hoursOfOperation"
         [hoursServing]="org.hoursServingFood"
         [identifier]="'orgAdmin'"
+        (message)='hoursMessage($event)'
         ></app-hours>
         
-        <!-- <app-hours
-        *ngIf="org.services.servesFood"
-        class="orgHoursFood"
-        [identifier]="orgAdmin"
-        ></app-hours> -->
     </div>
   </div>
 

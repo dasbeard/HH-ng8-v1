@@ -44,7 +44,7 @@ export class DialogComponent implements OnInit {
 
       this.hoursArray = data.data;
       this.HoursArrayData = data.data;
-      console.log(this.hoursArray);
+      // console.log(this.hoursArray);
 
       // this.createDayArrays(data.identifier);
     }
@@ -55,12 +55,19 @@ export class DialogComponent implements OnInit {
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
-  receiveTime($event, identifier: string) {
+  receiveTime(identifier: string, $event) {
     // console.log(identifier, $event);
     // let day = $event.day;
 
-    this.HoursArrayData[$event.day] = $event;
-    this.validateAllDays(this.HoursArrayData, identifier);
+    this.hoursArray[$event.day] = $event;
+
+    if (this.hoursArray.find(day => day.error === true)) {
+      this.HoursError = true;
+    } else {
+      this.HoursError = false;
+    }
+
+    // this.validateAllDays(this.HoursArrayData, identifier);
   }
 
   validateAllDays(dataArray: Array<day>, identifier: string) {

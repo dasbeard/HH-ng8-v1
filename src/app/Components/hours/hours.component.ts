@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogComponent } from "src/app/Components/dialog/dialog.component";
 
@@ -11,10 +11,13 @@ export class HoursComponent implements OnInit {
   @Input() hoursOfOp: Array<object>;
   @Input() hoursServing: Array<object>;
   @Input() identifier: string;
+  @Output() message = new EventEmitter;
 
   hoursDisplayed: string;
-  hoursToDisplay: object;
+  hoursToDisplay: Array<object>;
   buttonSize: boolean = false;
+  
+  newHoursToEdit: Array<object>;
 
   days: Array<string> = [
     "Sunday",
@@ -40,10 +43,15 @@ export class HoursComponent implements OnInit {
       this.buttonSize = false;
     }
 
-    // console.log(this.buttonSize);
-    // console.log(this.hoursToDisplay);
+    if(this.identifier){
+      // console.log(this.hoursToDisplay);
+
+    } 
     
   }
+
+
+
 
   changeHoursView(input) {
     if (input == "hoursOfOperation") {
@@ -56,7 +64,8 @@ export class HoursComponent implements OnInit {
     }
   }
 
-  editHours(hoursToEdit, identifier) {
+  editHours( identifier) {
+
     const dialogRef = this.dialog.open(DialogComponent, {
       width: "75vw",
       maxWidth: '800px',
@@ -64,13 +73,19 @@ export class HoursComponent implements OnInit {
       maxHeight: "85vh",
       data: {
         identifier: identifier,
-        data: hoursToEdit
+        data: this.hoursToDisplay
       }
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // this.animal = result;
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed', result);
+      let message = {
+        identifier: identifier,
+        result: result.event,
+        hours: this.hoursToDisplay
+      }
+      this.message.emit(message);
+      
+    });
   }
 }

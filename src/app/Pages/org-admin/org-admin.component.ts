@@ -100,10 +100,20 @@ export class OrgAdminComponent implements OnInit {
   }
 
 
-
-  logout() {
-    this.authService.signOut();
+  hoursMessage($event){
+    // console.log($event);
+    
+    if($event.result === 'update') {
+      if($event.identifier === 'hoursOfOperation') {
+        this.registrationService.addUserHours('hoursOfOp', $event.hours, this.user$) 
+      }
+      if($event.identifier === 'hoursServing') {
+        this.registrationService.addUserHours('servingFood', $event.hours, this.user$) 
+      }
+    }
   }
+
+
 
   deleteUserDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -136,4 +146,10 @@ export class OrgAdminComponent implements OnInit {
     }, 250);
 
   }
+
+
+  logout() {
+    this.authService.signOut();
+  }
+
 }

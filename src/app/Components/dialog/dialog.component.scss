@@ -21,17 +21,17 @@
       margin-top: 35px;
     }
 
-    .bottomBtns {
-      width: 75%;
-      margin: 60px auto 15px auto;
-      display: flex;
-      justify-content: space-evenly;
+    // .bottomBtns {
+    //   width: 75%;
+    //   margin: 60px auto 15px auto;
+    //   display: flex;
+    //   justify-content: space-evenly;
 
-      button {
-        width: 35%;
-      }
+    //   button {
+    //     width: 35%;
+    //   }
 
-    }
+    // }
 
 
   }
@@ -55,4 +55,15 @@
 
 }
 
+.bottomBtns {
+  width: 75%;
+  margin: 60px auto 15px auto;
+  display: flex;
+  justify-content: space-evenly;
+
+  button {
+    width: 35%;
+  }
+
+}
 

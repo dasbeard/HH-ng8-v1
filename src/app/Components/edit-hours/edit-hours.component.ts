@@ -30,19 +30,11 @@ export class EditHoursComponent implements OnInit {
 
   ngOnInit() {
     if(this.isAdmin){
-      console.log(this.isAdmin);
+      // console.log(this.isAdmin);
       this.editDayInput = this.dayInput;
-      this.createDayForm();
-
-
-
-
-
-
-    } else {
-      // !! NEED TO VALIDATE ON REGISTER
-      this.createDayForm();
     }
+
+      this.createDayForm();
 
   }
 

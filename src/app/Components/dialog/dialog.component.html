@@ -15,47 +15,48 @@
 
   <div *ngIf="identifier === 'deleteUser'" class="deleteUser">
     <h1>Are you sure you want to delete your account?</h1>
-    
+
     <p>
       All data and your User ID will be permanently deleted and unrecoverable
     </p>
 
     <div class="bottomBtns">
-      <button mat-raised-button color='primary' (click)="closeDialog('close')">Cancel</button>
-      <button mat-raised-button color="warn" (click)="closeDialog('delete')">Delete My Account</button>
+      <button mat-raised-button color="primary" (click)="closeDialog('close')">
+        Cancel
+      </button>
+      <button mat-raised-button color="warn" (click)="closeDialog('delete')">
+        Delete My Account
+      </button>
     </div>
   </div>
 
-
   <div *ngIf="identifier === 'editHours'" class="editHours">
-
     <p>Edit Hours</p>
 
     <app-edit-hours
       class="editHours"
       *ngFor="let day of hoursArray; let i = index"
       [dayInput]="day"
-      [isAdmin]='true'
-      (dayOutput)="receiveTime($event, identifier)"
+      [isAdmin]="true"
+      (dayOutput)="receiveTime(identifier, $event)"
     >
     </app-edit-hours>
 
-<!-- 
-    <app-edit-hours
-    *ngFor="let day of hoursOfOpArray; let i = index"
-    [dayInput]="day"
-    (dayOutput)="receiveTime('HOP', $event)"
-  >
-  </app-edit-hours> -->
+    <div class="bottomBtns">
+      <button mat-raised-button color="accent" (click)="closeDialog('close')">
+        Cancel
+      </button>
 
-
-    <!-- <pre>
-      {{ dataFromParent | json }}
-    </pre> -->
-
-
-
+      <button
+        [disabled]="HoursError"
+        color="primary"
+        mat-raised-button
+        type="button"
+        (click)="closeDialog('update')"
+      >
+        Update
+      </button>
+    </div>
+    
   </div>
-
-
 </div>
