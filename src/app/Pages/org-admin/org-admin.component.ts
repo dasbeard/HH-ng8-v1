@@ -1,14 +1,15 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
-import { switchMap } from "rxjs/operators";
 import { AuthService } from "src/app/Services/auth.service";
 import { User } from "../../Models/user";
 import { OrganizationsService } from "src/app/Services/organizations.service";
-import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogComponent } from 'src/app/Components/dialog/dialog.component';
 import { RegistationService } from 'src/app/Services/registation.service';
+
+
 
 @Component({
   selector: "app-org-admin",
@@ -34,7 +35,8 @@ export class OrgAdminComponent implements OnInit {
     private orgService: OrganizationsService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private registrationService: RegistationService
+    private registrationService: RegistationService,
+    private snackBar: MatSnackBar
   ) {
     let id = this.route.snapshot.paramMap.get('id');
     // console.log(id);
@@ -87,35 +89,20 @@ export class OrgAdminComponent implements OnInit {
             }
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-      // this.animal = result;
-    // });
-
+    dialogRef.afterClosed().subscribe(result => {
+      this.showSnackbar('Address Updated', 'Dismiss')
+      });
+      
   }
 
   updateProfile() {
-    // console.log(this.user$);
-    // console.log(this.mainForm.value);
-    
     this.registrationService.updateProfile(this.user$, this.mainForm.value);
-
+    this.showSnackbar('Profile Updated', 'Dismiss')
   }
 
-
-  // hoursMessage($event){
-  //   // console.log($event);
-    
-  //   if($event.result === 'update') {
-  //     if($event.identifier === 'hoursOfOperation') {
-  //       this.registrationService.addUserHours('hoursOfOp', $event.hours, this.user$) 
-  //     }
-  //     if($event.identifier === 'hoursServing') {
-  //       this.registrationService.addUserHours('servingFood', $event.hours, this.user$) 
-  //     }
-  //   }
-  // }
-
+  showSnackbar(message: string, action){
+    this.snackBar.open(message, action, {duration: 1500})
+  }
 
   editHours(){
     // console.log(this.hoursToEdit);
@@ -134,15 +121,31 @@ export class OrgAdminComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      
+      if(result) {
+        if(result.event.type === "Updated Hours") {
+          this.changeHoursToEdit(result.event.hoursUpdated);
+          
+          if(result.event.hoursUpdated === 'hoursOfOperation') {
+            this.showSnackbar('Hours Of Operation Updated', 'Dismiss')
+          }
+          
+          if(result.event.hoursUpdated === 'hoursServingFood') {
+            this.showSnackbar('Hours Serving Food Updated', 'Dismiss')
+          }
+          
+        } else if(result.event.type === "close") {
+          // console.log('closed');
+        }
+      }
     })
+
+    
 
   }
 
 
   changeHoursToEdit($event) {
-    this.hoursToEdit = $event;
+    this.hoursToEdit = $event;  
   }
 
 
@@ -161,12 +164,13 @@ export class OrgAdminComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // console.log(result);
-      if(result.event === 'delete'){
-        console.log('Delete User');
-        this.deleteUser();
+      if (result) {
+        if(result.event === 'delete'){
+          console.log('Delete User');
+          this.deleteUser();
+        }
       }
-      // console.log('The dialog was closed');
-      // this.animal = result;
+
     });
   }
 

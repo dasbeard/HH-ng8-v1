@@ -1,4 +1,5 @@
 <div class="container" *ngIf="organization as org">
+  
   <h1>{{ org.organization }}</h1>
 
   <div class="orgImgMap">
@@ -60,21 +61,21 @@
       </p>
     </div>
 
-
     <app-hours
       class="orgHours"
-      [hoursOfOp]="org.hoursOfOperation"
-      [hoursServing]="org.hoursServingFood"
-    ></app-hours>
+      [user]='organization'
+      ></app-hours>
 
-    <app-services class="orgServices" [services]="org.services"></app-services>
-
-    <div class="orgOtherServices" *ngIf="org.otherServices">
-      <h3>Other Services We Offer</h3>
-
-      <p>
-        {{ org.otherServices }}
-      </p>
+      
+      <app-services class="orgServices" [services]="org.services"></app-services>
+      
+      <div class="orgOtherServices" *ngIf="org.otherServices">
+        <h3>Other Services We Offer</h3>
+        
+        <p>
+          {{ org.otherServices }}
+        </p>
+      </div>
     </div>
-  </div>
+    <p class="lastUpdated">Last updated on {{ org.lastUpdated | date:'medium' }} </p>
 </div>

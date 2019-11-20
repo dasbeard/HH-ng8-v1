@@ -50,6 +50,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -124,6 +125,7 @@ import { EditHoursComponent } from './Components/edit-hours/edit-hours.component
     ClipboardModule,
     MatDialogModule,
     MatMenuModule,
+    MatSnackBarModule,
   ],
   entryComponents: [
     DialogComponent

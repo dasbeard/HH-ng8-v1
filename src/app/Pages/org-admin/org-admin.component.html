@@ -123,13 +123,14 @@
         Edit
       </button>
 
+      {{ hoursToEdit}}
+
       <app-hours
         class="orgHoursHOP"
-        [hoursOfOp]="org.hoursOfOperation"
-        [hoursServing]="org.hoursServingFood"
+        [user]='user$'
+        [showHours]='hoursToEdit'
         (identifierResponse)='changeHoursToEdit($event)'
         ></app-hours>
-        <!-- (message)="hoursMessage($event)" -->
 
 
 

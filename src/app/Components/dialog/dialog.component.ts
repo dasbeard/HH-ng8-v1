@@ -91,33 +91,30 @@ export class DialogComponent implements OnInit {
   }
 
   updateHours(hours){
-    console.log(hours, this.hoursToEdit);
+    // console.log(hours, this.hoursToEdit);
     this.registrationService.updateUserHours(this.user$, this.hoursToEdit, hours)
-    
+
+    let sendBack = {
+      type: 'Updated Hours',
+      hoursUpdated: this.hoursToEdit,
+    }
+
+    this.dialogRef.close({ event: sendBack });
   }
 
-
-  // addHoursToDB() {
-  //   this.regService.addUserHours("hoursOfOp", this.HOPArrayData, this.user);
-
-  //   if (this.user.services.servesFood) {
-  //     this.regService.addUserHours(
-  //       "servingFood",
-  //       this.ServingArrayData,
-  //       this.user
-  //     );
-  //   }
-  // }
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
   receiveMessage($event) {
-    // console.log($event);
+    console.log($event);
     this.closeDialog("address");
   }
 
   closeDialog(identifier: string) {
-    this.dialogRef.close({ event: identifier });
+    let data = {
+      type: identifier
+    }
+    this.dialogRef.close({ event: data });
     // this.dialogRef.close({event:'close',data:this.fromDialog});
   }
 }

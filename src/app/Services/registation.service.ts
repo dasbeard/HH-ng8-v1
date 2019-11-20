@@ -161,8 +161,6 @@ export class RegistationService {
 
 
   updateUserHours(user: User, identifier, newHours){
-    console.log(identifier, newHours);
-
     let updatedUser: User = user;
 
       if( identifier === 'hoursOfOperation') {
@@ -180,36 +178,7 @@ export class RegistationService {
       this.updateUser = this.afs.doc<User>(`users/${user.uid}`);
       this.updateUser.update(updatedUser)
  
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-
-
-
-
-
-    // this.updateUser.snapshotChanges()
-
-
-
-
-    // this.updateUser.valueChanges().subscribe( data => {
-
-    //   if( identifier === 'hoursOfOperation') {
-    //     data.hoursOfOperation = newHours;
-    //   }
-
-    //   if( identifier === 'hoursServingFood') {
-    //     data.hoursServingFood = newHours;
-    //   }
-
-    //   data.lastUpdated = Date.now();
-    //   this.updateUser.update(data)
- 
-    //   localStorage.setItem("user", JSON.stringify(data));
-      
-    // })
-
-
- 
+      localStorage.setItem("user", JSON.stringify(updatedUser)); 
 }
 
 
