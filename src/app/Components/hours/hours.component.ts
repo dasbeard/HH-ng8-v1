@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
-import { DialogComponent } from "src/app/Components/dialog/dialog.component";
 
 @Component({
   selector: "app-hours",

@@ -127,7 +127,7 @@ export class OrgAdminComponent implements OnInit {
       maxHeight: '85vh',
       data: {
               identifier: 'editHours', 
-              uid: this.user$.uid,
+              user: this.user$,
               hours: this.hoursToEdit
             }
     })

@@ -160,51 +160,56 @@ export class RegistationService {
 
 
 
-  updateUserHours(uid, identifier, newHours){
-    // console.log(uid, identifier, newHours);
+  updateUserHours(user: User, identifier, newHours){
+    console.log(identifier, newHours);
 
-    this.updateUser = this.afs.doc<User>(`users/${uid}`);
+    let updatedUser: User = user;
 
-    
-    this.updateUser.snapshotChanges().subscribe( data => {
-      let user = data.payload.data();
-      
-      if(identifier === 'hoursOfOperation') {
-        user.hoursOfOperation = newHours;
+      if( identifier === 'hoursOfOperation') {
+        updatedUser.hoursOfOperation = newHours;
       }
-      
-      if(identifier === 'hoursServingFood') {
-        user.hoursOfOperation = newHours;
+
+      if( identifier === 'hoursServingFood') {
+        updatedUser.hoursServingFood = newHours;
       }
-    })
+
+      // console.log(updatedUser);
+
+      updatedUser.lastUpdated = Date.now();
+
+      this.updateUser = this.afs.doc<User>(`users/${user.uid}`);
+      this.updateUser.update(updatedUser)
+ 
+      localStorage.setItem("user", JSON.stringify(updatedUser));
 
 
 
-    // !! NEED TO UPDATE THE RECORD HERE!!!
 
 
-    
-    
-    // this.updateUser.update(
-    //   data
-    // );
+    // this.updateUser.snapshotChanges()
 
 
-  // if(identifier == 'hoursOfOperation'){
-  //   this.newUser.hoursOfOperation = data;
-  // }
 
-  // if(identifier == 'hoursServingFood'){
-  //   this.newUser.hoursServingFood = data;
-  // }
 
-  // this.newUser.lastUpdated = Date.now();
-  
-  // localStorage.setItem("user", JSON.stringify(this.newUser));
+    // this.updateUser.valueChanges().subscribe( data => {
 
-  // this.saveToDatabase(this.newUser);
-  // this.router.navigate([`/OrgAdmin/${this.newUser.uid}`]);
-  
+    //   if( identifier === 'hoursOfOperation') {
+    //     data.hoursOfOperation = newHours;
+    //   }
+
+    //   if( identifier === 'hoursServingFood') {
+    //     data.hoursServingFood = newHours;
+    //   }
+
+    //   data.lastUpdated = Date.now();
+    //   this.updateUser.update(data)
+ 
+    //   localStorage.setItem("user", JSON.stringify(data));
+      
+    // })
+
+
+ 
 }
 
 

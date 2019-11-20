@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { OrganizationsService } from 'src/app/Services/organizations.service';
 import { RegistationService } from 'src/app/Services/registation.service';
+import { User } from 'src/app/Models/user';
 
 class day {
   day: number;
@@ -25,7 +26,7 @@ export class DialogComponent implements OnInit {
   HoursError: boolean = false;
 
   hoursToEdit: string;
-  uid: string;
+  user$: User;
 
   constructor(
     private orgServices: OrganizationsService,
@@ -44,16 +45,19 @@ export class DialogComponent implements OnInit {
       this.identifier = "deleteUser";
       this.dataFromParent = data;
     } else if ( data.identifier === "editHours" ) {
+      // console.log(data);
+      
       this.identifier = "editHours";
-      this.uid = data.uid;
+      this.user$ = data.user;
 
       if( data.hours === 'hoursOfOperation' ) {
         this.hoursToEdit = 'hoursOfOperation';
       } else if( data.hours === 'hoursServingFood' ) {
         this.hoursToEdit = 'hoursServingFood';
       } 
+
       
-      this.orgServices.getOrgHours(data.uid).subscribe( data => {
+      this.orgServices.getOrgHours(this.user$.uid).subscribe( data => {
         if( data ){
           let userData = data.payload.data();
           if( this.hoursToEdit == 'hoursOfOperation' ) {
@@ -88,7 +92,7 @@ export class DialogComponent implements OnInit {
 
   updateHours(hours){
     console.log(hours, this.hoursToEdit);
-    this.registrationService.updateUserHours(this.uid, this.hoursToEdit, hours)
+    this.registrationService.updateUserHours(this.user$, this.hoursToEdit, hours)
     
   }
 
