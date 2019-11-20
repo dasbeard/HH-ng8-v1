@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { OrganizationsService } from 'src/app/Services/organizations.service';
+import { RegistationService } from 'src/app/Services/registation.service';
 
 class day {
   day: number;
@@ -18,35 +20,50 @@ export class DialogComponent implements OnInit {
   identifier: string;
   dataFromParent: object;
   dataToSendBack;
-  hoursArray = [];
+  hoursArray;
   HoursArrayData = [];
   HoursError: boolean = false;
 
+  hoursToEdit: string;
+  uid: string;
+
   constructor(
+    private orgServices: OrganizationsService,
+    private registrationService: RegistationService,
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    if (data.identifier === "Address") {
+
+    // console.log(data);
+    
+
+    if ( data.identifier === "Address" ) {
       this.identifier = "Address";
       this.dataFromParent = data;
-    } else if (data.identifier === "deleteUser") {
-      // console.log('deleteUser');
-
+    } else if ( data.identifier === "deleteUser" ) {
       this.identifier = "deleteUser";
       this.dataFromParent = data;
-    } else if (
-      data.identifier === "hoursOfOperation" ||
-      data.identifier === "hoursServing"
-    ) {
-      // console.log("editHours", data);
+    } else if ( data.identifier === "editHours" ) {
       this.identifier = "editHours";
-      this.dataFromParent = data;
+      this.uid = data.uid;
 
-      this.hoursArray = data.data;
-      this.HoursArrayData = data.data;
-      // console.log(this.hoursArray);
-
-      // this.createDayArrays(data.identifier);
+      if( data.hours === 'hoursOfOperation' ) {
+        this.hoursToEdit = 'hoursOfOperation';
+      } else if( data.hours === 'hoursServingFood' ) {
+        this.hoursToEdit = 'hoursServingFood';
+      } 
+      
+      this.orgServices.getOrgHours(data.uid).subscribe( data => {
+        if( data ){
+          let userData = data.payload.data();
+          if( this.hoursToEdit == 'hoursOfOperation' ) {
+            this.hoursArray = userData.hoursOfOperation
+          }        
+          if( this.hoursToEdit == 'hoursServingFood' ) {
+            this.hoursArray = userData.hoursServingFood
+          }
+        }
+      })
     }
   }
 
@@ -55,7 +72,7 @@ export class DialogComponent implements OnInit {
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
-  receiveTime(identifier: string, $event) {
+  receiveTime($event) {
     // console.log(identifier, $event);
     // let day = $event.day;
 
@@ -67,32 +84,13 @@ export class DialogComponent implements OnInit {
       this.HoursError = false;
     }
 
-    // this.validateAllDays(this.HoursArrayData, identifier);
   }
 
-  validateAllDays(dataArray: Array<day>, identifier: string) {
-    // console.log('Validate Days Ran');
-    // console.log(dataArray);
-
-    if (dataArray.find(day => day.error === true)) {
-      this.HoursError = true;
-    } else {
-      this.HoursError = false;
-    }
+  updateHours(hours){
+    console.log(hours, this.hoursToEdit);
+    this.registrationService.updateUserHours(this.uid, this.hoursToEdit, hours)
+    
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   // addHoursToDB() {

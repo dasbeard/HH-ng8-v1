@@ -15,7 +15,7 @@ export class RegistationService {
   newUser: User;
   newUserAfsDoc: AngularFirestoreDocument<User>;
   userAfsDoc: AngularFirestoreDocument<User>;
-  updateUser: User;
+  updateUser: AngularFirestoreDocument<User>;
 
   constructor(private router: Router, private afs: AngularFirestore) {}
 
@@ -157,6 +157,55 @@ export class RegistationService {
     
     // console.log('Data saved to firebase');
   }
+
+
+
+  updateUserHours(uid, identifier, newHours){
+    // console.log(uid, identifier, newHours);
+
+    this.updateUser = this.afs.doc<User>(`users/${uid}`);
+
+    
+    this.updateUser.snapshotChanges().subscribe( data => {
+      let user = data.payload.data();
+      
+      if(identifier === 'hoursOfOperation') {
+        user.hoursOfOperation = newHours;
+      }
+      
+      if(identifier === 'hoursServingFood') {
+        user.hoursOfOperation = newHours;
+      }
+    })
+
+
+
+    // !! NEED TO UPDATE THE RECORD HERE!!!
+
+
+    
+    
+    // this.updateUser.update(
+    //   data
+    // );
+
+
+  // if(identifier == 'hoursOfOperation'){
+  //   this.newUser.hoursOfOperation = data;
+  // }
+
+  // if(identifier == 'hoursServingFood'){
+  //   this.newUser.hoursServingFood = data;
+  // }
+
+  // this.newUser.lastUpdated = Date.now();
+  
+  // localStorage.setItem("user", JSON.stringify(this.newUser));
+
+  // this.saveToDatabase(this.newUser);
+  // this.router.navigate([`/OrgAdmin/${this.newUser.uid}`]);
+  
+}
 
 
 

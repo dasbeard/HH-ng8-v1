@@ -24,6 +24,9 @@ export class OrgAdminComponent implements OnInit {
   orgId: string;
   dialogData
 
+  hoursToEdit: string = 'hoursOfOperation';
+
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -100,17 +103,46 @@ export class OrgAdminComponent implements OnInit {
   }
 
 
-  hoursMessage($event){
-    // console.log($event);
+  // hoursMessage($event){
+  //   // console.log($event);
     
-    if($event.result === 'update') {
-      if($event.identifier === 'hoursOfOperation') {
-        this.registrationService.addUserHours('hoursOfOp', $event.hours, this.user$) 
-      }
-      if($event.identifier === 'hoursServing') {
-        this.registrationService.addUserHours('servingFood', $event.hours, this.user$) 
-      }
-    }
+  //   if($event.result === 'update') {
+  //     if($event.identifier === 'hoursOfOperation') {
+  //       this.registrationService.addUserHours('hoursOfOp', $event.hours, this.user$) 
+  //     }
+  //     if($event.identifier === 'hoursServing') {
+  //       this.registrationService.addUserHours('servingFood', $event.hours, this.user$) 
+  //     }
+  //   }
+  // }
+
+
+  editHours(){
+    // console.log(this.hoursToEdit);
+    
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '75vw',
+      maxWidth: '800px',
+      minHeight: '45vh',
+      maxHeight: '85vh',
+      data: {
+              identifier: 'editHours', 
+              uid: this.user$.uid,
+              hours: this.hoursToEdit
+            }
+    })
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      
+    })
+
+  }
+
+
+  changeHoursToEdit($event) {
+    this.hoursToEdit = $event;
   }
 
 

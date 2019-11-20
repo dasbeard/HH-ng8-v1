@@ -10,15 +10,14 @@ import { DialogComponent } from "src/app/Components/dialog/dialog.component";
 export class HoursComponent implements OnInit {
   @Input() hoursOfOp: Array<object>;
   @Input() hoursServing: Array<object>;
+  
   @Input() identifier: string;
-  @Output() message = new EventEmitter;
+  @Output() identifierResponse = new EventEmitter;
 
   hoursDisplayed: string;
   hoursToDisplay: Array<object>;
   buttonSize: boolean = false;
   
-  newHoursToEdit: Array<object>;
-
   days: Array<string> = [
     "Sunday",
     "Monday",
@@ -42,11 +41,6 @@ export class HoursComponent implements OnInit {
       // console.log('serving food');
       this.buttonSize = false;
     }
-
-    if(this.identifier){
-      // console.log(this.hoursToDisplay);
-
-    } 
     
   }
 
@@ -57,35 +51,13 @@ export class HoursComponent implements OnInit {
     if (input == "hoursOfOperation") {
       this.hoursDisplayed = "hoursOfOperation";
       this.hoursToDisplay = this.hoursOfOp;
+      this.identifierResponse.emit('hoursOfOperation')
     }
     if (input == "hoursServing") {
       this.hoursDisplayed = "hoursServing";
       this.hoursToDisplay = this.hoursServing;
+      this.identifierResponse.emit('hoursServingFood')
     }
   }
 
-  editHours( identifier) {
-
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: "75vw",
-      maxWidth: '800px',
-      minHeight: "45vh",
-      maxHeight: "85vh",
-      data: {
-        identifier: identifier,
-        data: this.hoursToDisplay
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed', result);
-      let message = {
-        identifier: identifier,
-        result: result.event,
-        hours: this.hoursToDisplay
-      }
-      this.message.emit(message);
-      
-    });
-  }
 }

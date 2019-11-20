@@ -10,6 +10,7 @@ export class EditHoursComponent implements OnInit {
   @Input() dayInput;
   @Input() isAdmin;
   @Output() dayOutput = new EventEmitter();
+  @Output() outputError = new EventEmitter();
 
   editDayInput;
   dayForm: FormGroup;
@@ -29,10 +30,10 @@ export class EditHoursComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    if(this.isAdmin){
-      // console.log(this.isAdmin);
-      this.editDayInput = this.dayInput;
-    }
+    // if(this.isAdmin){
+    //   // console.log(this.isAdmin);
+    //   this.editDayInput = this.dayInput;
+    // }
 
       this.createDayForm();
 
@@ -52,19 +53,19 @@ export class EditHoursComponent implements OnInit {
     }
   }
 
-  createEditDayForm() {
+  // createEditDayForm() {
     
-    this.dayForm = this.formBuilder.group({
-      open: new FormControl(`${this.editDayInput.open}`),
-      close: new FormControl(`${this.editDayInput.close}`),
-      isClosed: new FormControl(this.editDayInput.isClosed),
-    });
+  //   this.dayForm = this.formBuilder.group({
+  //     open: new FormControl(`${this.editDayInput.open}`),
+  //     close: new FormControl(`${this.editDayInput.close}`),
+  //     isClosed: new FormControl(this.editDayInput.isClosed),
+  //   });
       
-    this.isClosedValue = this.editDayInput.isClosed;
-    if(this.isClosedValue === true) {
-      this.dayForm.disable();
-    }
-  }
+  //   this.isClosedValue = this.editDayInput.isClosed;
+  //   if(this.isClosedValue === true) {
+  //     this.dayForm.disable();
+  //   }
+  // }
 
   disableDay(data) {
     // console.log('closedValue Variable', this.isClosedValue);
@@ -115,6 +116,7 @@ export class EditHoursComponent implements OnInit {
       error: false
     };
 
+
     if (this.dayForm.value.isClosed) {
       this.error = false;
       this.dayOutput.emit(day);
@@ -134,12 +136,14 @@ export class EditHoursComponent implements OnInit {
         this.error = true;
         day.error = true;
         this.errorMessage = "Set open time";
+        
         this.dayOutput.emit(day);
       } else if (!this.dayForm.value.close) {
         // console.log("No Open Value");
         this.error = true;
         day.error = true;
         this.errorMessage = "Set close time";
+        
         this.dayOutput.emit(day);
       }
 

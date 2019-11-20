@@ -31,18 +31,18 @@
   </div>
 
   <div *ngIf="identifier === 'editHours'" class="editHours">
-    <p>Edit Hours</p>
-
+    <h1>Edit Hours</h1>
+    
     <app-edit-hours
-      class="editHours"
-      *ngFor="let day of hoursArray; let i = index"
-      [dayInput]="day"
-      [isAdmin]="true"
-      (dayOutput)="receiveTime(identifier, $event)"
+    class="editHours"
+    *ngFor="let day of hoursArray; let i = index"
+    [dayInput]="day"
+    (dayOutput)="receiveTime($event)"
     >
-    </app-edit-hours>
+    </app-edit-hours> 
 
-    <div class="bottomBtns">
+
+     <div class="bottomBtns">
       <button mat-raised-button color="accent" (click)="closeDialog('close')">
         Cancel
       </button>
@@ -52,7 +52,7 @@
         color="primary"
         mat-raised-button
         type="button"
-        (click)="closeDialog('update')"
+        (click)="updateHours(hoursArray)"
       >
         Update
       </button>

@@ -9,6 +9,7 @@ import { User } from 'src/app/Models/user';
 export class OrganizationsService {
   private organizationDoc: AngularFirestoreDocument<User>;
   organization: Observable<User>;
+  hoursDoc: AngularFirestoreDocument<User>;
   
   private allOrganizationsCollection: AngularFirestoreCollection<User>;
 
@@ -23,6 +24,13 @@ export class OrganizationsService {
 
   getAllOrgs() {
     return this.allOrganizationsCollection.valueChanges();
+  }
+
+  getOrgHours(uid: string ) {
+    
+    this.hoursDoc = this.afs.doc(`users/${uid}`);
+    return this.hoursDoc.snapshotChanges();
+    
   }
     
 }

@@ -109,14 +109,30 @@
         alt=""
       />
 
+
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="editBtn"
+        (click)="editHours()"
+      >
+        <mat-icon class="material-icons">
+          edit
+        </mat-icon>
+        Edit
+      </button>
+
       <app-hours
         class="orgHoursHOP"
         [hoursOfOp]="org.hoursOfOperation"
         [hoursServing]="org.hoursServingFood"
-        [identifier]="'orgAdmin'"
-        (message)='hoursMessage($event)'
+        (identifierResponse)='changeHoursToEdit($event)'
         ></app-hours>
-        
+        <!-- (message)="hoursMessage($event)" -->
+
+
+
     </div>
   </div>
 

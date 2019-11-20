@@ -1,6 +1,6 @@
 .dayRow {
   // outline: 1px solid red;
-   display: grid;
+  display: grid;
   grid-template-columns: [day]100px [open]135px [to]45px [close]135px [closed]100px;
   align-items: baseline;
   position: relative;
@@ -40,11 +40,16 @@
     text-align: end;
   }
 
-}
+// }
 
 
 .errorMessage{
-  width: 100%;
-  padding-left: 15%;
-  color: red;
+  position: absolute;
+  // width: 100%;
+  // padding-left: 25%;
+  color: red !important;
+  top: 14px;
+  left: 75%;
+}
+
 }

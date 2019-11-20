@@ -51,7 +51,8 @@
         Closed
       </mat-checkbox>
     </div>
+    
+    <div class="errorMessage" *ngIf="error">{{ errorMessage }}</div>
   </div>
 
-  <div class="errorMessage" *ngIf="error">{{ errorMessage }}</div>
 </div>
