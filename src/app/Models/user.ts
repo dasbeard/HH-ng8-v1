@@ -25,6 +25,7 @@ export interface User {
   // !! May need to break into pieces
   fullAddress?: string;
   lastUpdated?: number;
+  bedCount?: number;
   
 }
 

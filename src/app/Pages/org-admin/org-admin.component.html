@@ -56,8 +56,32 @@
           </mat-form-field>
 
           <div class="servicesContainer">
-            <mat-checkbox matInput formControlName="beds">
-              Beds Available
+            <mat-checkbox 
+              matInput 
+              formControlName="beds"
+              #beds
+              (click)="updateBedCount(!beds.checked)"
+            >
+
+              <p *ngIf="bedVariable">
+                {{ org.bedCount }} Beds Available
+                <span>
+                  Edit
+                </span>
+                <mat-icon>
+                  edit
+                </mat-icon>
+              </p>
+
+              <p *ngIf="!bedVariable">
+                Beds Available?
+              </p>
+
+
+            
+            
+            
+            
             </mat-checkbox>
 
             <mat-checkbox matInput formControlName="childcare">

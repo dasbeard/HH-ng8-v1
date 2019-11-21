@@ -60,12 +60,18 @@ export class RegistationService {
   }
 
 
-  addUserServices(services, otherServices) {
+
+  addUserServices(services, otherServices, bedCount) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
-    // console.log(services, otherServices);
+    // console.log(services, otherServices, bedCount);
     
+    if( !services.beds ) {
+      bedCount = 0;
+    }
+
     this.newUser.services = services;
     this.newUser.otherServices = otherServices;
+    this.newUser.bedCount = bedCount;
 
     // console.log(this.newUser);
     
@@ -74,6 +80,19 @@ export class RegistationService {
     this.router.navigate(["/Register/Hours"])
     
   }
+
+
+  updateBedsAvailable(user: User, status: boolean, bedCount: number){
+    let updatedData = user;
+    updatedData.services.beds = status;
+    updatedData.bedCount = bedCount;
+
+    this.updateUser = this.afs.doc<User>(`users/${user.uid}`);
+    this.updateUser.update(updatedData);
+    localStorage.setItem("user", JSON.stringify(updatedData));
+    
+  }
+
 
   updateServesFood(user: User, value: boolean){
     let updatedData = user;

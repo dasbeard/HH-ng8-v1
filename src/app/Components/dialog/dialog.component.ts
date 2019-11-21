@@ -21,12 +21,17 @@ export class DialogComponent implements OnInit {
   identifier: string;
   dataFromParent: object;
   dataToSendBack;
+
   hoursArray;
   HoursArrayData = [];
   HoursError: boolean = false;
-
+  
   hoursToEdit: string;
+  
   user$: User;
+
+  bedCount: number = 0;
+
 
   constructor(
     private orgServices: OrganizationsService,
@@ -34,9 +39,6 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-
-    // console.log(data);
-    
 
     if ( data.identifier === "Address" ) {
       this.identifier = "Address";
@@ -68,6 +70,9 @@ export class DialogComponent implements OnInit {
           }
         }
       })
+    } else if ( data.identifier === 'bedCount') {
+      this.identifier = data.identifier;
+      this.user$ = data.user
     }
   }
 
@@ -75,11 +80,21 @@ export class DialogComponent implements OnInit {
 
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+  
+  
+    updateBedCount(value){
+      console.log(value);
+      this.registrationService.updateBedsAvailable(this.user$, true, value);
+      
+
+      // Close Dialog
+      this.closeDialog('bedsUpdated');
+
+    }
+
+
 
   receiveTime($event) {
-    // console.log(identifier, $event);
-    // let day = $event.day;
-
     this.hoursArray[$event.day] = $event;
 
     if (this.hoursArray.find(day => day.error === true)) {
@@ -91,7 +106,6 @@ export class DialogComponent implements OnInit {
   }
 
   updateHours(hours){
-    // console.log(hours, this.hoursToEdit);
     this.registrationService.updateUserHours(this.user$, this.hoursToEdit, hours)
 
     let sendBack = {
@@ -101,7 +115,6 @@ export class DialogComponent implements OnInit {
 
     this.dialogRef.close({ event: sendBack });
   }
-
 
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 

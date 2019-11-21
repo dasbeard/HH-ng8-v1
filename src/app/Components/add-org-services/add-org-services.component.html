@@ -7,15 +7,19 @@
     <mat-vertical-stepper [linear]="true" #stepper>
       <mat-step [stepControl]="servicesFormGroup">
         <form [formGroup]="servicesFormGroup">
-          <ng-template matStepLabel>What services do you provide? </ng-template>
+          <ng-template matStepLabel>Which of these services do you provide? </ng-template>
           Select all that apply
           <div class="servicesContainer">
             <mat-checkbox
               matInput
               formControlName="beds"
               value="{{ servicesFormGroup.beds }}"
-              >Beds Available</mat-checkbox
-            >
+              #beds
+              (click)="checkBeds(!beds.checked)"
+
+              >
+              Beds Available
+            </mat-checkbox>
 
             <mat-checkbox
               matInput
@@ -58,6 +62,43 @@
           <div class='stepperBtn'>
             <button 
               mat-raised-button 
+              color='primary'
+              matStepperNext
+              >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step *ngIf="getBedCount" [stepControl]="bedsAvailable" [optional]="false">
+        <form [formGroup]="bedsAvailableFormGroup">
+          <ng-template matStepLabel
+            >How Many Beds?</ng-template
+          >
+          <mat-form-field class="bedCountInput">
+            <input
+              required
+              type="number"
+              min="0"
+              autocomplete="off"
+              matInput
+              formControlName="bedsAvailable"
+            />
+          </mat-form-field>
+
+          <div class="stepperBtns">
+            <button 
+              mat-raised-button
+              type="button"
+              color='accent'
+              matStepperPrevious
+              >
+              Back
+            </button>
+            <button 
+              mat-raised-button
+              type="button"
               color='primary'
               matStepperNext
               >

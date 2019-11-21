@@ -28,6 +28,8 @@ export class OrgAdminComponent implements OnInit {
   hoursToEdit: string = 'hoursOfOperation';
   hoursToEditString: string = 'Hours Of Operation'
 
+  bedVariable: boolean;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -48,6 +50,9 @@ export class OrgAdminComponent implements OnInit {
 
         this.user$ = data;
         this.createForm();
+        this.bedVariable = this.mainForm.value.beds
+        console.log(this.bedVariable);
+        
       }
         
     })
@@ -111,6 +116,40 @@ export class OrgAdminComponent implements OnInit {
     this.registrationService.updateProfile(this.user$, this.mainForm.value);
     this.showSnackbar('Profile Updated', 'Dismiss')
   }
+
+
+  updateBedCount(value) {
+    this.bedVariable = value;
+
+    if(value) {
+      // Open Dialog to update bed count
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '75vw',
+        maxWidth: '550px',
+        minHeight: '30vh',
+        maxHeight: '85vh',
+        data: {
+                identifier: 'bedCount', 
+                user: this.user$,
+              }
+      })
+
+      dialogRef.afterClosed().subscribe( result => {
+        if(result) {
+          if(result.event.type === "bedsUpdated"){
+            this.showSnackbar('Bed Count Updated', 'Dismiss')
+          } else {
+            this.bedVariable = false;
+            this.mainForm.controls['beds'].setValue(false);
+          }
+        } else {
+          this.bedVariable = false;
+          this.mainForm.controls['beds'].setValue(false);
+        }
+      });
+    }    
+  }
+
 
   showSnackbar(message: string, action){
     this.snackBar.open(message, action, {duration: 1500})
@@ -191,7 +230,6 @@ export class OrgAdminComponent implements OnInit {
     }, 250);
 
   }
-
 
   logout() {
     this.authService.signOut();

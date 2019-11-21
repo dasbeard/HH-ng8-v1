@@ -1,5 +1,5 @@
 <div class="contianer">
-  <button mat-mini-fab class="closeBtn" (click)="closeDialog('close')">
+  <button mat-mini-fab type="button" class="closeBtn" (click)="closeDialog('close')">
     <mat-icon class="material-icons">
       close
     </mat-icon>
@@ -21,10 +21,10 @@
     </p>
 
     <div class="bottomBtns">
-      <button mat-raised-button color="primary" (click)="closeDialog('close')">
+      <button mat-raised-button type="button" color="primary" (click)="closeDialog('close')">
         Cancel
       </button>
-      <button mat-raised-button color="warn" (click)="closeDialog('delete')">
+      <button mat-raised-button type="button" color="warn" (click)="closeDialog('delete')">
         Delete My Account
       </button>
     </div>
@@ -43,7 +43,7 @@
 
 
      <div class="bottomBtns">
-      <button mat-raised-button color="accent" (click)="closeDialog('close')">
+      <button mat-raised-button type="button" color="accent" (click)="closeDialog('close')">
         Cancel
       </button>
 
@@ -58,6 +58,38 @@
       </button>
     </div>
     
+  </div>
+
+
+  <div *ngIf="identifier === 'bedCount'" class="updateBedCount">
+    <h1>Bed Count</h1>
+
+    <mat-form-field>
+      <input 
+      matInput
+      type="number"
+      min="0"
+      autocomplete="off"
+      [(ngModel)]='user$.bedCount'
+      >      
+    </mat-form-field>
+
+    <div class="bottomBtns">
+        <button mat-raised-button type="button" color="accent" (click)="closeDialog('close')">
+          Cancel
+        </button>
+  
+        <!-- [disabled]="HoursError" -->
+        <button
+          color="primary"
+          mat-raised-button
+          type="button"
+          (click)="updateBedCount(user$.bedCount)"
+        >
+          Update
+        </button>
+      </div>
+
   </div>
 
 </div>

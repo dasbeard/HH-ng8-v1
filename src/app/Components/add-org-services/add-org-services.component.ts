@@ -13,6 +13,8 @@ export class AddOrgServicesComponent implements OnInit {
 
   servicesFormGroup: FormGroup;
   otherServicesFormGroup: FormGroup;
+  bedsAvailableFormGroup: FormGroup;
+  getBedCount: boolean= false;
 
   constructor(
     private regService: RegistationService,
@@ -34,12 +36,21 @@ export class AddOrgServicesComponent implements OnInit {
     this.otherServicesFormGroup = this.formBuilder.group({
       otherServices: [""]
     });
+    this.bedsAvailableFormGroup = this.formBuilder.group({
+      bedsAvailable: [0]
+    });
   }
+
+  checkBeds(value){
+    this.getBedCount = value  
+  }
+
 
   addServices() {
     this.regService.addUserServices(
       this.servicesFormGroup.value,
-      this.otherServicesFormGroup.value.otherServices
+      this.otherServicesFormGroup.value.otherServices,
+      this.bedsAvailableFormGroup.value.bedsAvailable
     );
   }
 }

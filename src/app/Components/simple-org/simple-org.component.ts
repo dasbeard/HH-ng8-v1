@@ -24,7 +24,7 @@ export class SimpleOrgComponent implements OnInit {
   hoursServingFoodNow: boolean;
 
   bedString: string;
-  bedContext: string;
+  bedWarningClass: boolean;
 
   days: Array<string> = ["Sun", "Mon", "Tues", "Wen", "Thur", "Fri", "Sat"];
 
@@ -34,19 +34,55 @@ export class SimpleOrgComponent implements OnInit {
     this.createAddress();
 
     // Get Hours of Operation
-    this.checkIfOpenToday("HOP");
-
+    this.checkIfAllClosed('HOP');
+    
     // Get Hours Serving Food
     if (this.org.services.servesFood) {
-      this.checkIfOpenToday("food");
+      this.checkIfAllClosed('food');
     }
 
     this.checkBedAvailability();
   }
 
+
+
+  checkIfAllClosed( input: string) {
+    let service;
+    
+    if( input === 'HOP') {
+      service = this.org.hoursOfOperation;
+    } else if( input === 'food') {
+      service = this.org.hoursServingFood;
+    }; 
+
+    if ( service.find( day => day.isClosed === false) ) {
+      this.checkIfOpenToday(input);
+    } else {
+
+      if (input === "HOP") {
+        this.hoursOfOpString = "Closed";
+        this.hoursOfOpOpen = false;
+      } else if (input === "food") {
+        this.hoursServingFoodString = "Not Currently Serving Food ";
+        this.hoursServingFoodNow = false;
+      }
+
+    }
+  }
+
   checkBedAvailability() {
     if (this.org.services.beds) {
-      this.bedString = "Beds Available Now";
+      
+      if ( this.org.bedCount >= 5 ) {
+        this.bedString = "Beds Available Now";
+        this.bedWarningClass = false;
+        return
+      }
+      if ( this.org.bedCount < 5 ) {
+        this.bedString = "Less Than 5 Bed Available"
+        this.bedWarningClass = true;
+        return
+      }      
     }
   }
 
@@ -179,6 +215,7 @@ export class SimpleOrgComponent implements OnInit {
   }
 
   setasClosed(service) {
+    
     let nextOpenDay = this.nextOpen(service);
 
     if (service === "HOP") {
@@ -196,23 +233,37 @@ export class SimpleOrgComponent implements OnInit {
 
   nextOpen(type) {
     let service;
+    let serviceString: string;
     const day = this.dayTime.dayOfWeek;
 
     if (type === "HOP") {
       service = this.org.hoursOfOperation;
+      serviceString = "HOPfood";
+
     } else if (type == "food") {
       service = this.org.hoursServingFood;
+      serviceString = "food";
     }
 
     let temp = 0;
     for (let index = 0; index < 9; index++) {
+
+      // if (index === 8) {
+      //   console.log('rest');  
+      //   this.setAllClosed(serviceString);
+      //   return
+      // } else
+        
+
       if (day + index >= 7) {
+      
         if (service[temp].isClosed) {
         } else {
           return [service[temp].open, temp];
         }
         temp += 1;
-      } else {
+      } 
+      else {
         if (service[day + index].isClosed) {
         } else {
           return [service[day + index].open, day + index];

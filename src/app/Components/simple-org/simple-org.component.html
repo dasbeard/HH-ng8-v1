@@ -56,7 +56,6 @@
     </div>
 
     <!-- -~-~-~-~-~-~- Start Contex  -~-~-~-~-~-~- -->
-    <!-- [ngClass]="org.services.beds ? 'available' : 'notAvailable'" -->
 
     <div class="orgContext">
       <div
@@ -64,7 +63,7 @@
         [ngClass]="hoursOfOpOpen ? 'available' : 'notAvailable'"
         >
         <div class="name hop"> {{ hoursOfOpString }} </div>
-        <div class="context"> {{hoursOfOpContext}} </div>
+        <div *ngIf="hoursOfOpContext" class="context"> {{hoursOfOpContext}} </div>
       </div>
 
       <div
@@ -72,15 +71,20 @@
         [ngClass]="hoursServingFoodNow ? 'available' : 'notAvailable'"
         >
         <div class="name"> {{ hoursServingFoodString }} </div>
-        <div class="context"> {{ hoursServingFoodContext }} </div>
+        <div *ngIf="hoursServingFoodContext" class="context"> {{ hoursServingFoodContext }} </div>
       </div>
 
       <div
+        *ngIf="org.services.beds"
         class="bedsAvailable contextRow z-depth-1"
-        [ngClass]="org.services.beds ? 'available' : 'notAvailable'"
-      >
-      <!-- <div class="name">unknown</div> -->
-        <div class="bedString"> {{ bedString }} </div>
+        [ngClass]="bedWarningClass ? 'bedWarning' : 'available'" 
+        >
+        <!-- [ngClass]="org.services.beds ? 'available' : 'notAvailable'" -->
+        <div 
+          class="bedString" 
+          >
+          {{ bedString }} 
+        </div>
       </div>
     </div>
 
