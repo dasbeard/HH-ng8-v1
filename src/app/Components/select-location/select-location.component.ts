@@ -133,7 +133,7 @@ export class SelectLocationComponent implements OnInit {
       
 
     } else {
-      console.log('Registering New Account');
+      // console.log('Registering New Account');
       
       this.regService.buildUserLocation(this.orgResult, this.latLng);
     }

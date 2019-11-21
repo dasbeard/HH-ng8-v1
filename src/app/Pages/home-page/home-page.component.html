@@ -65,7 +65,7 @@
 
     <h2>Whats Nearby?</h2>
 
-    <div class="simpleOrgs">
+    <div class="simpleOrgs" *ngIf="allOrgs.length >= 3">
 
       <app-simple-org
         class="org mat-elevation-z5"
@@ -84,6 +84,8 @@
         [org]="allOrgs[2]"
         [dayTime]="dayObj"
       ></app-simple-org>
+
+      
     </div>
 
   </div>

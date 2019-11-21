@@ -90,7 +90,9 @@ export class AuthService {
   }
   
   // !! Need to fix issue when deleting user - may need to logout and then re-login first
-  async deleteUser(user: User) {
+  deleteUser(user: User) {
+    console.log('test');
+    
     this.afAuth.auth.currentUser.delete().catch(error => {
       console.log('Error');
       console.log(error);

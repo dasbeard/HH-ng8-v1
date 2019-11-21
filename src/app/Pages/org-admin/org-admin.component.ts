@@ -26,7 +26,7 @@ export class OrgAdminComponent implements OnInit {
   dialogData
 
   hoursToEdit: string = 'hoursOfOperation';
-
+  hoursToEditString: string = 'Hours Of Operation'
 
   constructor(
     private authService: AuthService,
@@ -55,6 +55,18 @@ export class OrgAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  showServesFoodHours(value: boolean){
+    this.registrationService.updateServesFood(this.user$, value)
+    if(!value){
+      this.changeHoursToEdit('hoursOfOperation')
+      this.showSnackbar('No Longer Serving Food', 'Dismiss')
+    }
+    if(value){
+      this.changeHoursToEdit('hoursServingFood')
+      this.editHours()
+    }
   }
 
   createForm() {
@@ -105,8 +117,6 @@ export class OrgAdminComponent implements OnInit {
   }
 
   editHours(){
-    // console.log(this.hoursToEdit);
-    
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75vw',
       maxWidth: '800px',
@@ -118,7 +128,6 @@ export class OrgAdminComponent implements OnInit {
               hours: this.hoursToEdit
             }
     })
-
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
@@ -139,16 +148,17 @@ export class OrgAdminComponent implements OnInit {
       }
     })
 
-    
-
   }
-
 
   changeHoursToEdit($event) {
     this.hoursToEdit = $event;  
+    if (this.hoursToEdit === 'hoursOfOperation') {
+      this.hoursToEditString = 'Hours Of Operation'
+    }
+    if (this.hoursToEdit === 'hoursServingFood') {
+      this.hoursToEditString = 'Hours Serving Food'
+    }
   }
-
-
 
   deleteUserDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -163,9 +173,8 @@ export class OrgAdminComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result);
       if (result) {
-        if(result.event === 'delete'){
+        if(result.event.type === 'delete'){
           console.log('Delete User');
           this.deleteUser();
         }
@@ -176,8 +185,8 @@ export class OrgAdminComponent implements OnInit {
 
   deleteUser() {
     this.router.navigate([""]);    
+    
     setTimeout(() => {
-      
       this.authService.deleteUser(this.user$);
     }, 250);
 

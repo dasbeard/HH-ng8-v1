@@ -79,18 +79,17 @@ export class SimpleOrgComponent implements OnInit {
 
     const openTime = await this.extractTimeOfService(service[day].open);
     const closeTime = await this.extractTimeOfService(service[day].close);
-
+    
     this.checkIfNow(openTime, closeTime, service);
-  
+    
   }
-
+  
   checkIfNow(openTime, closeTime, service) {
     let serviceString;
     let tempOpenHour;
     let tempCloseHour;
     let tempDayHour;
-
-
+    
     if( service === this.org.hoursOfOperation ){
       serviceString = 'HOP';
     } else if ( service === this.org.hoursServingFood ){
@@ -106,7 +105,7 @@ export class SimpleOrgComponent implements OnInit {
     } else {
       tempOpenHour = openTime.hour;
     };
-
+    
     if(closeTime.meridiem === 1){
       if(closeTime.hour === 12){
         tempCloseHour = closeTime.hour;
@@ -116,7 +115,7 @@ export class SimpleOrgComponent implements OnInit {
     } else {
       tempCloseHour = closeTime.hour;
     };
-    
+        
     if(this.dayTime.meridiem === 1){
       if(this.dayTime.hour == 12){
         tempDayHour = this.dayTime.hour;
@@ -127,17 +126,58 @@ export class SimpleOrgComponent implements OnInit {
       tempDayHour = this.dayTime.hour;
     };
 
-    if(tempDayHour >= tempOpenHour && tempDayHour <= tempCloseHour){
-      if ( this.dayTime.minute <= openTime.minute || this.dayTime.minute >= closeTime.minute ) {
-        this.setAsOpen(service)
-        return
-      } else {
-        this.setasClosed(serviceString);
+
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    
+    // console.log('tempDayHour' , tempDayHour);
+    // console.log('tempOpenHour' , tempOpenHour);
+    // console.log('tempCloseHour' , tempCloseHour);
+    console.log('Now Minute' , this.dayTime.minute);
+    // console.log('open Min' , openTime.minute);
+    
+    if(tempDayHour > tempOpenHour){
+      
+    if(tempDayHour >= tempCloseHour){
+      // Check minutes
+      if( closeTime.minute === 0 ){
+        this.setasClosed(serviceString)
+      } 
+      if( this.dayTime.minute >= closeTime.minute ){
+        this.setasClosed(serviceString)
+      }
+      if( this.dayTime.minute < closeTime.minute ){
+        this.setAsOpen(service);
       }
     } else {
-      this.setasClosed(serviceString);
+      this.setasClosed(serviceString)
+    }
+  }
+    if( tempDayHour <= tempCloseHour) {
+      if( this.dayTime.minute >= openTime.minute ){
+        this.setAsOpen(service)
+      } else {
+        this.setasClosed(serviceString)
+      }
     }
 
+  
+
+    if ( tempDayHour <= tempCloseHour ) {
+      if(tempDayHour === tempCloseHour){
+      }
+    }
+
+    else {
+      // this.setAsOpen(service)
+      // this.setasClosed(serviceString)
+    };
+
+    
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
   }
 
   setAsOpen(service) {
@@ -158,13 +198,11 @@ export class SimpleOrgComponent implements OnInit {
     let nextOpenDay = this.nextOpen(service)
     
     if( service === 'HOP' ) {
-      
       this.hoursOfOpString = "Closed";
       this.hoursOfOpContext = "open "+ this.days[nextOpenDay[1]] + ' at ' + nextOpenDay[0];
       this.hoursOfOpOpen = false;
     } else if ( service === 'food' ) {
       this.hoursServingFoodString = "Serving Food ";
-      
       this.hoursServingFoodContext = this.days[nextOpenDay[1]] + ' at ' + nextOpenDay[0];
       this.hoursServingFoodNow = false;
     }
@@ -180,14 +218,14 @@ export class SimpleOrgComponent implements OnInit {
       service = this.org.hoursServingFood;
     }
 
-    for (let index = 1; index < 9; index++) {
+    let temp = 0;
+    for (let index = 0; index < 9; index++) {
       if (day + index >= 7) {
-        let temp = 0;
-        if (service[temp].isClosed) {
+        if (service[temp].isClosed) {          
         } else {
           return [service[temp].open, temp];
         }
-        temp++;
+        temp += 1;
       } else {
         if (service[day + index].isClosed) {
         } else {

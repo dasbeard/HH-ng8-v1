@@ -78,7 +78,11 @@
               >Donation Center</mat-checkbox
             >
 
-            <mat-checkbox matInput formControlName="servesFood"
+            <mat-checkbox 
+              matInput 
+              formControlName="servesFood"
+              #servesFood
+              (click)="showServesFoodHours(!servesFood.checked)"
               >Do you serve food?</mat-checkbox
             >
           </div>
@@ -109,31 +113,28 @@
         alt=""
       />
 
+      <div class="editHours">
+        <button
+          mat-raised-button
+          color="primary"
+          class="editBtn"
+          (click)="editHours()"
+        >
+          <mat-icon class="material-icons">
+            edit
+          </mat-icon>
+          Edit {{ hoursToEditString }}
+        </button>
 
-
-      <button
-        mat-raised-button
-        color="primary"
-        class="editBtn"
-        (click)="editHours()"
-      >
-        <mat-icon class="material-icons">
-          edit
-        </mat-icon>
-        Edit
-      </button>
-
-      {{ hoursToEdit}}
-
-      <app-hours
-        class="orgHoursHOP"
-        [user]='user$'
-        [showHours]='hoursToEdit'
-        (identifierResponse)='changeHoursToEdit($event)'
+        <app-hours
+          class="orgHoursHOP"
+          [user]="user$"
+          [showHours]="hoursToEdit"
+          (identifierResponse)="changeHoursToEdit($event)"
         ></app-hours>
+      </div>
 
-
-
+      
     </div>
   </div>
 

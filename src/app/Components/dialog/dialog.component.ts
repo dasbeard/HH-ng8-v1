@@ -110,7 +110,7 @@ export class DialogComponent implements OnInit {
     this.closeDialog("address");
   }
 
-  closeDialog(identifier: string) {
+  closeDialog(identifier: string) {    
     let data = {
       type: identifier
     }

@@ -75,24 +75,30 @@ export class RegistationService {
     
   }
 
+  updateServesFood(user: User, value: boolean){
+    let updatedData = user;
+
+    updatedData.services.servesFood = value;
+    updatedData.lastUpdated = Date.now();
+
+    this.updateUser = this.afs.doc<User>(`users/${user.uid}`);
+    this.updateUser.update(updatedData);
+
+    localStorage.setItem("user", JSON.stringify(updatedData));
+
+  }
+
 
   addUserHours(identifier, data, user){
       this.newUser = user;
 
     if(identifier == 'hoursOfOp'){
-      // console.log('Hours of Operation', data);
       this.newUser.hoursOfOperation = data;
-      // console.log(this.newUser);
-      
     }
     if(identifier == 'servingFood'){
-      // console.log('Hours Serving Food', data);
       this.newUser.hoursServingFood = data;
-      // console.log(this.newUser);
     }
 
-    // console.log(this.newUser);
-    
     this.newUser.lastUpdated = Date.now();
     this.newUser.registering = false;
     

@@ -45,36 +45,47 @@ export class HoursComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges() {
-    
     if (this.showHours) {
       this.hoursDisplayed = this.showHours;
     } else {
       this.hoursDisplayed = "hoursOfOperation";
     }
+
+    if (this.user.services.servesFood) {
+      this.buttonSize = true;
+    } else {
+      this.buttonSize = false;
+      // this.hoursDisplayed = "hoursOfOperation"
+
+    }
+
     this.changeHoursView(this.hoursDisplayed);
-    
+
     // console.log(this.showHours);
     // console.log(this.hoursDisplayed);
   }
 
   ngOnInit() {
-
-
     this.organizationService.getOrgHours(this.user.uid).subscribe(data => {
       this.hoursOfOp = data.payload.data().hoursOfOperation;
       this.hoursServing = data.payload.data().hoursServingFood;
       // this.hoursToDisplay = this.hoursOfOp;
       this.changeHoursView(this.hoursDisplayed);
-
     });
 
-    if (this.hoursServing) {
-      // console.log('not serving');
-      this.buttonSize = true;
-    } else {
-      // console.log('serving food');
-      this.buttonSize = false;
-    }
+    // if(this.user.services.servesFood){
+    //     this.buttonSize = true;
+    // } else {
+    //   this.buttonSize = false;
+    // }
+
+    // if (this.hoursServing) {
+    //   // console.log('not serving');
+    //   this.buttonSize = true;
+    // } else {
+    //   // console.log('serving food');
+    //   this.buttonSize = false;
+    // }
   }
 
   changeHoursView(input) {

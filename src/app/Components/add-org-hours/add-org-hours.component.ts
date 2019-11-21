@@ -28,13 +28,21 @@ export class AddOrgHoursComponent implements OnInit {
 
   constructor(private regService: RegistationService) {
     this.user = JSON.parse(localStorage.getItem("user"));
+    
   }
 
   ngOnInit() {
     this.createDayArrays("HOP");
-    if (this.user.services.servesFood) {
+
+    if(this.user.services.servesFood){
       this.createDayArrays("Food");
     }
+
+
+    if(!this.user.services.servesFood){
+      this.notServingFood();
+    }
+
   }
 
   createDayArrays(identifier: string) {
@@ -54,9 +62,26 @@ export class AddOrgHoursComponent implements OnInit {
         this.ServingArrayData.push(newDay);
       }
     }
-
     // console.log(this.hoursOfOpArray);
   }
+  
+
+  notServingFood(){
+    // this.createDayArrays("Food");
+    for (let index = 0; index < 7; index++) {
+      // const newDay = new day();
+      let newDay = {
+        day: index,
+        isClosed: true,
+        error: false,
+        open: "",
+        close: "",
+      }
+      
+      this.ServingArrayData.push(newDay);
+    }    
+  }
+
 
 
   receiveTime( identifier: string, $event) {
@@ -98,13 +123,9 @@ export class AddOrgHoursComponent implements OnInit {
   addHoursToDB() {
     this.regService.addUserHours("hoursOfOp", this.HOPArrayData, this.user);
 
-    if (this.user.services.servesFood) {
-      this.regService.addUserHours(
-        "servingFood",
-        this.ServingArrayData,
-        this.user
-      );
-    }
+    // if (!this.user.services.servesFood) {
+      this.regService.addUserHours( "servingFood", this.ServingArrayData, this.user );
+    // }
   }
 
 }
