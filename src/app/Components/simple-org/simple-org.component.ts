@@ -26,16 +26,7 @@ export class SimpleOrgComponent implements OnInit {
   bedString: string;
   bedContext: string;
 
-
-  days: Array<string> = [
-    "Sun",
-    "Mon",
-    "Tues",
-    "Wen",
-    "Thur",
-    "Fri",
-    "Sat"
-  ];
+  days: Array<string> = ["Sun", "Mon", "Tues", "Wen", "Thur", "Fri", "Sat"];
 
   constructor(private clickFunction: ClickFunctionsService) {}
 
@@ -43,19 +34,19 @@ export class SimpleOrgComponent implements OnInit {
     this.createAddress();
 
     // Get Hours of Operation
-    this.checkIfOpenToday('HOP');
+    this.checkIfOpenToday("HOP");
 
     // Get Hours Serving Food
-    if (this.org.services.servesFood){
-      this.checkIfOpenToday('food');
+    if (this.org.services.servesFood) {
+      this.checkIfOpenToday("food");
     }
 
     this.checkBedAvailability();
   }
 
   checkBedAvailability() {
-    if(this.org.services.beds){
-      this.bedString = 'Beds Available Now'
+    if (this.org.services.beds) {
+      this.bedString = "Beds Available Now";
     }
   }
 
@@ -63,147 +54,142 @@ export class SimpleOrgComponent implements OnInit {
     let service;
     const day = this.dayTime.dayOfWeek;
 
-    if(inputService === 'HOP') {
+    if (inputService === "HOP") {
       service = this.org.hoursOfOperation;
-      if(service[day].isClosed) {
-        this.setasClosed('HOP');
-        return
+      if (service[day].isClosed) {
+        this.setasClosed("HOP");
+        return;
       }
-    } else if ( inputService === 'food'){
+    } else if (inputService === "food") {
       service = this.org.hoursServingFood;
-        if(service[day].isClosed) {
-          this.setasClosed('food');
-          return
-        }
+      if (service[day].isClosed) {
+        this.setasClosed("food");
+        return;
+      }
     }
 
     const openTime = await this.extractTimeOfService(service[day].open);
     const closeTime = await this.extractTimeOfService(service[day].close);
-    
+
     this.checkIfNow(openTime, closeTime, service);
-    
   }
-  
+
   checkIfNow(openTime, closeTime, service) {
     let serviceString;
     let tempOpenHour;
     let tempCloseHour;
     let tempDayHour;
-    
-    if( service === this.org.hoursOfOperation ){
-      serviceString = 'HOP';
-    } else if ( service === this.org.hoursServingFood ){
-      serviceString = 'food';
-    };
- 
-    if(openTime.meridiem === 1){
-      if (openTime.hour === 12){
+
+    if (service === this.org.hoursOfOperation) {
+      serviceString = "HOP";
+    } else if (service === this.org.hoursServingFood) {
+      serviceString = "food";
+    }
+
+    if (openTime.meridiem === 1) {
+      if (openTime.hour === 12) {
         tempOpenHour = openTime.hour;
       } else {
         tempOpenHour = openTime.hour + 12;
       }
     } else {
       tempOpenHour = openTime.hour;
-    };
-    
-    if(closeTime.meridiem === 1){
-      if(closeTime.hour === 12){
+    }
+
+    if (closeTime.meridiem === 1) {
+      if (closeTime.hour === 12) {
         tempCloseHour = closeTime.hour;
       } else {
         tempCloseHour = closeTime.hour + 12;
       }
     } else {
       tempCloseHour = closeTime.hour;
-    };
-        
-    if(this.dayTime.meridiem === 1){
-      if(this.dayTime.hour == 12){
+    }
+
+    if (this.dayTime.meridiem === 1) {
+      if (this.dayTime.hour == 12) {
         tempDayHour = this.dayTime.hour;
       } else {
         tempDayHour = this.dayTime.hour + 12;
       }
     } else {
       tempDayHour = this.dayTime.hour;
-    };
+    }
 
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
-    
-    // console.log('tempDayHour' , tempDayHour);
-    // console.log('tempOpenHour' , tempOpenHour);
-    // console.log('tempCloseHour' , tempCloseHour);
-    console.log('Now Minute' , this.dayTime.minute);
-    // console.log('open Min' , openTime.minute);
-    
-    if(tempDayHour > tempOpenHour){
+    // console.log('Now Hour' , tempDayHour);
+    // console.log("Now Minute", this.dayTime.minute);
+    // console.log('Open Hour' , tempOpenHour);
+    // console.log('Open Min' , openTime.minute);
+    // console.log('Close Min' , closeTime.minute);
+    // console.log('Close Hour' , tempCloseHour);
+
+    if ( tempDayHour >= tempOpenHour ) {
       
-    if(tempDayHour >= tempCloseHour){
-      // Check minutes
-      if( closeTime.minute === 0 ){
+      if ( tempDayHour > tempCloseHour ) {
         this.setasClosed(serviceString)
-      } 
-      if( this.dayTime.minute >= closeTime.minute ){
-        this.setasClosed(serviceString)
+        return
       }
-      if( this.dayTime.minute < closeTime.minute ){
-        this.setAsOpen(service);
+      // -~-~-~ Current Hour is same as Open Hour - Check Minutes -~-~-~
+      if ( tempDayHour === tempOpenHour ) {
+        if ( this.dayTime.minute >= openTime.minute ) {
+          this.setAsOpen(service)
+          return
+        } 
+        if ( this.dayTime.minute < openTime.minute ) {
+          this.setasClosed(serviceString)
+          return
+        } 
       }
-    } else {
-      this.setasClosed(serviceString)
-    }
-  }
-    if( tempDayHour <= tempCloseHour) {
-      if( this.dayTime.minute >= openTime.minute ){
-        this.setAsOpen(service)
-      } else {
-        this.setasClosed(serviceString)
+      
+      // -~-~-~ Current Hour is same as Close Hour - Check Minutes -~-~-~
+      if ( tempDayHour === tempCloseHour ) {
+        if( this.dayTime.minute >= closeTime.minute ) {
+          this.setasClosed(serviceString)
+          return
+        }
+        if ( this.dayTime.minute < closeTime.minute ) {
+          this.setAsOpen(service)
+          return
+        }
       }
-    }
-
-  
-
-    if ( tempDayHour <= tempCloseHour ) {
-      if(tempDayHour === tempCloseHour){
-      }
-    }
-
-    else {
-      // this.setAsOpen(service)
-      // this.setasClosed(serviceString)
-    };
-
     
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
-    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+      this.setAsOpen(service)
+    
+    } 
   }
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
+    // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~--~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
   setAsOpen(service) {
-
-    if( service === this.org.hoursOfOperation ){
+    if (service === this.org.hoursOfOperation) {
       this.hoursOfOpString = "Open Now";
       this.hoursOfOpContext = "until " + service[this.dayTime.dayOfWeek].close;
       this.hoursOfOpOpen = true;
-    } else if ( service === this.org.hoursServingFood ){
-      this.hoursServingFoodString = "Serving Food"
-      this.hoursServingFoodContext = "until " + service[this.dayTime.dayOfWeek].close;
+    } else if (service === this.org.hoursServingFood) {
+      this.hoursServingFoodString = "Serving Food";
+      this.hoursServingFoodContext =
+        "until " + service[this.dayTime.dayOfWeek].close;
       this.hoursServingFoodNow = true;
-    };
-
+    }
   }
-  
+
   setasClosed(service) {
-    let nextOpenDay = this.nextOpen(service)
-    
-    if( service === 'HOP' ) {
+    let nextOpenDay = this.nextOpen(service);
+
+    if (service === "HOP") {
       this.hoursOfOpString = "Closed";
-      this.hoursOfOpContext = "open "+ this.days[nextOpenDay[1]] + ' at ' + nextOpenDay[0];
+      this.hoursOfOpContext =
+        "open " + this.days[nextOpenDay[1]] + " at " + nextOpenDay[0];
       this.hoursOfOpOpen = false;
-    } else if ( service === 'food' ) {
+    } else if (service === "food") {
       this.hoursServingFoodString = "Serving Food ";
-      this.hoursServingFoodContext = this.days[nextOpenDay[1]] + ' at ' + nextOpenDay[0];
+      this.hoursServingFoodContext =
+        this.days[nextOpenDay[1]] + " at " + nextOpenDay[0];
       this.hoursServingFoodNow = false;
     }
   }
@@ -212,16 +198,16 @@ export class SimpleOrgComponent implements OnInit {
     let service;
     const day = this.dayTime.dayOfWeek;
 
-    if(type === 'HOP'){
-      service = this.org.hoursOfOperation; 
-    } else if ( type == 'food') {
+    if (type === "HOP") {
+      service = this.org.hoursOfOperation;
+    } else if (type == "food") {
       service = this.org.hoursServingFood;
     }
 
     let temp = 0;
     for (let index = 0; index < 9; index++) {
       if (day + index >= 7) {
-        if (service[temp].isClosed) {          
+        if (service[temp].isClosed) {
         } else {
           return [service[temp].open, temp];
         }
@@ -240,7 +226,6 @@ export class SimpleOrgComponent implements OnInit {
     let meridiem;
 
     if (meridiemSplit === "AM") {
-
       meridiem = 0;
     } else if (meridiemSplit === "PM") {
       meridiem = 1;
