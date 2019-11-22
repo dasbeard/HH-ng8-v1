@@ -51,7 +51,7 @@ export class OrgAdminComponent implements OnInit {
         this.user$ = data;
         this.createForm();
         this.bedVariable = this.mainForm.value.beds
-        console.log(this.bedVariable);
+        // console.log(this.bedVariable);
         
       }
         
@@ -116,6 +116,24 @@ export class OrgAdminComponent implements OnInit {
     this.registrationService.updateProfile(this.user$, this.mainForm.value);
     this.showSnackbar('Profile Updated', 'Dismiss')
   }
+
+
+  editBedCount(){
+    // console.log('test');
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '75vw',
+      maxWidth: '550px',
+      minHeight: '30vh',
+      maxHeight: '85vh',
+      data: {
+              identifier: 'bedCount', 
+              user: this.user$,
+            }
+    })
+
+
+  }
+
 
 
   updateBedCount(value) {

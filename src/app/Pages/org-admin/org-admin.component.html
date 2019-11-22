@@ -56,33 +56,45 @@
           </mat-form-field>
 
           <div class="servicesContainer">
-            <mat-checkbox 
-              matInput 
-              formControlName="beds"
-              #beds
-              (click)="updateBedCount(!beds.checked)"
-            >
 
-              <p *ngIf="bedVariable">
-                {{ org.bedCount }} Beds Available
-                <span>
-                  Edit
-                </span>
+
+
+            <div class="beds">
+
+              <mat-checkbox
+                matInput
+                formControlName="beds"
+                #beds
+                (click)="updateBedCount(!beds.checked)"
+              >
+                <p *ngIf="bedVariable">
+                  {{ org.bedCount }} Beds Available
+                </p>
+
+                <p *ngIf="!bedVariable">
+                  Beds Available?
+                </p>
+              </mat-checkbox>
+
+
+              <button 
+                class="editBedBtn"
+                *ngIf="bedVariable"  
+                mat-icon-button 
+                color="primary"
+                (click)="editBedCount()"
+                >
                 <mat-icon>
                   edit
                 </mat-icon>
-              </p>
-
-              <p *ngIf="!bedVariable">
-                Beds Available?
-              </p>
+              </button>
 
 
-            
-            
-            
-            
-            </mat-checkbox>
+            </div>
+
+
+
+
 
             <mat-checkbox matInput formControlName="childcare">
               Child Care
@@ -102,8 +114,8 @@
               >Donation Center</mat-checkbox
             >
 
-            <mat-checkbox 
-              matInput 
+            <mat-checkbox
+              matInput
               formControlName="servesFood"
               #servesFood
               (click)="showServesFoodHours(!servesFood.checked)"
@@ -157,8 +169,6 @@
           (identifierResponse)="changeHoursToEdit($event)"
         ></app-hours>
       </div>
-
-      
     </div>
   </div>
 

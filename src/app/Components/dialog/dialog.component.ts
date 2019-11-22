@@ -73,7 +73,7 @@ export class DialogComponent implements OnInit {
     } else if ( data.identifier === 'bedCount') {
       this.identifier = data.identifier;
       this.user$ = data.user
-    }
+    } 
   }
 
   ngOnInit() {}
@@ -82,16 +82,15 @@ export class DialogComponent implements OnInit {
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
   
   
-    updateBedCount(value){
-      console.log(value);
-      this.registrationService.updateBedsAvailable(this.user$, true, value);
-      
+  updateBedCount(value){
+    console.log(value);
+    this.registrationService.updateBedsAvailable(this.user$, true, value);
+    
 
-      // Close Dialog
-      this.closeDialog('bedsUpdated');
+    // Close Dialog
+    this.closeDialog('bedsUpdated');
 
-    }
-
+  }
 
 
   receiveTime($event) {

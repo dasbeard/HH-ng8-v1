@@ -68,31 +68,28 @@
           grid-template-columns: repeat(auto-fill, minmax(230px, 310px));
           padding-bottom: 1.25em;
 
+          mat-checkbox {
+            height: 40px;
+            line-height: 40px;
 
-
-          mat-checkbox{
-            line-height: 33px;
-          
             p {
               margin: 0;
-            
-              span {  
-                visibility: hidden;
-              }
-              span:hover {  
-                visibility: visible;
-                // z-index: 99;
-                padding: 5px;
-                border-radius: 4px;
-                background-color: rgb(215, 215, 215);
-                box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 
-                0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                0 3px 1px -2px rgba(0, 0, 0, 0.2);              }
-            
             }
-          
+
+            .beds {
+              height: 40px;
+            }
           }
 
+          .editBedBtn {
+            margin-left: 15px;
+            margin-top: -10px;
+            content: "";
+          }
+
+          .editBedBtn:hover:after {
+            content: " EDIT";
+          }
         }
       }
     }
@@ -107,17 +104,12 @@
       }
 
       .editHours {
-
         .editBtn {
           width: 100%;
           cursor: pointer;
         }
-
       }
-
-
     }
-
   }
 
   .bottomBtns {
@@ -128,5 +120,4 @@
     display: flex;
     justify-content: space-evenly;
   }
-    
 }
