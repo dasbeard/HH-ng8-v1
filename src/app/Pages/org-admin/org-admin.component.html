@@ -57,10 +57,7 @@
 
           <div class="servicesContainer">
 
-
-
             <div class="beds">
-
               <mat-checkbox
                 matInput
                 formControlName="beds"
@@ -72,10 +69,9 @@
                 </p>
 
                 <p *ngIf="!bedVariable">
-                  Beds Available?
+                  Beds Available
                 </p>
               </mat-checkbox>
-
 
               <button 
                 class="editBedBtn"
@@ -88,13 +84,7 @@
                   edit
                 </mat-icon>
               </button>
-
-
             </div>
-
-
-
-
 
             <mat-checkbox matInput formControlName="childcare">
               Child Care
@@ -144,10 +134,25 @@
     </div>
 
     <div class="rightSide">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+
+      <div class="imageContainer">
+        <img
+        src="{{org.photoURL}}"
         alt=""
-      />
+        />
+
+        <button 
+          class="editImgBtn"
+          mat-icon-button 
+          color="primary"
+          (click)="editImg()"
+          >
+          <mat-icon>
+            edit
+          </mat-icon>
+        </button>
+
+      </div>
 
       <div class="editHours">
         <button

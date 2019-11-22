@@ -15,11 +15,22 @@
     ::ng-deep .mat-checkbox-disabled .mat-checkbox-label {
       color: #000;
     }
+
+
+    mat-checkbox {
+      height: 40px;
+      line-height: 40px;
+
+      p {
+        margin: 0;
+      }
+
+      .beds {
+        height: 40px;
+      }
+    }
+
+
   }
 
-  // .otherServices {
-  //   h3 {
-  //     text-align: center;
-  //   }
-  // }
 }

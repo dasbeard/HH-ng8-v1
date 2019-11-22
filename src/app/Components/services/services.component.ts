@@ -1,18 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Services } from 'src/app/Models/user';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss']
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, OnChanges {
   
-  @Input() services: object;
+  // @Input() services: object;
+  @Input() services: Services;
+  @Input() bedCount: number;
+  
+  bedVariable: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-    // console.log( this.services );
+    
   }
+  
+  ngOnChanges(){
+    if( this.services.beds ){
+      this.bedVariable = true;
+    }
+    
+  }
+
 
 }

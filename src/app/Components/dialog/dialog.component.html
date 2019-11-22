@@ -1,5 +1,10 @@
 <div class="contianer">
-  <button mat-mini-fab type="button" class="closeBtn" (click)="closeDialog('close')">
+  <button
+    mat-mini-fab
+    type="button"
+    class="closeBtn"
+    (click)="closeDialog('close')"
+  >
     <mat-icon class="material-icons">
       close
     </mat-icon>
@@ -21,10 +26,20 @@
     </p>
 
     <div class="bottomBtns">
-      <button mat-raised-button type="button" color="primary" (click)="closeDialog('close')">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        (click)="closeDialog('close')"
+      >
         Cancel
       </button>
-      <button mat-raised-button type="button" color="warn" (click)="closeDialog('delete')">
+      <button
+        mat-raised-button
+        type="button"
+        color="warn"
+        (click)="closeDialog('delete')"
+      >
         Delete My Account
       </button>
     </div>
@@ -32,18 +47,22 @@
 
   <div *ngIf="identifier === 'editHours'" class="editHours">
     <h1>Edit Hours</h1>
-    
+
     <app-edit-hours
-    class="editHours"
-    *ngFor="let day of hoursArray; let i = index"
-    [dayInput]="day"
-    (dayOutput)="receiveTime($event)"
+      class="editHours"
+      *ngFor="let day of hoursArray; let i = index"
+      [dayInput]="day"
+      (dayOutput)="receiveTime($event)"
     >
-    </app-edit-hours> 
+    </app-edit-hours>
 
-
-     <div class="bottomBtns">
-      <button mat-raised-button type="button" color="accent" (click)="closeDialog('close')">
+    <div class="bottomBtns">
+      <button
+        mat-raised-button
+        type="button"
+        color="accent"
+        (click)="closeDialog('close')"
+      >
         Cancel
       </button>
 
@@ -57,38 +76,56 @@
         Update
       </button>
     </div>
-    
   </div>
+
+
 
 
   <div *ngIf="identifier === 'bedCount'" class="updateBedCount">
     <h1>Bed Count</h1>
 
-    <mat-form-field>
-      <input 
-      matInput
-      type="number"
-      min="0"
-      autocomplete="off"
-      [(ngModel)]='user$.bedCount'
-      >      
-    </mat-form-field>
+    <div class="bedsInput">
+
+      <mat-form-field>
+        <input
+        matInput
+        type="number"
+        min="0"
+        autocomplete="off"
+        [(ngModel)]="bedCount"
+        />
+      </mat-form-field>
+      
+    </div>
 
     <div class="bottomBtns">
-        <button mat-raised-button type="button" color="accent" (click)="closeDialog('close')">
-          Cancel
-        </button>
-  
-        <button
-          color="primary"
-          mat-raised-button
-          type="button"
-          (click)="updateBedCount(user$.bedCount)"
-        >
-          Update
-        </button>
-      </div>
+      <button
+        mat-raised-button
+        type="button"
+        color="accent"
+        (click)="closeDialog('close')"
+      >
+        Cancel
+      </button>
 
+      <button
+        color="primary"
+        mat-raised-button
+        type="button"
+        (click)="updateBedCount(bedCount)"
+      >
+        Update
+      </button>
+    </div>
   </div>
 
+
+
+
+
+  <div *ngIf="identifier === 'editImage'" class="editImage">
+    <h1>Update Your Image</h1>
+
+    <app-upload-image [userData]="user$"></app-upload-image>
+  </div>
 </div>

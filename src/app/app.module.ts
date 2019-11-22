@@ -51,6 +51,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 
 
@@ -71,6 +73,7 @@ import { AddOrgServicesComponent } from './Components/add-org-services/add-org-s
 import { AddOrgHoursComponent } from './Components/add-org-hours/add-org-hours.component';
 import { DialogComponent } from './Components/dialog/dialog.component';
 import { EditHoursComponent } from './Components/edit-hours/edit-hours.component';
+import { UploadImageComponent } from './Components/upload-image/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,8 @@ import { EditHoursComponent } from './Components/edit-hours/edit-hours.component
     AddOrgServicesComponent,
     AddOrgHoursComponent,
     DialogComponent,
-    EditHoursComponent
+    EditHoursComponent,
+    UploadImageComponent
   ],
   imports: [
     BrowserModule,
@@ -126,6 +130,7 @@ import { EditHoursComponent } from './Components/edit-hours/edit-hours.component
     MatDialogModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatRadioModule,
   ],
   entryComponents: [
     DialogComponent

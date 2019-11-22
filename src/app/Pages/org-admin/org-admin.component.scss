@@ -99,13 +99,40 @@
       grid-area: rightSide;
       // width: 100%;
 
-      img {
-        width: 100%;
+      .imageContainer {
+        width: 300px;
+        height: 275px;
+        position: relative;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .editImgBtn {
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          border: 1px solid rgba(0, 0, 0, $alpha: .5);
+          border-radius: 50%;
+          background-color: #fff;
+          box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+
+          mat-icon {
+            vertical-align: sub;
+          }
+
+        }
+
+        
       }
 
       .editHours {
+        
         .editBtn {
-          width: 100%;
+          margin: 10px 10% 5px;
+          width: 80%;
           cursor: pointer;
         }
       }

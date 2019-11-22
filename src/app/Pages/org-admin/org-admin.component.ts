@@ -3,13 +3,16 @@ import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { AuthService } from "src/app/Services/auth.service";
 import { User } from "../../Models/user";
 import { OrganizationsService } from "src/app/Services/organizations.service";
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DialogComponent } from 'src/app/Components/dialog/dialog.component';
-import { RegistationService } from 'src/app/Services/registation.service';
-
-
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from "@angular/forms";
+import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { DialogComponent } from "src/app/Components/dialog/dialog.component";
+import { RegistationService } from "src/app/Services/registation.service";
 
 @Component({
   selector: "app-org-admin",
@@ -17,16 +20,15 @@ import { RegistationService } from 'src/app/Services/registation.service';
   styleUrls: ["./org-admin.component.scss"]
 })
 export class OrgAdminComponent implements OnInit {
-  // user$: User = <User>{};
-  
+  user$: User;
+
   mainForm: FormGroup;
   servicesForm: FormGroup;
-  user$;
   orgId: string;
-  dialogData
+  dialogData;
 
-  hoursToEdit: string = 'hoursOfOperation';
-  hoursToEditString: string = 'Hours Of Operation'
+  hoursToEdit: string = "hoursOfOperation";
+  hoursToEditString: string = "Hours Of Operation";
 
   bedVariable: boolean;
 
@@ -40,37 +42,28 @@ export class OrgAdminComponent implements OnInit {
     private registrationService: RegistationService,
     private snackBar: MatSnackBar
   ) {
-    let id = this.route.snapshot.paramMap.get('id');
-    // console.log(id);
+    let id = this.route.snapshot.paramMap.get("id");
 
-    this.orgService.getOrganizationByUID( id ).subscribe( data => {
-      
-      // console.log(data);
-      if(data){
-
+    this.orgService.getOrganizationByUID(id).subscribe(data => {
+      if (data) {
         this.user$ = data;
         this.createForm();
-        this.bedVariable = this.mainForm.value.beds
-        // console.log(this.bedVariable);
-        
+        this.bedVariable = this.mainForm.value.beds;
       }
-        
-    })
-
+    });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  showServesFoodHours(value: boolean){
-    this.registrationService.updateServesFood(this.user$, value)
-    if(!value){
-      this.changeHoursToEdit('hoursOfOperation')
-      this.showSnackbar('No Longer Serving Food', 'Dismiss')
+  showServesFoodHours(value: boolean) {
+    this.registrationService.updateServesFood(this.user$, value);
+    if (!value) {
+      this.changeHoursToEdit("hoursOfOperation");
+      this.showSnackbar("No Longer Serving Food", "Dismiss");
     }
-    if(value){
-      this.changeHoursToEdit('hoursServingFood')
-      this.editHours()
+    if (value) {
+      this.changeHoursToEdit("hoursServingFood");
+      this.editHours();
     }
   }
 
@@ -90,167 +83,184 @@ export class OrgAdminComponent implements OnInit {
       jobPlacement: new FormControl(this.user$.services.jobPlacement),
       servesFood: new FormControl(this.user$.services.servesFood)
     });
-
   }
 
-  changeAddress(): void {
+  changeAddress() {
     // Open dialog with slect address component
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '75vw',
-      maxWidth: '800px',
-      minHeight: '45vh',
-      maxHeight: '85vh',
+      width: "75vw",
+      maxWidth: "800px",
+      minHeight: "45vh",
+      maxHeight: "85vh",
       data: {
-              identifier: 'Address', 
-              user: this.user$
-            }
+        identifier: "Address",
+        user: this.user$
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.showSnackbar('Address Updated', 'Dismiss')
-      });
-      
+      if (result) {
+        if (result.event.type === "close") {
+          // console.log("Address closed");
+        }
+        if (result.event.type === "addressUpdated") {
+          this.showSnackbar("Address Updated", "Dismiss");
+        }
+      }
+    });
   }
 
   updateProfile() {
     this.registrationService.updateProfile(this.user$, this.mainForm.value);
-    this.showSnackbar('Profile Updated', 'Dismiss')
+    this.showSnackbar("Profile Updated", "Dismiss");
   }
 
+  editImg() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: "75vw",
+      maxWidth: "800px",
+      minHeight: "45vh",
+      maxHeight: "85vh",
+      data: {
+        identifier: "editImage",
+        user: this.user$
+      }
+    });
+  }
 
-  editBedCount(){
+  editBedCount() {
     // console.log('test');
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '75vw',
-      maxWidth: '550px',
-      minHeight: '30vh',
-      maxHeight: '85vh',
+      width: "75vw",
+      maxWidth: "550px",
+      minHeight: "30vh",
+      maxHeight: "85vh",
       data: {
-              identifier: 'bedCount', 
-              user: this.user$,
-            }
-    })
+        identifier: "bedCount",
+        user: this.user$
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.event.type === "bedsUpdated") {
+          this.showSnackbar("Bed Count Updated", "Dismiss");
+        }
+      }
+    });
 
 
   }
-
-
 
   updateBedCount(value) {
     this.bedVariable = value;
 
-    if(value) {
+    if (value) {
       // Open Dialog to update bed count
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '75vw',
-        maxWidth: '550px',
-        minHeight: '30vh',
-        maxHeight: '85vh',
+        width: "75vw",
+        maxWidth: "550px",
+        minHeight: "30vh",
+        maxHeight: "85vh",
         data: {
-                identifier: 'bedCount', 
-                user: this.user$,
-              }
-      })
+          identifier: "bedCount",
+          user: this.user$
+        }
+      });
 
-      dialogRef.afterClosed().subscribe( result => {
-        if(result) {
-          if(result.event.type === "bedsUpdated"){
-            this.showSnackbar('Bed Count Updated', 'Dismiss')
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          if (result.event.type === "bedsUpdated") {
+            this.showSnackbar("Bed Count Updated", "Dismiss");
           } else {
             this.bedVariable = false;
-            this.mainForm.controls['beds'].setValue(false);
+            this.mainForm.controls["beds"].setValue(false);
           }
         } else {
           this.bedVariable = false;
-          this.mainForm.controls['beds'].setValue(false);
+          this.mainForm.controls["beds"].setValue(false);
         }
       });
-    }    
+    }
   }
 
-
-  showSnackbar(message: string, action){
-    this.snackBar.open(message, action, {duration: 1500})
+  showSnackbar(message: string, action) {
+    this.snackBar.open(message, action, { duration: 1500 });
   }
 
-  editHours(){
+  editHours() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '75vw',
-      maxWidth: '800px',
-      minHeight: '45vh',
-      maxHeight: '85vh',
+      width: "75vw",
+      maxWidth: "800px",
+      minHeight: "45vh",
+      maxHeight: "85vh",
       data: {
-              identifier: 'editHours', 
-              user: this.user$,
-              hours: this.hoursToEdit
-            }
-    })
+        identifier: "editHours",
+        user: this.user$,
+        hours: this.hoursToEdit
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        if(result.event.type === "Updated Hours") {
+      if (result) {
+        if (result.event.type === "Updated Hours") {
           this.changeHoursToEdit(result.event.hoursUpdated);
-          
-          if(result.event.hoursUpdated === 'hoursOfOperation') {
-            this.showSnackbar('Hours Of Operation Updated', 'Dismiss')
+
+          if (result.event.hoursUpdated === "hoursOfOperation") {
+            this.showSnackbar("Hours Of Operation Updated", "Dismiss");
           }
-          
-          if(result.event.hoursUpdated === 'hoursServingFood') {
-            this.showSnackbar('Hours Serving Food Updated', 'Dismiss')
+
+          if (result.event.hoursUpdated === "hoursServingFood") {
+            this.showSnackbar("Hours Serving Food Updated", "Dismiss");
           }
-          
-        } else if(result.event.type === "close") {
+        } else if (result.event.type === "close") {
           // console.log('closed');
         }
       }
-    })
-
+    });
   }
 
   changeHoursToEdit($event) {
-    this.hoursToEdit = $event;  
-    if (this.hoursToEdit === 'hoursOfOperation') {
-      this.hoursToEditString = 'Hours Of Operation'
+    this.hoursToEdit = $event;
+    if (this.hoursToEdit === "hoursOfOperation") {
+      this.hoursToEditString = "Hours Of Operation";
     }
-    if (this.hoursToEdit === 'hoursServingFood') {
-      this.hoursToEditString = 'Hours Serving Food'
+    if (this.hoursToEdit === "hoursServingFood") {
+      this.hoursToEditString = "Hours Serving Food";
     }
   }
 
   deleteUserDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '75vw',
-      maxWidth: '800px',
-      minHeight: '45vh',
-      maxHeight: '85vh',
+      width: "75vw",
+      maxWidth: "800px",
+      minHeight: "45vh",
+      maxHeight: "85vh",
       data: {
-              identifier: 'deleteUser', 
-              user: this.user$
-            }
+        identifier: "deleteUser",
+        user: this.user$
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        if(result.event.type === 'delete'){
-          console.log('Delete User');
+        if (result.event.type === "delete") {
+          console.log("Delete User");
           this.deleteUser();
         }
       }
-
     });
   }
 
   deleteUser() {
-    this.router.navigate([""]);    
-    
+    this.router.navigate([""]);
+
     setTimeout(() => {
       this.authService.deleteUser(this.user$);
     }, 250);
-
   }
 
   logout() {
     this.authService.signOut();
   }
-
 }

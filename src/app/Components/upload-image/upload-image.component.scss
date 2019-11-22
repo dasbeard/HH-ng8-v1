@@ -1,0 +1,83 @@
+.container {
+  max-height: 525px;
+  display: grid;
+  grid-template-columns: [leftSide]300px [rightSide]auto;
+
+  .leftSide {
+    // outline: 1px solid blue;
+
+    grid-area: leftSide;
+
+    .imgContainer {
+      margin: 0 auto;
+      height: 250px;
+      width: 250px;
+
+      img {
+        // outline: 1px solid green;
+
+        width: 100%;
+      }
+    }
+
+    .imageTitle {
+      text-align: center;
+    }
+  }
+
+  .rightSide {
+    // outline: 1px solid red;
+
+    grid-area: rightSide;
+    padding-left: 15px;
+
+    .uploadImage {
+      // outline: 1px solid darkcyan;
+      width: 100%;
+      height: 55px;
+      margin: 0 auto;
+
+      button {
+        margin-left: 10%;
+        height: 80%;
+        width: 80%;
+      }
+    }
+
+    .selectImage {
+      // outline: 1px solid purple;
+      width: 100%;
+      height: 225px;
+      // overflow-y: scroll;
+      // overflow-x: hidden;
+
+      h4 {
+        text-align: center;
+        margin-top: 5px;
+      }
+
+      .selectImageList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(175px, 200px));
+        gap: 5px;
+        padding-left: 10px;
+      }
+
+      .radioBox {
+        display: flex;
+        flex-direction: column;
+
+        .sampleImg {
+          height: 125px;
+          width: 125px;
+          object-fit: cover;
+        }
+
+        p {
+          text-align: center;
+          margin: 5px auto;
+        }
+      }
+    }
+  }
+}

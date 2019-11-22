@@ -73,7 +73,12 @@ export class DialogComponent implements OnInit {
     } else if ( data.identifier === 'bedCount') {
       this.identifier = data.identifier;
       this.user$ = data.user
-    } 
+      this.bedCount = data.user.bedCount;
+
+    } else if ( data.identifier === 'editImage' ) {
+      this.identifier = data.identifier;
+      this.user$ = data.user;
+    }
   }
 
   ngOnInit() {}
@@ -83,7 +88,7 @@ export class DialogComponent implements OnInit {
   
   
   updateBedCount(value){
-    console.log(value);
+    // console.log(value);
     this.registrationService.updateBedsAvailable(this.user$, true, value);
     
 
@@ -118,11 +123,11 @@ export class DialogComponent implements OnInit {
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
   receiveMessage($event) {
-    console.log($event);
-    this.closeDialog("address");
+    // console.log($event);
+    this.closeDialog($event);
   }
 
-  closeDialog(identifier: string) {    
+  closeDialog(identifier: string) {   
     let data = {
       type: identifier
     }

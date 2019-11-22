@@ -1,9 +1,32 @@
 <div class="container">
 
   <div class="mainServices">
-    <mat-checkbox [(ngModel)]="services.beds" [disabled]="true">
+    
+      <div class="beds">
+
+        <mat-checkbox *ngIf="bedVariable" [(ngModel)]="services.beds" [disabled]="true">
+          {{bedCount}} Beds Available
+        </mat-checkbox>
+
+        <mat-checkbox *ngIf="!bedVariable" [(ngModel)]="services.beds" [disabled]="true">
+          Beds Available
+        </mat-checkbox>
+
+
+        </div>
+    
+    
+    
+    
+    
+    <!-- <mat-checkbox [(ngModel)]="services.beds" [disabled]="true">
       Beds Available
-    </mat-checkbox>
+    </mat-checkbox> -->
+
+
+
+
+
 
     <mat-checkbox [(ngModel)]="services.childcare" [disabled]="true">
       Childcare Help

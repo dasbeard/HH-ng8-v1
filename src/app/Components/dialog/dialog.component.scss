@@ -11,6 +11,9 @@
     }
   }
 
+  h1{
+    text-align: center;
+  }
 
   .deleteUser {
     width: fit-content;
@@ -40,6 +43,21 @@
   .editHours {
     width: 525px;
     margin: 0 auto;
+  }
+  
+  
+  .updateBedCount {
+    width: 100%;
+    
+    .bedsInput {
+      text-align: center;
+
+      input {
+        text-align: center;
+        font-size: 1.5em;
+      }
+      
+    }
   }
 
 

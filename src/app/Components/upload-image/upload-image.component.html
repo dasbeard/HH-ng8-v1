@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="leftSide">
+    <div class="imgContainer">
+      <img src=" {{ photoToDisplay }}" alt="" />
+    </div>
+
+    <div class="imageTitle">
+      <p>Here is Where The Image Title Will Be</p>
+    </div>
+  </div>
+
+  <div class="rightSide">
+    <div class="uploadImage">
+      <button mat-raised-button color="primary">
+        Upload An Image
+      </button>
+    </div>
+
+    <h4>Or Select One From Below</h4>
+    <div class="selectImage">
+      <mat-radio-group aria-label="Select an image" class="selectImageList">
+        <mat-radio-button value="1" class="radioBox">
+          <img src="{{ churchImg }}"
+            alt="Image of a Church" 
+            class="sampleImg"
+            loading="lazy" 
+          />
+          <p>
+            Church
+          </p>
+        </mat-radio-button>
+
+        <mat-radio-button value="2" class="radioBox">
+          <img src="{{ shelterImg }}" 
+            alt="Image of a Shelter" 
+            class="sampleImg" 
+            loading="lazy" 
+            />
+          <p>
+            Shelter
+          </p>
+        </mat-radio-button>
+        
+      </mat-radio-group>
+    </div>
+  </div>
+</div>
