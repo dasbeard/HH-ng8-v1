@@ -1,12 +1,12 @@
 <div class="container">
   <h1>Welcome to Helping Hours</h1>
 
+  <!-- (mapClick)="mapClick($event)" -->
   <agm-map
-    (mapClick)="mapClick($event)"
     [latitude]="userLocation.lat"
     [longitude]="userLocation.lng"
-    [zoom]="userLocation.zoom"
     [scrollwheel]="null"
+    [zoom]="userLocation.zoom"
     [gestureHandling]="'cooperative'"
   >
     <agm-marker

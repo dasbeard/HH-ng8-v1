@@ -95,11 +95,11 @@ export class HomePageComponent implements OnInit {
     });
   }
 
-  mapClick() {
-    if (this.previousIW) {
-      this.previousIW.close();
-    }
-  }
+  // mapClick() {
+  //   if (this.previousIW) {
+  //     this.previousIW.close();
+  //   }
+  // }
 
   markerClick(infoWindow) {
     if (this.previousIW) {

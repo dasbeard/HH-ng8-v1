@@ -5,10 +5,10 @@
 
   <div class="autocomplete-container ">
     <div class="autocomplete" *ngIf="!oldAddress; else changeAddress">
+      <!-- [types]='[address, establishment]' -->
       <mat-google-maps-autocomplete
         country="us"
         [strictBounds]="true"
-        [types]="[address, establishment]"
         (onAutocompleteSelected)="onAutocompleteSelected($event)"
         (onLocationSelected)="onLocationSelected($event)"
       >
@@ -16,11 +16,11 @@
     </div>
 
     <ng-template #changeAddress class="autocomplete">
+      <!-- [types]="[address, establishment]" -->
       <mat-google-maps-autocomplete
         class="change"
         country="us"
         [strictBounds]="true"
-        [types]="[address, establishment]"
         (onAutocompleteSelected)="onAutocompleteSelected($event)"
         (onLocationSelected)="onLocationSelected($event)"
         [address]="oldAddress.user.fullAddress"

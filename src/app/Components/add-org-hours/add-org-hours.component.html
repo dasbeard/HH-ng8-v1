@@ -9,7 +9,9 @@
 
   <mat-card>
     <mat-vertical-stepper [linear]="false" #stepper>
-      <mat-step [stepControl]="hoursOfOperationStep">
+      <mat-step 
+      >
+      <!-- [stepControl]="hoursOfOperationStep" -->
         <ng-template matStepLabel>When are you open? </ng-template>
 
         <app-edit-hours
@@ -33,8 +35,8 @@
         </div>
       </mat-step>
 
+      <!-- [stepControl]="hoursServingFoodStep" -->
       <mat-step
-        [stepControl]="hoursServingFoodStep"
         *ngIf="user.services.servesFood"
       >
         <ng-template matStepLabel>What times do you serve food?? </ng-template>
