@@ -13,6 +13,7 @@ export class OrganizationPageComponent implements OnInit {
   organization: User;
   emailPlaceHolder: string = 'Email Us';
   clipboard: boolean = false;
+  orgImage;
 
   constructor(
     private orgService: OrganizationsService,
@@ -23,6 +24,8 @@ export class OrganizationPageComponent implements OnInit {
 
     this.orgService.getOrganizationByUID(uid).subscribe(orgData => {
       this.organization = orgData;
+      this.orgImage = this.orgService.getOrgImage(this.organization.photoName);
+
     });
   }
 

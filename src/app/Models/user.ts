@@ -1,3 +1,5 @@
+import { Url } from 'url';
+
 export interface CreateUser {
   email: string;
   password: string;
@@ -8,7 +10,8 @@ export interface User {
   uid: string;
   email: string;
   organization?: string;
-  photoURL?: string;
+  photoName?: string;
+  tempPhoto?: any;
   about?: string;
   website?:string;
   phone?:string;

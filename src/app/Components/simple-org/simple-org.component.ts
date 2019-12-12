@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { User } from "src/app/Models/user";
 import { ClickFunctionsService } from "src/app/Services/click-functions.service";
+import { OrganizationsService } from 'src/app/Services/organizations.service';
 
 @Component({
   selector: "app-simple-org",
@@ -25,12 +26,18 @@ export class SimpleOrgComponent implements OnInit {
 
   bedString: string;
   bedWarningClass: boolean;
+  orgImage;
 
   days: Array<string> = ["Sun", "Mon", "Tues", "Wen", "Thur", "Fri", "Sat"];
 
-  constructor(private clickFunction: ClickFunctionsService) {}
+  constructor(private clickFunction: ClickFunctionsService, private orgService: OrganizationsService) {
 
+    
+    
+  }
+  
   ngOnInit() {
+    this.orgImage = this.orgService.getOrgImage(this.org.photoName);
     this.createAddress();
 
     // Get Hours of Operation

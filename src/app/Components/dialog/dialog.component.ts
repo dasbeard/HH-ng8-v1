@@ -19,7 +19,7 @@ class day {
 })
 export class DialogComponent implements OnInit {
   identifier: string;
-  dataFromParent: object;
+  dataFromParent;
   dataToSendBack;
 
   hoursArray;
@@ -32,12 +32,21 @@ export class DialogComponent implements OnInit {
 
   bedCount: number = 0;
 
+// -~-~-~-~-~-~ Upload Image -~-~-~-~-~-~
+  uploadPercent;
+  imageData = {
+    imageSelected: false,
+    imgName: '',
+    fileToUpload: File = null
+  };
+
 
   constructor(
     private orgServices: OrganizationsService,
     private registrationService: RegistationService,
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private regService: RegistationService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
 
     if ( data.identifier === "Address" ) {
@@ -83,9 +92,6 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {}
 
-
-  // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-  
   
   updateBedCount(value){
     // console.log(value);
@@ -120,6 +126,50 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close({ event: sendBack });
   }
 
+
+  imageEventData($event) {
+    // console.log($event);
+    this.imageData = $event;
+  }
+
+
+  submitNewImage() {
+    if(this.imageData.imageSelected) {
+      if ( this.imageData.imgName === 'church') {
+        this.regService.updatePhotoName(this.user$.uid, 'church')
+        this.closeDialog('newImageSelected')        
+
+      } else if (this.imageData.imgName === 'shelter') {
+        this.regService.updatePhotoName(this.user$.uid, 'shelter')
+        this.closeDialog('newImageSelected')        
+
+      } else{
+        this.regService.updatePhotoName(this.user$.uid, this.imageData.fileToUpload)
+        
+        this.regService.uploadPercent.subscribe( data => {          
+          if(data) {
+            this.uploadPercent = data;
+
+            if( this.uploadPercent === 100 ) {
+              setTimeout(() => {
+                
+                this.closeDialog('newImageUploaded')        
+              }, 250);
+
+              // this.closeDialog('newImageUploaded')        
+            }
+          }
+        })
+      }
+    }
+    
+  }
+
+
+
+
+
+
   // -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
   receiveMessage($event) {
@@ -132,6 +182,5 @@ export class DialogComponent implements OnInit {
       type: identifier
     }
     this.dialogRef.close({ event: data });
-    // this.dialogRef.close({event:'close',data:this.fromDialog});
   }
 }

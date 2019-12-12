@@ -1,7 +1,6 @@
 <div class="container">
   <h1>Welcome to Helping Hours</h1>
 
-  <!-- (mapClick)="mapClick($event)" -->
   <agm-map
     [latitude]="userLocation.lat"
     [longitude]="userLocation.lng"
@@ -11,11 +10,12 @@
   >
     <agm-marker
       (markerClick)="markerClick(iw)"
-      *ngFor="let org of allOrgs; async"
+      *ngFor="let org of allOrgs"
+
       [latitude]="org.latLng.latitude"
       [longitude]="org.latLng.longitude"
     >
-      <agm-info-window #iw>
+      <agm-info-window #iw >
         <div class="infoMarker">
           <h3
             class="pHover"
@@ -36,7 +36,7 @@
             <img
               [routerLink]="['/Organization', org.uid]"
               title="Visit {{ org.organization }}'s page"
-              src="https://firebasestorage.googleapis.com/v0/b/hh-ng8-v1.appspot.com/o/Temp%2FChurch.jpg?alt=media&token=42710afe-d701-4b55-ad2a-f16a9bc7c904"
+              src="{{org?.tempPhoto | async}}"
               alt=""
             />
             <div class="contact">

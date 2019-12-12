@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/Models/user';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class OrganizationsService {
   
   private allOrganizationsCollection: AngularFirestoreCollection<User>;
 
-  constructor( private afs: AngularFirestore, ) {
+  constructor( 
+    private afs: AngularFirestore, 
+    private storage: AngularFireStorage,
+    ) {
     this.allOrganizationsCollection = afs.collection<User>('users');
   }
   
@@ -31,6 +35,10 @@ export class OrganizationsService {
     this.hoursDoc = this.afs.doc(`users/${uid}`);
     return this.hoursDoc.snapshotChanges();
     
+  }
+
+  getOrgImage( imageName:string ) {
+    return this.storage.ref(`userImages/${imageName}`).getDownloadURL();
   }
 
 

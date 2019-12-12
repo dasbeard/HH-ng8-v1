@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "../Models/user";
 // import { AngularFireStorage } from "@angular/fire/storage";
@@ -7,6 +7,8 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
@@ -16,8 +18,14 @@ export class RegistationService {
   newUserAfsDoc: AngularFirestoreDocument<User>;
   userAfsDoc: AngularFirestoreDocument<User>;
   updateUser: AngularFirestoreDocument<User>;
+  uploadPercent: Observable<number>;
 
-  constructor(private router: Router, private afs: AngularFirestore) {}
+
+  constructor(
+    private router: Router, 
+    private afs: AngularFirestore, 
+    private storage: AngularFireStorage
+  ) {}
 
   startNewUser(data: User) {
 
@@ -27,6 +35,60 @@ export class RegistationService {
 
     this.router.navigateByUrl("/Register");
   }
+
+
+  updatePhotoName(uid: string, input: any) {
+    // console.log(uid, input);
+    this.updateUser = this.afs.doc<User>(`users/${uid}`);
+    
+    let tempPhotoName: string;
+    
+
+    if( input === 'shelter' ) {
+      tempPhotoName = 'Shelter.jpg'
+    } else if( input === 'church' ) {
+      tempPhotoName = 'Church.jpg'
+    } else { 
+      let extension = this.getImageExtension(input)
+      tempPhotoName = `${uid}.${extension}`;
+      this.uploadImage(uid, extension, input);
+    }
+
+    let dataToUpdate = { photoName: tempPhotoName};
+
+    this.updateUser.update(dataToUpdate)
+      .catch( error => console.log(error)
+      )
+
+  }
+
+  getImageExtension(imageName) {
+    var [name, extension] = imageName.name.split('.')
+    .reduce((acc, val, i, arr) => (i == arr.length - 1) 
+        ? [acc[0].substring(1), val] 
+        : [[acc[0], val].join('.')], []);
+
+    return extension;
+
+  }
+
+
+  uploadImage(uid: string, extension:string, photo: any) {
+    console.log('Uploading Image');
+    
+    const fileName = `${uid}.${extension}`;
+
+    const filePath = `userImages/${fileName}`;
+    // const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, photo);
+
+    this.uploadPercent = task.percentageChanges();
+
+  }
+
+
+
+
 
 
   buildUserLocation(data, latLng) {
@@ -59,8 +121,6 @@ export class RegistationService {
     this.router.navigate(["/Register/Services"]);
   }
 
-
-
   addUserServices(services, otherServices, bedCount) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
     // console.log(services, otherServices, bedCount);
@@ -81,7 +141,6 @@ export class RegistationService {
     
   }
 
-
   updateBedsAvailable(user: User, status: boolean, bedCount: number){
     let updatedData = user;
     updatedData.services.beds = status;
@@ -92,7 +151,6 @@ export class RegistationService {
     localStorage.setItem("user", JSON.stringify(updatedData));
     
   }
-
 
   updateServesFood(user: User, value: boolean){
     let updatedData = user;
@@ -106,7 +164,6 @@ export class RegistationService {
     localStorage.setItem("user", JSON.stringify(updatedData));
 
   }
-
 
   addUserHours(identifier, data, user){
       this.newUser = user;
@@ -128,7 +185,6 @@ export class RegistationService {
     
   }
 
-
   updateAddress(locationResults, latLng, oldData: User) {
     let userToUpdate:User = oldData;
 
@@ -143,7 +199,6 @@ export class RegistationService {
     // update user in localStorage
     localStorage.setItem("user", JSON.stringify(userToUpdate));
   }
-
 
   updateProfile(oldData, newData){
     let newProfile: User = oldData;
@@ -182,8 +237,6 @@ export class RegistationService {
     
     // console.log('Data saved to firebase');
   }
-
-
 
   updateUserHours(user: User, identifier, newHours){
     let updatedUser: User = user;

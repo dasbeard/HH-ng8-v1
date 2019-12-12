@@ -52,6 +52,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 
@@ -131,6 +132,7 @@ import { UploadImageComponent } from './Components/upload-image/upload-image.com
     MatMenuModule,
     MatSnackBarModule,
     MatRadioModule,
+    MatProgressBarModule,
   ],
   entryComponents: [
     DialogComponent

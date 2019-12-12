@@ -22,6 +22,8 @@ import { RegistationService } from "src/app/Services/registation.service";
 export class OrgAdminComponent implements OnInit {
   user$: User;
 
+  orgImage;
+
   mainForm: FormGroup;
   servicesForm: FormGroup;
   orgId: string;
@@ -49,6 +51,7 @@ export class OrgAdminComponent implements OnInit {
         this.user$ = data;
         this.createForm();
         this.bedVariable = this.mainForm.value.beds;
+        this.orgImage = this.orgService.getOrgImage(this.user$.photoName);
       }
     });
   }
@@ -126,10 +129,24 @@ export class OrgAdminComponent implements OnInit {
         user: this.user$
       }
     });
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(result.event);
+      if (result) {
+        if (result.event.type === "newImageUploaded") {
+          setTimeout(() => {
+            this.orgImage = this.orgService.getOrgImage(this.user$.photoName);
+            this.showSnackbar("New Photo Uploaded", "Dismiss");
+          }, 750);
+
+        } 
+      }
+    });
+
   }
 
   editBedCount() {
-    // console.log('test');
     const dialogRef = this.dialog.open(DialogComponent, {
       width: "75vw",
       maxWidth: "550px",
@@ -148,7 +165,6 @@ export class OrgAdminComponent implements OnInit {
         }
       }
     });
-
 
   }
 

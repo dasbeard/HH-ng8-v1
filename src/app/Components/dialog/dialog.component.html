@@ -126,6 +126,50 @@
   <div *ngIf="identifier === 'editImage'" class="editImage">
     <h1>Update Your Image</h1>
 
-    <app-upload-image [userData]="user$"></app-upload-image>
+    <app-upload-image 
+    [userData]="user$" 
+    [updatePhoto]="true" 
+    (dataEventToParent)='imageEventData($event)'
+    ></app-upload-image>
+
+
+    <div class="bottomBtns">
+        <button
+          mat-raised-button
+          type="button"
+          color="accent"
+          (click)="closeDialog('close')"
+        >
+          Cancel
+        </button>
+  
+        <button
+          [disabled]="!imageData.imageSelected"
+          color="primary"
+          mat-raised-button
+          type="button"
+          (click)="submitNewImage()"
+          >
+          Update
+        </button>
+      </div>
+
+
+
+      <!-- <div class="progressBar"> -->
+        <div *ngIf="uploadPercent as pct">
+          <mat-progress-bar
+            mode="determinate"
+            [value]="uploadPercent"
+          ></mat-progress-bar>
+  
+          {{ pct | number }}%
+        </div>
+      <!-- </div> -->
+
+
+
+
+      
   </div>
 </div>

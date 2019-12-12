@@ -1,46 +1,67 @@
 <div class="container">
   <div class="leftSide">
+
     <div class="imgContainer">
-      <img src=" {{ photoToDisplay }}" alt="" />
+
+
+      <img *ngIf='preview' src="{{imageToDisplay | async}}" alt="" />
+      <img *ngIf='!preview' [src]="imageToDisplay" alt="" />
     </div>
 
-    <div class="imageTitle">
-      <p>Here is Where The Image Title Will Be</p>
-    </div>
+
+
+
   </div>
 
   <div class="rightSide">
     <div class="uploadImage">
-      <button mat-raised-button color="primary">
-        Upload An Image
+      <input
+        tabindex="-1"
+        type="file"
+        (change)="imagePreview($event.srcElement.files)"
+        accept="image/*"
+        #fileInput
+        hidden
+      />
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="fileInput.click()"
+        title="Upload and image"
+      >
+        Upload An Image <span>(max size 150kb)</span>
       </button>
     </div>
 
     <h4>Or Select One From Below</h4>
     <div class="selectImage">
-      <mat-radio-group aria-label="Select an image" class="selectImageList">
-        <mat-radio-button value="1" class="radioBox">
-          <img src="{{ churchImg }}"
-            alt="Image of a Church" 
+      <mat-radio-group
+        aria-label="Select an image"
+        class="selectImageList"
+        (change)="radioSelectImage($event)"
+      >
+        <mat-radio-button value="church" class="radioBox">
+          <img
+            src="{{churchImg | async}}"
+            alt="Image of a Church"
             class="sampleImg"
-            loading="lazy" 
           />
           <p>
             Church
           </p>
         </mat-radio-button>
 
-        <mat-radio-button value="2" class="radioBox">
-          <img src="{{ shelterImg }}" 
-            alt="Image of a Shelter" 
-            class="sampleImg" 
-            loading="lazy" 
-            />
+        <mat-radio-button value="shelter" class="radioBox">
+          <img
+            src="{{shelterImg | async}}"
+            alt="Image of a Shelter"
+            class="sampleImg"
+          />
           <p>
             Shelter
           </p>
         </mat-radio-button>
-        
       </mat-radio-group>
     </div>
   </div>

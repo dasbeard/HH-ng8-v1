@@ -9,20 +9,22 @@
     grid-area: leftSide;
 
     .imgContainer {
+      // !! Set as same size as simpleOrg Image
       margin: 0 auto;
       height: 250px;
       width: 250px;
 
       img {
-        // outline: 1px solid green;
+        outline: 1px solid green;
 
         width: 100%;
+        height: 100%;
       }
     }
 
-    .imageTitle {
-      text-align: center;
-    }
+    // .imageTitle {
+    //   text-align: center;
+    // }
   }
 
   .rightSide {
