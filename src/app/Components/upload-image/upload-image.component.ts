@@ -42,8 +42,8 @@ export class UploadImageComponent implements OnInit {
     
   }
   
-  ngOnInit() {
-    
+  ngOnInit() {    
+
     this.getImages();
 
     this.preview = true;
@@ -64,7 +64,7 @@ export class UploadImageComponent implements OnInit {
 
 
   imagePreview(file: FileList) {
-    console.log('temp');
+    // console.log('temp');
     
     
     this.dataForParent.fileToUpload = file.item(0);
@@ -114,6 +114,7 @@ export class UploadImageComponent implements OnInit {
 
   
     if(input.value === 'church') {
+      this.preview = true;
       this.imageToDisplay = this.churchImg
       this.dataForParent.imgName = 'church';
       // console.log(this.dataForParent);
@@ -121,12 +122,15 @@ export class UploadImageComponent implements OnInit {
       this.dataEventToParent.emit(this.dataForParent);
     } 
     else if ( input.value === 'shelter' ) {
+      this.preview = true;
       this.imageToDisplay = this.shelterImg
       this.dataForParent.imgName = 'shelter';
       // console.log(this.dataForParent);
       
       this.dataEventToParent.emit(this.dataForParent);
     } else {
+      // ** Not Sure if this else is needed
+
       this.dataForParent.imgName = this.userData.uid;
       // console.log(this.dataForParent);
       

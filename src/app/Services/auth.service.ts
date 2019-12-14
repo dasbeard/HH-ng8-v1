@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import {
   AngularFirestore,
@@ -9,7 +8,7 @@ import {
 } from "@angular/fire/firestore";
 
 import { Observable, of } from "rxjs";
-import { switchMap, tap, take, map } from "rxjs/operators";
+import { switchMap } from "rxjs/operators";
 
 import { CreateUser, User } from "./../Models/user";
 import { RegistationService } from "./registation.service";
@@ -38,30 +37,50 @@ export class AuthService {
     );
   }
 
+
+
   async createUser(user: CreateUser) {
     this.afAuth.auth
       .createUserWithEmailAndPassword(user.email, user.password)
-      .then(data => {
-        const uid = data.user.uid;
-
-        this.afs
-          .collection<CreateUser>(`users`)
-          .doc(uid)
-          .set({
-            email: user.email,
-            organization: user.organization,
-            uid: uid
-          });
-
-        const sendToRegService = {
-          email: user.email,
-          organization: user.organization,
-          uid: uid
-        };
-
-        this.regService.startNewUser(sendToRegService);
+      .then(data => {    
+          let newUser = {
+            uid: data.user.uid, 
+            email: user.email, 
+            organization: user.organization 
+          };
+        
+          // console.log(newUser);
+        
+        this.regService.startNewUser(newUser);
       });
   }
+
+
+
+  // async createUser(user: CreateUser) {
+  //   this.afAuth.auth
+  //     .createUserWithEmailAndPassword(user.email, user.password)
+  //     .then(data => {
+  //       const uid = data.user.uid;
+
+  //       this.afs
+  //         .collection<CreateUser>(`users`)
+  //         .doc(uid)
+  //         .set({
+  //           email: user.email,
+  //           organization: user.organization,
+  //           uid: uid
+  //         });
+
+  //       const sendToRegService = {
+  //         email: user.email,
+  //         organization: user.organization,
+  //         uid: uid
+  //       };
+
+  //       this.regService.startNewUser(sendToRegService);
+  //     });
+  // }
 
   async signIn(user: CreateUser) {
     const credential = await this.afAuth.auth.signInWithEmailAndPassword(

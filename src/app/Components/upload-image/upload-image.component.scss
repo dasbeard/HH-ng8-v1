@@ -10,7 +10,7 @@
 
     .imgContainer {
       // !! Set as same size as simpleOrg Image
-      margin: 0 auto;
+      margin: 15px auto 0;
       height: 250px;
       width: 250px;
 
@@ -49,9 +49,8 @@
     .selectImage {
       // outline: 1px solid purple;
       width: 100%;
-      height: 225px;
-      // overflow-y: scroll;
-      // overflow-x: hidden;
+      max-height: 225px;
+      overflow-x: auto;
 
       h4 {
         text-align: center;

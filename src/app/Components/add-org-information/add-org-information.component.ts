@@ -33,6 +33,16 @@ export class AddOrgInformationComponent implements OnInit {
   nameFormGroup: FormGroup;
   emailFormGroup: FormGroup;
 
+
+
+  uploadPercent;
+  imageName: string;
+  imageData = {
+    imageSelected: false,
+    imgName: '',
+    fileToUpload: File = null
+  };
+
   public mask = [
     "(",
     /[1-9]/,
@@ -106,15 +116,86 @@ export class AddOrgInformationComponent implements OnInit {
     });
   }
 
+
+//  -~-~-~-~-~-~-~ Image -~-~-~-~-~-~-~-~-~
+
+imageEventData($event) {
+  // console.log($event);
+  this.imageData = $event;
+  this.submitImage()
+}
+
+
+submitImage() {
+  if(this.imageData.imageSelected) {
+    if ( this.imageData.imgName === 'church') {
+      this.imageName = 'Church.jpg';
+      // console.log(this.imageName);
+      
+    } else if (this.imageData.imgName === 'shelter') {
+      this.imageName = 'Shelter.jpg';
+      // console.log(this.imageName);
+
+
+    } else{
+
+      let ext = this.regService.getImageExtension(this.imageData.fileToUpload);
+      this.imageName = this.user.uid + '.' + ext;
+      // console.log(this.imageName);
+      
+    }
+  }
+  
+}
+
+
+
+
+
+
+//  -~-~-~-~-~-~-~ End Image -~-~-~-~-~-~-~-~-~
+
+
+
+
   saveBasicInfo() {
     const basicOrgInfo = {
       about: this.formGroup.value.formArray[0].about,
       website: this.formGroup.value.formArray[1].website,
       phone: this.formGroup.value.formArray[2].phone,
       contactEmail: this.formGroup.value.formArray[3].contactEmail,
+      photoName: this.imageName
     };
 
+
+
+
+    console.log(this.imageName);
+    
+
+    if( this.imageName === 'Church.jpg'){
+      this.regService.addUserInfo(basicOrgInfo);
+    } else if( this.imageName === 'Shelter.jpg'){
+      this.regService.addUserInfo(basicOrgInfo);
+    } else {
+
+      this.regService.uploadNewImage(this.user.uid, this.imageData.fileToUpload);
+      
+      this.regService.uploadPercent.subscribe( data => {          
+        if(data) {
+          this.uploadPercent = data;
+          
+          if( this.uploadPercent === 100 ) {
+              this.regService.addUserInfo(basicOrgInfo);
+            }
+        }
+      })
+    }
+
+
+
+
+ 
     // console.log(basicOrgInfo);
-    this.regService.addUserInfo(basicOrgInfo);
   }
 }

@@ -10,6 +10,37 @@
         formArrayName="formArray"
         [linear]="true"
       >
+
+        <mat-step class="uploadImageContainer" >
+          <ng-template matStepLabel >
+            <div>Upload an Image</div>
+          </ng-template>
+
+          <div class="imageContainer">
+
+            <app-upload-image
+            [userData]="user" 
+            [updatePhoto]="false" 
+            (dataEventToParent)='imageEventData($event)'
+            ></app-upload-image>
+          </div>
+            
+            <div class="stepperBtn">
+            <button 
+              type="button" 
+              mat-raised-button 
+              color='primary' 
+              matStepperNext
+              [disabled]="!imageData.imageSelected"
+              (click)='submitImage()'
+              >
+              Next
+            </button>
+          </div>
+        </mat-step>
+
+
+
         <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
           <ng-template matStepLabel>
             <div>Tell us a little bit about your organization</div>

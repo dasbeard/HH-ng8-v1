@@ -1,4 +1,3 @@
-import { Url } from 'url';
 
 export interface CreateUser {
   email: string;
@@ -9,7 +8,7 @@ export interface CreateUser {
 export interface User {
   uid: string;
   email: string;
-  organization?: string;
+  organization: string;
   photoName?: string;
   tempPhoto?: any;
   about?: string;

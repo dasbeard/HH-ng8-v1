@@ -89,10 +89,13 @@ export class HomePageComponent implements OnInit {
 
   getAllOrgs() {
     this.orgService.getAllOrgs().subscribe(data => {
-      data.forEach( org => {
-        org.tempPhoto = this.orgService.getOrgImage(org.photoName);
-      })
-      this.allOrgs = data;
+      if(data){
+
+        data.forEach( org => {
+          org.tempPhoto = this.orgService.getOrgImage(org.photoName);
+        })
+        this.allOrgs = data;
+      }
     });
   }
 

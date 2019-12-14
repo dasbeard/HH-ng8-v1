@@ -48,6 +48,8 @@ export class OrgAdminComponent implements OnInit {
 
     this.orgService.getOrganizationByUID(id).subscribe(data => {
       if (data) {
+        // console.log(data);
+        
         this.user$ = data;
         this.createForm();
         this.bedVariable = this.mainForm.value.beds;

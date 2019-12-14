@@ -100,9 +100,7 @@ export class AddOrgHoursComponent implements OnInit {
   }
 
   validateAllDays(dataArray: Array<day>, identifier: string) {
-    // console.log('Validate Days Ran');
-    // console.log(dataArray);
-
+    
     if (identifier === "HOP") {
       if (dataArray.find(day => day.error === true)) {
         this.HOPErrors = true;
