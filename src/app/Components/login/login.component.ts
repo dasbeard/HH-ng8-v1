@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   hidePass: boolean = true;
 
   loginForm: FormGroup;
-  isSubmitted = false;
+  // isSubmitted = false;
 
   register:boolean = false;
 
@@ -26,33 +26,32 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ["", Validators.required],
-      password: ["", Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
+
   }
 
   get formControls() {
     return this.loginForm.controls;
   }
 
-  login() {
-    // console.log(this.loginForm.value);
-    this.isSubmitted = true;
-    if (this.loginForm.invalid) {
-      this.loginForm.reset();
-      return;
-    }
-    this.authService.signIn(this.loginForm.value);
+  login(values) {
+    // console.log(values);
+    // if (this.loginForm.invalid) {
+    //   this.loginForm.reset();
+    //   return;
+    // }
+    this.authService.signIn(values);
   }
 
   newClient() {
     this.registerNewClient.emit(true);
   }
+  
+  getErrorMessage() {
+    return  this.loginForm.controls.email.hasError('required') ? 'You must enter a value' :
+    this.loginForm.controls.email.hasError('email') ? 'Not a valid email' :
+    '';
+  }
 }
-
-// getErrorMessage() {
-//   // !! Not Currently being Used
-//   return  this.email.hasError('required') ? 'You must enter a value' :
-//           this.email.hasError('email') ? 'Not a valid email' :
-//           '';
-// }

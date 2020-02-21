@@ -3,18 +3,20 @@
 
   <div class="mainContent">
     <div class="login-container">
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-form-field>
-          <input
-            matInput
-            placeholder="Enter your email"
-            formControlName="email"
-            required
-          />
-          <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
-        </mat-form-field>
 
-        <mat-form-field>
+      <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <mat-form-field [hideRequiredMarker]='true'>
+        <input
+          matInput
+          placeholder="Enter your email"
+          formControlName="email"          
+          required
+        />
+        <mat-error *ngIf="loginForm.controls.email.invalid && !loginForm.controls.email.pristine">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      
+      <mat-form-field [hideRequiredMarker]='true'> 
           <input
             matInput
             placeholder="Enter your password"
@@ -42,8 +44,9 @@
           color="primary"
           type="submit"
           class="loginBTN"
-        >
-          Login
+          [disabled]="!loginForm.valid"
+          >
+        Login
         </button>
       </form>
 

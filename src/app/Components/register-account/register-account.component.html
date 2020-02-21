@@ -8,9 +8,8 @@
           matInput
           placeholder="Organization's Name"
           formControlName="organization"
-          required
+          required          
         />
-        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
         <mat-hint align="start"
           ><strong>What's the name of your Organization?</strong>
         </mat-hint>
@@ -26,7 +25,7 @@
         <mat-hint align="start"
           ><strong>This is will be your User ID</strong>
         </mat-hint>
-        <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+        <mat-error *ngIf="registerForm.controls.email.invalid && !registerForm.controls.email.pristine">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -35,6 +34,7 @@
           placeholder="Enter your Password"
           formControlName="password"
           required
+          minLength="6"
           [type]="hidePass ? 'password' : 'text'"
         />
         <button
@@ -48,9 +48,14 @@
         >
           <mat-icon>{{ hidePass ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
+      
         <mat-hint align="start"
           ><strong>Don't disclose personal info</strong>
         </mat-hint>
+        <mat-error *ngIf="registerForm.controls.password.hasError">
+          {{getErrorMessagePass()}}
+        </mat-error>
+      
       </mat-form-field>
 
       <mat-form-field>
@@ -59,8 +64,11 @@
           placeholder="Confirm your Password"
           formControlName="confirmPassword"
           required
+          minLength="6"
           [type]="hidePassConf ? 'password' : 'text'"
-        />
+          [errorStateMatcher]="matcher"
+          />
+
         <button
           tabindex="-1"
           mat-icon-button
@@ -77,6 +85,11 @@
         <mat-hint align="start"
           ><strong>Confirm your password</strong>
         </mat-hint>
+
+        <mat-error *ngIf="registerForm.hasError('notSame')">
+          Passwords do not match
+        </mat-error> 
+        
       </mat-form-field>
 
       <button
@@ -84,6 +97,7 @@
         color="primary"
         type="submit"
         class="registerBTN"
+        [disabled]="!registerForm.valid"
       >
         Continue
       </button>
@@ -102,6 +116,8 @@
         </button>
       </div>
     </div>
-    <!-- </div> -->
+
+    <p class="allRequired">* All fields required</p>
+
   </div>
 </div>
