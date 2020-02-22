@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, ParamMap } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "src/app/Services/auth.service";
 import { User } from "../../Models/user";
 import { OrganizationsService } from "src/app/Services/organizations.service";
@@ -19,7 +19,7 @@ import { RegistationService } from "src/app/Services/registation.service";
   templateUrl: "./org-admin.component.html",
   styleUrls: ["./org-admin.component.scss"]
 })
-export class OrgAdminComponent implements OnInit {
+export class OrgAdminComponent implements OnInit{
   user$: User;
 
   orgImage;
@@ -33,6 +33,8 @@ export class OrgAdminComponent implements OnInit {
   hoursToEditString: string = "Hours Of Operation";
 
   bedVariable: boolean;
+
+  updateProfileCheck:boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -56,7 +58,20 @@ export class OrgAdminComponent implements OnInit {
         this.orgImage = this.orgService.getOrgImage(this.user$.photoName);
       }
     });
+    this.onChanges()
   }
+
+  onChanges():void {
+
+    setTimeout(() => {
+      
+      this.mainForm.valueChanges.subscribe(val => {
+        this.updateProfileCheck = true        
+      });
+    }, 500);
+
+  }
+
 
   ngOnInit() {}
 
@@ -118,6 +133,7 @@ export class OrgAdminComponent implements OnInit {
   updateProfile() {
     this.registrationService.updateProfile(this.user$, this.mainForm.value);
     this.showSnackbar("Profile Updated", "Dismiss");
+    this.updateProfileCheck = false
   }
 
   editImg() {

@@ -181,9 +181,9 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="!mainForm.valid"
       (click)="updateProfile()"
-    >
+      [disabled]=" !updateProfileCheck"
+      >
       Update Profile
     </button>
     <button mat-raised-button color="warn" (click)="deleteUserDialog()">
