@@ -1,8 +1,19 @@
 <div class="container">
+
+  <!-- <div class="error" color="warn"> 
+    <h2>
+      The email address is already in use by Another Account
+    </h2> 
+  </div> -->
+  
+  <mat-card class="error" *ngIf="error"> {{errorMessage}} </mat-card>
+
+
+
   <h1>LETS GET STARTED!</h1>
 
   <div class="registerContainer">
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
       <mat-form-field>
         <input
           matInput

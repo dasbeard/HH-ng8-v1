@@ -26,6 +26,8 @@ export class AuthService {
     private router: Router,
     private regService: RegistationService
   ) {
+
+
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -37,10 +39,8 @@ export class AuthService {
     );
   }
 
-
-
   async createUser(user: CreateUser) {
-    this.afAuth.auth
+    let data = await this.afAuth.auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(data => {    
           let newUser = {
@@ -52,53 +52,49 @@ export class AuthService {
           // console.log(newUser);
         
         this.regService.startNewUser(newUser);
+        return ' success'
+      }).catch(error => {
+        // console.log(error);
+        return error
       });
+
+      return { data: data}
   }
 
 
-
-  // async createUser(user: CreateUser) {
-  //   this.afAuth.auth
-  //     .createUserWithEmailAndPassword(user.email, user.password)
-  //     .then(data => {
-  //       const uid = data.user.uid;
-
-  //       this.afs
-  //         .collection<CreateUser>(`users`)
-  //         .doc(uid)
-  //         .set({
-  //           email: user.email,
-  //           organization: user.organization,
-  //           uid: uid
-  //         });
-
-  //       const sendToRegService = {
-  //         email: user.email,
-  //         organization: user.organization,
-  //         uid: uid
-  //       };
-
-  //       this.regService.startNewUser(sendToRegService);
-  //     });
-  // }
 
   async signIn(user: CreateUser) {
-    const credential = await this.afAuth.auth.signInWithEmailAndPassword(
+
+    let data = await this.afAuth.auth.signInWithEmailAndPassword(
       user.email,
       user.password
-    );
+    ).then(userCredential => {
 
-    this.newUserAfsDoc = this.afs.doc(`users/${credential.user.uid}`);
-    this.newUserAfsDoc.valueChanges().subscribe(user => {
-      // console.log(user);
-      localStorage.setItem("user", JSON.stringify(user));
-    });
-
-    this.router.navigate([`/OrgAdmin/${credential.user.uid}`]);
-
-    // return credential.user;
-    // return this.updateUserData(credential.user);
+      this.newUserAfsDoc = this.afs.doc(`users/${userCredential.user.uid}`);
+      this.newUserAfsDoc.valueChanges().subscribe(user => {
+        localStorage.setItem("user", JSON.stringify(user));
+      });
+      this.router.navigate([`/OrgAdmin/${userCredential.user.uid}`]);
+      return 'success';
+      
+    }).catch(error => {
+      var errorCode = error.code;
+      // var errorMessage = error.message;
+      
+      if (errorCode === 'auth/wrong-password') {
+        return 'Wrong Password'
+      } else if (errorCode === 'auth/too-many-requests') {
+        return 'Too Many Request - Wait and try again'
+      } else if(errorCode === 'auth/user-not-found') {
+        return 'Username Not Found'
+      } else {
+        return 'Something went wrong - We will look into it'
+      }
+    })
+    return await {data: data}
   }
+      
+  
 
 
   async signOut() {

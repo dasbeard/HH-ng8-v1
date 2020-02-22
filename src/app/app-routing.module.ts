@@ -47,7 +47,7 @@ const routes: Routes = [
     path: "OrgAdmin/:id",
     // pathMatch: "full",
     component: OrgAdminComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
 
   

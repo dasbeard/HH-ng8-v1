@@ -39,6 +39,13 @@
           </button>
         </mat-form-field>
 
+        <mat-error *ngIf="showLoginError">
+          {{loginError}}
+        </mat-error>
+
+
+
+
         <button
           mat-raised-button
           color="primary"

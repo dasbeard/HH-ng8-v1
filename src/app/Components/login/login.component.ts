@@ -10,11 +10,11 @@ import { AuthService } from "../../Services/auth.service";
 })
 export class LoginComponent implements OnInit {
   hidePass: boolean = true;
-
   loginForm: FormGroup;
-  // isSubmitted = false;
-
   register:boolean = false;
+  
+  showLoginError:boolean = false;
+  loginError:String = '';
 
   @Output() registerNewClient = new EventEmitter<boolean>();
 
@@ -36,14 +36,22 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-  login(values) {
-    // console.log(values);
-    // if (this.loginForm.invalid) {
-    //   this.loginForm.reset();
-    //   return;
-    // }
-    this.authService.signIn(values);
+  async login(formValues) {
+    this.showLoginError=false;
+
+    let temp = await this.authService.signIn(formValues);
+
+    if (temp.data === 'success') {
+      // console.log(temp.data);
+      this.loginForm.reset();
+    } else {
+      this.showLoginError = true;
+      this.loginError = temp.data;
+      this.loginForm.reset({email: formValues.email,password: ''});
+    }
+
   }
+
 
   newClient() {
     this.registerNewClient.emit(true);

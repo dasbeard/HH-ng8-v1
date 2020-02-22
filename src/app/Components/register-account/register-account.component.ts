@@ -28,6 +28,8 @@ export class RegisterAccountComponent implements OnInit {
   
   matcher = new MyErrorStateMatcher();
 
+  error:boolean = false;
+  errorMessage:String = '';
 
   constructor(
     private authService: AuthService,
@@ -48,31 +50,49 @@ export class RegisterAccountComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  register() {
-    if (this.registerForm.invalid) {
+  async register(formValues) {
+
+    this.error = false;
+    let response = await this.authService.createUser(formValues);
+
+
+    if (response.data === 'success') {
+    //   // console.log(temp.data);
       this.registerForm.reset();
-      return;
-    }
-
-    let pass = this.registerForm.get("password").value;
-    let confPass = this.registerForm.get("confirmPassword").value;
-
-    let passwordsMatch = this.verifyPasswords(pass, confPass);
-
-    if (passwordsMatch) {
-      this.authService.createUser(this.registerForm.value);
     } else {
-      alert("Passwords dont match");
+      this.error = true;
+      this.errorMessage = response.data.message
+      this.registerForm.reset({organization: formValues.organization, email: '', password: '',  confirmPassword: ''});
     }
+
   }
 
-  verifyPasswords(password, confirmPassword) {
-     if (password === confirmPassword) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+
+  // register() {
+    // if (this.registerForm.invalid) {
+    //   this.registerForm.reset();
+    //   return;
+    // }
+
+    // let pass = this.registerForm.get("password").value;
+    // let confPass = this.registerForm.get("confirmPassword").value;
+
+    // let passwordsMatch = this.verifyPasswords(pass, confPass);
+
+    // if (passwordsMatch) {
+      // this.authService.createUser(this.registerForm.value);
+    // } else {
+    //   alert("Passwords dont match");
+    // }
+  // }
+
+  // verifyPasswords(password, confirmPassword) {
+  //    if (password === confirmPassword) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   login() {
     this.goToLogin.emit(true);
