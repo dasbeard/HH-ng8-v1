@@ -1,56 +1,39 @@
 import { Injectable, Input } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "../Models/user";
-// import { AngularFireStorage } from "@angular/fire/storage";
-// import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import {
   AngularFirestore,
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
+
+// GeoFireX
+import * as firebaseApp from 'firebase/app';
+import * as geofirex from 'geofirex';
 
 @Injectable({
   providedIn: "root"
 })
 export class RegistationService {
+
+  geo = geofirex.init(firebaseApp);
+
   newUser: User;
   newUserAfsDoc: AngularFirestoreDocument<User>;
   userAfsDoc: AngularFirestoreDocument<User>;
   updateUser: AngularFirestoreDocument<User>;
   uploadPercent: Observable<number>;
 
+
   constructor(
     private router: Router,
     private afs: AngularFirestore,
     private storage: AngularFireStorage
-  ) {}
+  ) {
 
 
-
-
-  // startNewUser(newUserData: User) {
-  //   console.log(newUserData);
-
-    // this.afs.collection<User>(`users`).doc(`${newUserData.uid}`).set({
-      
-    //   uid: newUserData.uid,
-    //   email: newUserData.email,
-    //   organization: newUserData.organization,
-    //   registering: true,
-    // });
-
-
-
-
-    
-    // this.newUser = data;
-    // this.newUser.registering = true;
-    // localStorage.setItem("user", JSON.stringify(this.newUser));
-
-    // this.router.navigateByUrl("/Register");
-  // }
-
+  }
 
 
   startNewUser(data: User) {
@@ -60,10 +43,6 @@ export class RegistationService {
 
     this.router.navigateByUrl("/Register");
   }
-
-
-
-
 
   buildUserLocation(data, latLng) {
     this.newUser = JSON.parse(localStorage.getItem("user"));
@@ -146,6 +125,7 @@ export class RegistationService {
     // update data
     userToUpdate.fullAddress = locationResults.formatted_address;
     userToUpdate.latLng = latLng;
+    userToUpdate.pos = this.geo.point(latLng.latitude, latLng.longitude);
 
     // update user in Firebase
     this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
@@ -174,8 +154,16 @@ export class RegistationService {
     newProfile.services.donations = newData.donations;
     newProfile.services.servesFood = newData.servesFood;
 
+    /*
+    Used only to update Database for geofirex
+    */
+   newProfile.pos = this.geo.point(oldData.latLng.latitude, oldData.latLng.longitude)
+    // console.log(newProfile.position);
+    
+   
     // console.log('Updated', newProfile);
     // update user in Firebase
+    
     this.userAfsDoc = this.afs.doc<User>(`users/${oldData.uid}`);
     this.userAfsDoc.update(newProfile);
 

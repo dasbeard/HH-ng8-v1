@@ -4,6 +4,12 @@ import { OrganizationsService } from "src/app/Services/organizations.service";
 import { AgmInfoWindow } from "@agm/core";
 import { ClickFunctionsService } from 'src/app/Services/click-functions.service';
 
+// GeoFireX
+import * as firebaseApp from 'firebase/app';
+import * as geofirex from 'geofirex';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, shareReplay } from 'rxjs/operators';
+
 interface geoLocation {
   lat: number;
   lng: number;
@@ -16,11 +22,16 @@ interface geoLocation {
   styleUrls: ["./home-page.component.scss"]
 })
 export class HomePageComponent implements OnInit {
+  geo = geofirex.init(firebaseApp);
+
   userLocation: geoLocation = {
     lat: 34.05,
     lng: -118.25,
     zoom: 9
   };
+
+  points: Observable<any>;
+  radius = new BehaviorSubject(9);
 
   radiusSize: number = null;
   currentDateTime;
@@ -43,8 +54,24 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.runGeoLocation();
 
-    this.getAllOrgs();
+    // this.getAllOrgs();
+    this.getNearbyOrgs5k();
     this.getCurrentTime();
+
+    
+    //  -~-~-~-~-~-~-~-~-~-~-~-~
+    //  -~-~-~-~-~-~-~-~-~-~-~-~
+    //  -~-~-~-~-~-~-~-~-~-~-~-~
+
+    // const center = this.geo.point(this.userLocation.lat, this.userLocation.lng);
+    // const radius = 5;
+    // const field = 'pos';
+
+    // this.points = this.geo.query('/users').within(center, radius, field, { log: true });
+    // console.log(this.points);
+    
+
+
   }
 
   
@@ -86,6 +113,33 @@ export class HomePageComponent implements OnInit {
       });
     }
   }
+
+
+
+  getNearbyOrgs5k(){
+    let center = this.geo.point(this.userLocation.lat, this.userLocation.lng);
+    let field = 'pos';
+
+    this.points = this.radius.pipe(
+      switchMap(r => {
+
+        let temp = this.geo.query('/users').within(center, r, field, { log: true });
+        console.log(temp);
+        return temp
+        
+        // return this.geo.query('/users').within(center, r, field, { log: true });
+      }),
+      shareReplay(1)
+    );
+  }
+
+
+  update(v) {
+    this.radius.next(v);
+  }
+
+
+
 
   getAllOrgs() {
     this.orgService.getAllOrgs().subscribe(data => {

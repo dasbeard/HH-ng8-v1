@@ -8,13 +8,23 @@
     [zoom]="userLocation.zoom"
     [gestureHandling]="'cooperative'"
   >
-    <agm-marker
-      (markerClick)="markerClick(iw)"
-      *ngFor="let org of allOrgs"
 
-      [latitude]="org.latLng.latitude"
-      [longitude]="org.latLng.longitude"
-    >
+  <!-- <agm-marker 
+    *ngFor="let point of points | async" 
+    [latitude]="point.pos.geopoint.latitude" 
+    [longitude]="point.pos.geopoint.longitude"
+  >
+    <agm-info-window>
+      {{ point | json }}
+    </agm-info-window>
+  </agm-marker> -->
+
+    <agm-marker
+      *ngFor="let org of points | async"
+      [latitude]="org.pos.geopoint.latitude"
+      [longitude]="org.pos.geopoint.longitude"
+      (markerClick)="markerClick(iw)"
+      >
       <agm-info-window #iw >
         <div class="infoMarker">
           <h3
@@ -61,7 +71,7 @@
     </agm-marker>
   </agm-map>
 
-  <div class="nearby" *ngIf="allOrgs">
+  <!-- <div class="nearby" *ngIf="allOrgs">
 
     <h2>Whats Nearby?</h2>
 
@@ -86,9 +96,12 @@
       ></app-simple-org>
 
       
-    </div>
+    </div> 
 
-  </div>
+  </div> -->
 
   <!-- <h4>Add Search Bar Component Here</h4> -->
+
+  <!-- {{ points | async }} -->
+
 </div>

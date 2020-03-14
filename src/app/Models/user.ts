@@ -28,6 +28,8 @@ export interface User {
   fullAddress?: string;
   lastUpdated?: number;
   bedCount?: number;
+
+  pos?: object;
   
 }
 
