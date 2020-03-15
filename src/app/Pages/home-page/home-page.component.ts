@@ -28,12 +28,16 @@ export class HomePageComponent implements OnInit {
     lat: 34.05,
     lng: -118.25,
     zoom: 9
-  };
+  }; 
+
+
+  showRadius: Boolean = false;
+  newLatLng: Object = {lat: this.userLocation.lat, lng: this.userLocation.lng};
 
   points: Observable<any>;
-  radius = new BehaviorSubject(9);
+  radius = new BehaviorSubject(12);
 
-  radiusSize: number = null;
+  // radiusSize: number = null;
   currentDateTime;
   allOrgs;
   dayObj;
@@ -55,26 +59,10 @@ export class HomePageComponent implements OnInit {
     this.runGeoLocation();
 
     // this.getAllOrgs();
-    this.getNearbyOrgs5k();
+    this.getNearbyOrgs();
     this.getCurrentTime();
-
-    
-    //  -~-~-~-~-~-~-~-~-~-~-~-~
-    //  -~-~-~-~-~-~-~-~-~-~-~-~
-    //  -~-~-~-~-~-~-~-~-~-~-~-~
-
-    // const center = this.geo.point(this.userLocation.lat, this.userLocation.lng);
-    // const radius = 5;
-    // const field = 'pos';
-
-    // this.points = this.geo.query('/users').within(center, radius, field, { log: true });
-    // console.log(this.points);
-    
-
-
   }
 
-  
   runGeoLocation() {
     if (navigator) {
       navigator.geolocation.getCurrentPosition(
@@ -114,49 +102,62 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-
-
-  getNearbyOrgs5k(){
+  getNearbyOrgs(){
     let center = this.geo.point(this.userLocation.lat, this.userLocation.lng);
     let field = 'pos';
 
     this.points = this.radius.pipe(
       switchMap(r => {
-
-        let temp = this.geo.query('/users').within(center, r, field, { log: true });
-        console.log(temp);
-        return temp
-        
-        // return this.geo.query('/users').within(center, r, field, { log: true });
+        // return this.geo.query('/users').within(center, r, field);
+        return this.geo.query('/users').within(center, r, field, { log: true });
       }),
       shareReplay(1)
     );
   }
 
 
-  update(v) {
-    this.radius.next(v);
+  setRadius(zoomLevel: Number){
+    let rad;
+    if(zoomLevel <= 11){
+      rad = 18;
+      this.showRadius = true;
+    } else if (zoomLevel == 12){
+      rad = 12;
+      this.showRadius = false;
+    } else if (zoomLevel == 13){
+      rad = 6;
+      this.showRadius = false;
+    } else if (zoomLevel == 14){
+      rad = 2;
+      this.showRadius = false;
+    } else if (zoomLevel == 15){
+      rad = 1
+      this.showRadius = false;
+    } else if (zoomLevel >= 16){
+      rad = .75
+      this.showRadius = false;
+    }
+    console.log(this.showRadius);
+    
+    return rad;
+  }
+  
+  zoomChange(e){
+    this.radius.next(this.setRadius(e));
+    console.log(this.radius.value);
+    
   }
 
+  // getAllOrgs() {
+  //   this.orgService.getAllOrgs().subscribe(data => {
+  //     if(data){
 
-
-
-  getAllOrgs() {
-    this.orgService.getAllOrgs().subscribe(data => {
-      if(data){
-
-        data.forEach( org => {
-          org.tempPhoto = this.orgService.getOrgImage(org.photoName);
-        })
-        this.allOrgs = data;
-      }
-    });
-  }
-
-  // mapClick() {
-  //   if (this.previousIW) {
-  //     this.previousIW.close();
-  //   }
+  //       data.forEach( org => {
+  //         org.tempPhoto = this.orgService.getOrgImage(org.photoName);
+  //       })
+  //       this.allOrgs = data;
+  //     }
+  //   });
   // }
 
   markerClick(infoWindow) {
@@ -174,7 +175,6 @@ export class HomePageComponent implements OnInit {
   openAddressinGoogleMaps(address: string) {
     this.clickFunction.openAddressInGoogleMaps(address)
   }
-
 
   getCurrentTime() {
     this.currentDateTime = new Date();
@@ -209,4 +209,13 @@ export class HomePageComponent implements OnInit {
     // console.log(this.currentDateTime);
     // console.log("day", this.currentDateTime.getDay());
   }
+
+
+
+  // mapClick() {
+  //   if (this.previousIW) {
+  //     this.previousIW.close();
+  //   }
+  // }
+
 }

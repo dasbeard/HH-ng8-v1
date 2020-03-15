@@ -7,6 +7,7 @@
     [scrollwheel]="null"
     [zoom]="userLocation.zoom"
     [gestureHandling]="'cooperative'"
+    (zoomChange)="zoomChange($event)"
   >
 
   <!-- <agm-marker 
@@ -69,6 +70,16 @@
         </div>
       </agm-info-window>
     </agm-marker>
+
+    <agm-circle 
+      *ngIf="showRadius"
+      [latitude]="newLatLng.lat"
+      [longitude]="newLatLng.lng"
+      [radius]="(radius | async) * 1000"
+      >
+    </agm-circle>
+
+
   </agm-map>
 
   <!-- <div class="nearby" *ngIf="allOrgs">

@@ -37,8 +37,8 @@ export class OrganizationsService {
     
   }
 
-  getOrgImage( imageName:string ) {
-    return this.storage.ref(`userImages/${imageName}`).getDownloadURL();
+  async getOrgImage( imageName:string ) {
+    return await this.storage.ref(`userImages/${imageName}`).getDownloadURL();
   }
 
 
