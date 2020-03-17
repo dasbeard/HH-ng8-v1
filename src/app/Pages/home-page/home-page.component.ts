@@ -36,6 +36,7 @@ export class HomePageComponent implements OnInit {
   showRadius: Boolean = false;
   changeLat: number;
   changeLng: number;
+  newLatLng: Object = {lat: null, lng: null}
   points: Observable<any>;
   radius = new BehaviorSubject(12);
 
@@ -110,7 +111,7 @@ export class HomePageComponent implements OnInit {
     this.points = this.radius.pipe(
       switchMap(r => {
         // return this.geo.query('/users').within(center, r, field);
-        return this.geo.query('/users').within(center, r, field, { log: true });
+        return this.geo.query('/users').within(center, r, field, { log: false });
       }),
       shareReplay(1)
     );
@@ -119,21 +120,16 @@ export class HomePageComponent implements OnInit {
         // console.log(e) 
         // hitMetadata.distance
         // let test = e.map( e => e.hitMetadata.distance)
-        // console.log(test);
-        if(e){
 
+        if(e){
           e.forEach( async org => {
             org.tempPhoto = await this.orgService.getOrgImage(org.photoName);
           })
           this.allOrgs = e;
           // console.log(this.allOrgs);
-          
         }
-
       })
   }
-
-
 
   setRadius(zoomLevel: Number){
     let rad;
@@ -163,20 +159,30 @@ export class HomePageComponent implements OnInit {
   
   zoomChange(e){
     this.radius.next(this.setRadius(e));
+
+    if( this.changeLat || this.changeLng ){
+      console.log('changeLatLng');
+    } else {
+      console.log('No LatLng Change');    
+      this.newLatLng  
+    }
+
+
     // console.log(this.radius.value); 
   }
 
   centerChange(e){
-    if (event) {
+    if (event) {      
       this.changeLat = e.lat;
       this.changeLng = e.lng;
     }
   }
 
   idle() {
-    // console.log(this.changeLat, this.changeLng);
     if(this.changeLat){
       this.getNearbyOrgs(this.changeLat, this.changeLng);
+    } else {
+
     }
   }
 

@@ -22,10 +22,12 @@ export class OrganizationPageComponent implements OnInit {
   ) {
     let uid = this.route.snapshot.paramMap.get("id");
 
-    this.orgService.getOrganizationByUID(uid).subscribe(orgData => {
-      this.organization = orgData;
-      this.orgImage = this.orgService.getOrgImage(this.organization.photoName);
-
+    this.orgService.getOrganizationByUID(uid)
+      .subscribe(async orgData => {
+      if(orgData){
+        this.organization = orgData;
+        this.organization.tempPhoto = await this.orgService.getOrgImage(orgData.photoName);
+      }
     });
   }
 

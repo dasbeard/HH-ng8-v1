@@ -51,6 +51,8 @@ export class RegistationService {
     this.newUser.phone = data.formatted_phone_number;
     this.newUser.website = data.website;
     this.newUser.latLng = latLng;
+    this.newUser.pos = this.geo.point(latLng.latitude, latLng.longitude);
+
 
     // console.log(this.newUser);
     // ! Maybe this should be session not localstorage
@@ -157,7 +159,7 @@ export class RegistationService {
     /*
     Used only to update Database for geofirex
     */
-   newProfile.pos = this.geo.point(oldData.latLng.latitude, oldData.latLng.longitude)
+    //  newProfile.pos = this.geo.point(oldData.latLng.latitude, oldData.latLng.longitude)
     // console.log(newProfile.position);
     
    
