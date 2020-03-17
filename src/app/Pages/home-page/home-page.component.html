@@ -7,8 +7,11 @@
     [scrollwheel]="null"
     [zoom]="userLocation.zoom"
     [gestureHandling]="'cooperative'"
+    [usePanning]='true'
     (zoomChange)="zoomChange($event)"
-  >
+    (centerChange)="centerChange($event)"
+    (idle)="idle()"
+    >
 
   <!-- <agm-marker 
     *ngFor="let point of points | async" 
@@ -21,7 +24,7 @@
   </agm-marker> -->
 
     <agm-marker
-      *ngFor="let org of points | async"
+      *ngFor="let org of allOrgs "
       [latitude]="org.pos.geopoint.latitude"
       [longitude]="org.pos.geopoint.longitude"
       (markerClick)="markerClick(iw)"
@@ -82,15 +85,17 @@
 
   </agm-map>
 
-  <!-- <div class="nearby" *ngIf="allOrgs">
+  <div class="nearby" *ngIf="allOrgs">
 
     <h2>Whats Nearby?</h2>
 
-    <div class="simpleOrgs" *ngIf="allOrgs.length >= 3">
-
+    <div class="simpleOrgs"
+      *ngIf="allOrgs.length >= 3"
+    >
+    
       <app-simple-org
         class="org mat-elevation-z5"
-        [org]="allOrgs[4]"
+        [org]="allOrgs[0]"
         [dayTime]="dayObj"
         ></app-simple-org>
         
@@ -107,12 +112,10 @@
       ></app-simple-org>
 
       
-    </div> 
+    </div>  
 
-  </div> -->
+  </div>
 
   <!-- <h4>Add Search Bar Component Here</h4> -->
-
-  <!-- {{ points | async }} -->
 
 </div>

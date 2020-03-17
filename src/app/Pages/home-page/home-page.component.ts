@@ -25,19 +25,20 @@ export class HomePageComponent implements OnInit {
   geo = geofirex.init(firebaseApp);
 
   userLocation: geoLocation = {
-    lat: 34.05,
-    lng: -118.25,
+    lat: 34.0500,
+    lng: -118.2500,
     zoom: 9
   }; 
 
 
-  showRadius: Boolean = false;
-  newLatLng: Object = {lat: this.userLocation.lat, lng: this.userLocation.lng};
+  simpleOrgs = [{}];
 
+  showRadius: Boolean = false;
+  changeLat: number;
+  changeLng: number;
   points: Observable<any>;
   radius = new BehaviorSubject(12);
 
-  // radiusSize: number = null;
   currentDateTime;
   allOrgs;
   dayObj;
@@ -49,7 +50,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     private geoService: GeolocationService,
     private orgService: OrganizationsService,
-    private clickFunction: ClickFunctionsService
+    private clickFunction: ClickFunctionsService,  
   ) {
     this.currentIW = null;
     this.previousIW = null;
@@ -59,7 +60,7 @@ export class HomePageComponent implements OnInit {
     this.runGeoLocation();
 
     // this.getAllOrgs();
-    this.getNearbyOrgs();
+    this.getNearbyOrgs(this.userLocation.lat, this.userLocation.lng);
     this.getCurrentTime();
   }
 
@@ -102,8 +103,8 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  getNearbyOrgs(){
-    let center = this.geo.point(this.userLocation.lat, this.userLocation.lng);
+  getNearbyOrgs(lat: number, lng: number){
+    let center = this.geo.point(lat, lng);
     let field = 'pos';
 
     this.points = this.radius.pipe(
@@ -113,40 +114,74 @@ export class HomePageComponent implements OnInit {
       }),
       shareReplay(1)
     );
+
+      this.points.subscribe(e => {
+        // console.log(e) 
+        // hitMetadata.distance
+        // let test = e.map( e => e.hitMetadata.distance)
+        // console.log(test);
+        if(e){
+
+          e.forEach( async org => {
+            org.tempPhoto = await this.orgService.getOrgImage(org.photoName);
+          })
+          this.allOrgs = e;
+          // console.log(this.allOrgs);
+          
+        }
+
+      })
   }
+
 
 
   setRadius(zoomLevel: Number){
     let rad;
     if(zoomLevel <= 11){
-      rad = 18;
+      rad = 22;
       this.showRadius = true;
     } else if (zoomLevel == 12){
-      rad = 12;
+      rad = 15;
       this.showRadius = false;
     } else if (zoomLevel == 13){
-      rad = 6;
+      rad = 7.5;
       this.showRadius = false;
     } else if (zoomLevel == 14){
-      rad = 2;
+      rad = 4;
       this.showRadius = false;
     } else if (zoomLevel == 15){
-      rad = 1
+      rad = 2
       this.showRadius = false;
     } else if (zoomLevel >= 16){
-      rad = .75
+      rad = 1
       this.showRadius = false;
     }
-    console.log(this.showRadius);
-    
+    // console.log(zoomLevel);
+    // console.log(this.showRadius);
     return rad;
   }
   
   zoomChange(e){
     this.radius.next(this.setRadius(e));
-    console.log(this.radius.value);
-    
+    // console.log(this.radius.value); 
   }
+
+  centerChange(e){
+    if (event) {
+      this.changeLat = e.lat;
+      this.changeLng = e.lng;
+    }
+  }
+
+  idle() {
+    // console.log(this.changeLat, this.changeLng);
+    if(this.changeLat){
+      this.getNearbyOrgs(this.changeLat, this.changeLng);
+    }
+  }
+
+
+
 
   // getAllOrgs() {
   //   this.orgService.getAllOrgs().subscribe(data => {
